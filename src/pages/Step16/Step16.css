@@ -1,0 +1,782 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
+
+/* =====================================
+   STEP 16 - FULL SCREEN
+===================================== */
+
+.s16-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+  margin: 0;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      rgba(99, 48, 105, 0.32),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 15% 85%,
+      rgba(174, 107, 89, 0.13),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(135, 77, 157, 0.16),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #080610,
+      #160c20 48%,
+      #090611
+    );
+
+  color: #fff;
+  font-family: "DM Sans", sans-serif;
+  box-sizing: border-box;
+}
+
+.s16-screen *,
+.s16-screen *::before,
+.s16-screen *::after {
+  box-sizing: border-box;
+}
+
+/* =====================================
+   PARTICLES
+===================================== */
+
+.s16-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.s16-particle {
+  position: absolute;
+  left: var(--x);
+  bottom: -20px;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+  background: #f5d59b;
+
+  box-shadow:
+    0 0 7px #f5d59b,
+    0 0 15px rgba(255, 204, 130, 0.7);
+
+  opacity: 0;
+
+  animation:
+    s16-particle-float var(--duration) linear var(--delay) infinite;
+}
+
+@keyframes s16-particle-float {
+  0% {
+    transform: translateY(0) scale(0.4);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.8;
+  }
+
+  80% {
+    opacity: 0.65;
+  }
+
+  100% {
+    transform: translateY(-110vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* =====================================
+   ORBITS
+===================================== */
+
+.s16-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: min(75vw, 750px);
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+  border: 1px solid rgba(236, 192, 132, 0.07);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+.s16-orbit-one {
+  animation: s16-orbit-rotate 35s linear infinite;
+}
+
+.s16-orbit-two {
+  width: min(55vw, 550px);
+  border-color: rgba(226, 159, 197, 0.08);
+
+  animation: s16-orbit-rotate 28s linear infinite reverse;
+}
+
+@keyframes s16-orbit-rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* =====================================
+   MAIN GLASS CARD
+===================================== */
+
+.s16-card {
+  position: relative;
+  z-index: 3;
+
+  width: min(720px, 100%);
+  min-height: min(650px, 88dvh);
+
+  margin: 0 auto;
+  padding: clamp(35px, 6vh, 65px) 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+  text-align: center;
+
+  border-radius: 35px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.075),
+      rgba(255, 255, 255, 0.018)
+    );
+
+  border: 1px solid rgba(241, 204, 153, 0.19);
+
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 80px rgba(197, 131, 178, 0.06);
+
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  animation: s16-card-appear 1.3s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes s16-card-appear {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =====================================
+   TOP HEART
+===================================== */
+
+.s16-top-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  margin-bottom: 28px;
+  color: #f1d09a;
+}
+
+.s16-top-icon > span {
+  font-size: 25px;
+  animation: s16-sparkle 2.5s ease-in-out infinite;
+}
+
+.s16-heart {
+  width: 65px;
+  height: 65px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  font-size: 42px;
+  color: #f7c7d9;
+
+  border: 1px solid rgba(255, 215, 173, 0.35);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(239, 177, 200, 0.17),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  box-shadow:
+    0 0 25px rgba(240, 158, 190, 0.17),
+    inset 0 0 15px rgba(255, 255, 255, 0.06);
+
+  animation: s16-heart-float 3s ease-in-out infinite;
+}
+
+@keyframes s16-heart-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-7px) scale(1.07);
+  }
+}
+
+@keyframes s16-sparkle {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+/* =====================================
+   EYEBROW
+===================================== */
+
+.s16-eyebrow {
+  margin: 0;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 5px;
+
+  color: #dfc18e;
+}
+
+/* =====================================
+   DIVIDER
+===================================== */
+
+.s16-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  width: min(210px, 65%);
+  margin: 25px 0;
+}
+
+.s16-divider span {
+  flex: 1;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(229, 185, 124, 0.65)
+    );
+}
+
+.s16-divider span:last-child {
+  transform: rotate(180deg);
+}
+
+.s16-divider i {
+  font-style: normal;
+  font-size: 15px;
+  color: #f4d39b;
+}
+
+/* =====================================
+   HEADING
+===================================== */
+
+.s16-heading {
+  margin: 0;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(45px, 7vw, 76px);
+
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -1px;
+
+  color: #fff0db;
+
+  text-shadow:
+    0 0 25px rgba(246, 199, 140, 0.15);
+
+  animation: s16-heading-reveal 1.2s ease both;
+}
+
+.s16-heading em {
+  font-family: "Great Vibes", cursive;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.05em;
+
+  background:
+    linear-gradient(
+      110deg,
+      #f7d7a6,
+      #fff2d7,
+      #e8a8c9,
+      #f7d7a6
+    );
+
+  background-size: 250% auto;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: s16-gold-shimmer 6s linear infinite;
+}
+
+@keyframes s16-gold-shimmer {
+  to {
+    background-position: 250% center;
+  }
+}
+
+@keyframes s16-heading-reveal {
+  from {
+    opacity: 0;
+    letter-spacing: 5px;
+  }
+
+  to {
+    opacity: 1;
+    letter-spacing: -1px;
+  }
+}
+
+/* =====================================
+   DESCRIPTION
+===================================== */
+
+.s16-description {
+  margin: 25px 0 0;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(17px, 2vw, 22px);
+
+  line-height: 1.8;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+
+  color: rgba(255, 238, 224, 0.65);
+}
+
+/* =====================================
+   GOLDEN LINE
+===================================== */
+
+.s16-golden-line {
+  width: 100px;
+  height: 1px;
+
+  position: relative;
+  margin: 35px 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #e9c18a,
+      transparent
+    );
+}
+
+.s16-golden-line span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+  padding: 0 12px;
+
+  color: #eeb8ce;
+  background: #1a1023;
+
+  font-size: 17px;
+}
+
+/* =====================================
+   CONTINUE BUTTON
+===================================== */
+
+.s16-continue-btn {
+  position: relative;
+
+  width: min(290px, 100%);
+  min-height: 58px;
+
+  padding: 14px 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+
+  border-radius: 50px;
+  border: 1px solid rgba(255, 223, 175, 0.65);
+
+  background:
+    linear-gradient(
+      110deg,
+      #a97680,
+      #c99a75,
+      #e2bc8e
+    );
+
+  color: #fff;
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+
+  cursor: pointer;
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 35px rgba(197, 143, 135, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.s16-continue-btn::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  transform: translateX(-110%);
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent,
+      rgba(255, 255, 255, 0.35),
+      transparent
+    );
+
+  transition: transform 0.7s ease;
+}
+
+.s16-continue-btn:hover::before {
+  transform: translateX(110%);
+}
+
+.s16-continue-btn:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 45px rgba(221, 163, 145, 0.35);
+}
+
+.s16-continue-btn:active {
+  transform: scale(0.97);
+}
+
+.s16-continue-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.s16-arrow {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.s16-continue-btn:hover .s16-arrow {
+  transform: translateX(5px);
+}
+
+/* =====================================
+   BOTTOM TEXT
+===================================== */
+
+.s16-bottom-text {
+  margin-top: 40px;
+
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 4px;
+
+  color: rgba(255, 225, 190, 0.42);
+}
+
+.s16-bottom-text span {
+  color: #e9a9c5;
+  margin: 0 5px;
+}
+
+/* =====================================
+   CORNERS
+===================================== */
+
+.s16-corner {
+  position: absolute;
+  z-index: 2;
+
+  font-size: 23px;
+  color: rgba(235, 196, 145, 0.6);
+
+  animation: s16-sparkle 3s ease-in-out infinite;
+}
+
+.s16-corner-tl { top: 22px; left: 25px; }
+.s16-corner-tr { top: 22px; right: 25px; }
+.s16-corner-bl { bottom: 22px; left: 25px; }
+.s16-corner-br { bottom: 22px; right: 25px; }
+
+/* =====================================
+   TABLET
+===================================== */
+
+@media (max-width: 768px) {
+  .s16-card {
+    width: min(600px, 100%);
+    min-height: min(590px, 85dvh);
+    padding: 40px 25px;
+  }
+
+  .s16-heading {
+    font-size: clamp(43px, 9vw, 65px);
+  }
+
+  .s16-description {
+    font-size: 18px;
+  }
+
+  .s16-orbit {
+    width: 90vw;
+  }
+
+  .s16-orbit-two {
+    width: 65vw;
+  }
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 600px) {
+  .s16-screen {
+    padding: 16px;
+  }
+
+  .s16-card {
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    max-height: calc(100dvh - 32px);
+
+    padding: 30px 18px;
+    border-radius: 25px;
+  }
+
+  .s16-top-icon {
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+
+  .s16-top-icon > span {
+    font-size: 19px;
+  }
+
+  .s16-heart {
+    width: 55px;
+    height: 55px;
+    font-size: 35px;
+  }
+
+  .s16-eyebrow {
+    font-size: 8px;
+    letter-spacing: 3px;
+  }
+
+  .s16-divider {
+    margin: 20px 0;
+  }
+
+  .s16-heading {
+    font-size: clamp(39px, 11vw, 57px);
+    line-height: 1.1;
+  }
+
+  .s16-description {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .s16-golden-line {
+    margin: 25px 0;
+  }
+
+  .s16-continue-btn {
+    min-height: 53px;
+    font-size: 11px;
+    gap: 12px;
+  }
+
+  .s16-bottom-text {
+    margin-top: 28px;
+    font-size: 7px;
+    letter-spacing: 2.5px;
+  }
+
+  .s16-corner {
+    font-size: 17px;
+  }
+
+  .s16-corner-tl { top: 12px; left: 13px; }
+  .s16-corner-tr { top: 12px; right: 13px; }
+  .s16-corner-bl { bottom: 12px; left: 13px; }
+  .s16-corner-br { bottom: 12px; right: 13px; }
+}
+
+/* =====================================
+   SMALL MOBILE
+===================================== */
+
+@media (max-width: 380px) {
+  .s16-card {
+    padding: 23px 14px;
+  }
+
+  .s16-top-icon {
+    margin-bottom: 16px;
+  }
+
+  .s16-heart {
+    width: 48px;
+    height: 48px;
+    font-size: 31px;
+  }
+
+  .s16-divider {
+    margin: 16px 0;
+  }
+
+  .s16-heading {
+    font-size: 39px;
+  }
+
+  .s16-description {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+
+  .s16-golden-line {
+    margin: 20px 0;
+  }
+
+  .s16-bottom-text {
+    margin-top: 20px;
+  }
+}
+
+/* =====================================
+   SHORT HEIGHT SCREENS
+===================================== */
+
+@media (max-height: 650px) {
+  .s16-card {
+    min-height: 0;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .s16-top-icon {
+    margin-bottom: 12px;
+  }
+
+  .s16-heart {
+    width: 45px;
+    height: 45px;
+    font-size: 30px;
+  }
+
+  .s16-divider {
+    margin: 12px 0;
+  }
+
+  .s16-heading {
+    font-size: clamp(38px, 7vh, 55px);
+  }
+
+  .s16-description {
+    margin-top: 12px;
+    font-size: 16px;
+  }
+
+  .s16-golden-line {
+    margin: 16px 0;
+  }
+
+  .s16-bottom-text {
+    margin-top: 17px;
+  }
+}
+
+/* =====================================
+   REDUCED MOTION
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .s16-screen *,
+  .s16-screen *::before,
+  .s16-screen *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

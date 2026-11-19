@@ -1,0 +1,772 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600&family=Orbitron:wght@400;500;600&display=swap");
+
+/* =========================================
+   MAIN STAR UNIVERSE
+========================================= */
+
+.star-universe {
+  position: relative;
+  min-height: 100svh;
+  width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 85px 20px 75px;
+
+  background: #050716;
+  color: #fff;
+
+  font-family: "Cormorant Garamond", serif;
+}
+
+/* =========================================
+   GALAXY BACKGROUND
+========================================= */
+
+.universe-nebula {
+  position: absolute;
+  inset: -20%;
+  z-index: -3;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(72, 53, 139, 0.26),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 20% 65%,
+      rgba(100, 48, 137, 0.17),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 80% 25%,
+      rgba(50, 74, 145, 0.17),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      #050716,
+      #0b0d25 60%,
+      #080918
+    );
+
+  animation: nebulaMove 16s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaMove {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+
+  to {
+    transform: scale(1.12) rotate(3deg);
+  }
+}
+
+.universe-horizon {
+  position: absolute;
+  width: 100%;
+  height: 40%;
+  bottom: -25%;
+  left: 0;
+  z-index: -2;
+
+  background: radial-gradient(
+    ellipse,
+    rgba(117, 78, 186, 0.2),
+    transparent 70%
+  );
+
+  filter: blur(30px);
+}
+
+/* =========================================
+   BACKGROUND STARS
+========================================= */
+
+.star-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.background-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+
+  box-shadow:
+    0 0 5px rgba(255, 255, 255, 0.8),
+    0 0 12px rgba(191, 176, 255, 0.7);
+}
+
+/* =========================================
+   SHOOTING STARS
+========================================= */
+
+.shooting-star {
+  position: absolute;
+
+  width: 100px;
+  height: 1px;
+
+  z-index: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    #fff,
+    transparent
+  );
+
+  transform: rotate(28deg);
+
+  box-shadow: 0 0 8px #b9a6ff;
+}
+
+/* =========================================
+   TOP LABEL
+========================================= */
+
+.universe-top-label {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  width: max-content;
+  max-width: calc(100% - 30px);
+
+  color: #d8c5ff;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+
+  text-align: center;
+}
+
+.universe-top-label svg {
+  color: #f1d6ff;
+
+  filter: drop-shadow(
+    0 0 7px #c49aff
+  );
+}
+
+/* =========================================
+   CONSTELLATION STAGE
+========================================= */
+
+.constellation-stage {
+  position: relative;
+
+  width: min(90vw, 720px);
+  aspect-ratio: 1.35 / 1;
+
+  max-height: 65vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  perspective: 1000px;
+}
+
+.constellation-heading {
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 100%;
+
+  color: rgba(208, 196, 255, 0.72);
+
+  text-align: center;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+}
+
+/* =========================================
+   HEART CONSTELLATION
+========================================= */
+
+.heart-constellation {
+  position: absolute;
+
+  inset: 5% 9% 0;
+
+  width: 82%;
+  height: 90%;
+
+  overflow: visible;
+
+  filter: drop-shadow(
+    0 0 9px rgba(186, 155, 255, 0.6)
+  );
+
+  transform: translateZ(0);
+}
+
+/* =========================================
+   LUXURY CURSIVE NAME - VENKAT
+========================================= */
+
+.name-constellation {
+  position: absolute;
+
+  left: 50%;
+  top: 52%;
+
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  min-height: 130px;
+
+  text-align: center;
+
+  transform-style: preserve-3d;
+  perspective: 1000px;
+
+  z-index: 5;
+}
+
+/* Common name styles */
+
+.name-constellation > div:not(.name-sparkle) {
+  position: absolute;
+  inset: 0;
+
+  font-family: "Great Vibes", cursive;
+
+  font-size: clamp(75px, 11vw, 115px);
+
+  font-weight: 400;
+  line-height: 1.2;
+
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+
+/* 3D DEPTH - BACK LAYER */
+
+.name-depth-three {
+  color: #7051a8;
+
+  transform: translate3d(0, 12px, -30px);
+
+  opacity: 0.3;
+
+  filter: blur(3px);
+}
+
+/* 3D DEPTH - MIDDLE LAYER */
+
+.name-depth-two {
+  color: #c49aff;
+
+  transform: translate3d(0, 6px, -15px);
+
+  opacity: 0.55;
+
+  filter: blur(1px);
+}
+
+/* MAIN CURSIVE NAME */
+
+.name-depth-one {
+  position: relative !important;
+
+  color: #fff1ff;
+
+  transform: translateZ(15px);
+
+  text-shadow:
+    0 0 5px #ffffff,
+    0 0 12px #f5d4ff,
+    0 0 25px #d69aff,
+    0 0 45px #a56aff,
+    0 0 75px #8650ff;
+
+  animation: luxuryNameGlow 3s ease-in-out infinite;
+}
+
+/* NAME GLOW ANIMATION */
+
+@keyframes luxuryNameGlow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 5px #ffffff,
+      0 0 12px #f5d4ff,
+      0 0 25px #d69aff,
+      0 0 45px #a56aff;
+  }
+
+  50% {
+    text-shadow:
+      0 0 10px #ffffff,
+      0 0 22px #f5d4ff,
+      0 0 40px #d69aff,
+      0 0 65px #a56aff,
+      0 0 90px #8650ff;
+  }
+}
+
+/* =========================================
+   NAME SPARKLE
+========================================= */
+
+.name-sparkle {
+  position: absolute;
+
+  top: -30px;
+  right: 22%;
+
+  color: #fff2c7;
+
+  font-size: 25px;
+
+  text-shadow:
+    0 0 8px #ffdf91,
+    0 0 15px #ffdf91;
+}
+
+/* =========================================
+   FINAL MESSAGE
+========================================= */
+
+.universe-final-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  color: #f0d3ff;
+
+  text-align: center;
+}
+
+.universe-final-message svg {
+  width: 13px;
+
+  color: #e8a9dd;
+
+  filter: drop-shadow(
+    0 0 7px #e8a9dd
+  );
+}
+
+.universe-final-message p {
+  margin: 0;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+
+  text-shadow:
+    0 0 15px rgba(204, 163, 255, 0.7);
+}
+
+/* =========================================
+   BOTTOM CAPTION
+========================================= */
+
+.universe-bottom-note {
+  margin: 22px 0 0;
+
+  color: #a8a4ca;
+
+  font-size: 11px;
+  letter-spacing: 2.5px;
+
+  text-align: center;
+  line-height: 1.8;
+}
+
+/* =========================================
+   CONTINUE BUTTON
+========================================= */
+
+.universe-continue {
+  margin-top: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+
+  padding: 13px 25px;
+
+  border: 1px solid rgba(207, 174, 255, 0.4);
+  border-radius: 50px;
+
+  color: #f4e7ff;
+
+  background: rgba(100, 64, 150, 0.17);
+
+  backdrop-filter: blur(12px);
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 20px rgba(162, 116, 255, 0.12);
+
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.universe-continue:hover {
+  background: rgba(139, 91, 192, 0.35);
+
+  box-shadow:
+    0 0 30px rgba(183, 138, 255, 0.3);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.universe-footer {
+  position: absolute;
+
+  bottom: 20px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: max-content;
+  max-width: calc(100% - 20px);
+
+  color: #7f7eaa;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+
+  text-align: center;
+}
+
+.universe-footer span {
+  color: #d8b8ff;
+  padding-left: 5px;
+}
+
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+  .star-universe {
+    padding: 90px 14px 80px;
+  }
+
+  .universe-top-label {
+    top: 28px;
+
+    font-size: 8px;
+    letter-spacing: 2px;
+    gap: 8px;
+  }
+
+  .constellation-stage {
+    width: 100%;
+
+    max-height: 55vh;
+
+    aspect-ratio: 1 / 1.05;
+  }
+
+  .constellation-heading {
+    font-size: 7px;
+    letter-spacing: 2px;
+
+    top: 2%;
+  }
+
+  .heart-constellation {
+    inset: 7% 0 0;
+
+    width: 100%;
+    height: 90%;
+  }
+
+  .name-constellation {
+    top: 52%;
+    min-height: 100px;
+  }
+
+  .name-constellation > div:not(.name-sparkle) {
+    font-size: clamp(65px, 15vw, 95px);
+    letter-spacing: 1px;
+  }
+
+  .name-sparkle {
+    right: 12%;
+    top: -25px;
+    font-size: 19px;
+  }
+
+  .universe-final-message {
+    gap: 8px;
+  }
+
+  .universe-final-message p {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .universe-bottom-note {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+  .star-universe {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .name-constellation > div:not(.name-sparkle) {
+    font-size: 60px;
+  }
+
+  .name-sparkle {
+    right: 10%;
+  }
+
+  .universe-final-message {
+    gap: 7px;
+  }
+
+  .universe-final-message p {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+  }
+
+  .universe-top-label {
+    font-size: 7px;
+    letter-spacing: 1.5px;
+  }
+}
+
+/* =========================================
+   SHORT SCREEN RESPONSIVE
+========================================= */
+
+@media (max-height: 650px) and (min-width: 769px) {
+  .star-universe {
+    padding-top: 65px;
+    padding-bottom: 60px;
+  }
+
+  .constellation-stage {
+    max-height: 52vh;
+  }
+
+  .universe-top-label {
+    top: 20px;
+  }
+
+  .universe-continue {
+    margin-top: 15px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .universe-nebula,
+  .name-depth-one {
+    animation: none;
+  }
+}
+
+/* =========================================
+   FINAL POSITION FIX
+========================================= */
+
+/* TOP LABEL - PERFECT TOP CENTER */
+
+.universe-top-label {
+  position: absolute !important;
+  top: 30px;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+  max-width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  transform: none !important;
+  margin: 0 auto;
+
+  z-index: 10;
+}
+
+/* HEART STAGE */
+
+.constellation-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* VENKAT - HEART CENTER */
+
+.name-constellation {
+  position: absolute !important;
+
+  left: 0;
+  right: 0;
+  top: 52%;
+
+  width: 100%;
+  min-height: 130px;
+
+  margin: 0;
+  padding: 0;
+
+  text-align: center;
+
+  z-index: 10;
+  transform-origin: center center;
+}
+
+/* ALL THREE NAME LAYERS */
+
+.name-constellation > div:not(.name-sparkle) {
+  position: absolute !important;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+
+  text-align: center;
+
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(65px, 8vw, 105px);
+
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* BACK DEPTH */
+
+.name-depth-three {
+  color: #7051a8;
+  transform: translateY(10px);
+  opacity: 0.3;
+  filter: blur(3px);
+}
+
+/* MIDDLE DEPTH */
+
+.name-depth-two {
+  color: #c49aff;
+  transform: translateY(5px);
+  opacity: 0.55;
+  filter: blur(1px);
+}
+
+/* MAIN NAME */
+
+.name-depth-one {
+  color: #fff1ff;
+
+  text-shadow:
+    0 0 5px #ffffff,
+    0 0 12px #f5d4ff,
+    0 0 25px #d69aff,
+    0 0 45px #a56aff,
+    0 0 75px #8650ff;
+
+  animation: luxuryNameGlow 3s ease-in-out infinite;
+}
+
+/* SPARKLE */
+
+.name-sparkle {
+  position: absolute;
+  top: -20px;
+  right: 25%;
+
+  color: #fff2c7;
+  font-size: 22px;
+
+  text-shadow:
+    0 0 8px #ffdf91,
+    0 0 15px #ffdf91;
+}
+
+/* TABLET */
+
+@media (max-width: 768px) {
+  .universe-top-label {
+    top: 25px;
+  }
+
+  .name-constellation {
+    top: 52%;
+    min-height: 100px;
+  }
+
+  .name-constellation > div:not(.name-sparkle) {
+    font-size: clamp(55px, 12vw, 85px);
+  }
+
+  .name-sparkle {
+    right: 15%;
+  }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 380px) {
+  .name-constellation > div:not(.name-sparkle) {
+    font-size: 55px;
+  }
+
+  .name-sparkle {
+    right: 12%;
+  }
+}

@@ -1,0 +1,1274 @@
+
+/* ============================================
+   HER UNIVERSE
+   LUXURY ROMANTIC EXPERIENCE
+   ============================================ */
+
+.welcome-screen {
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  min-height: 0;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  padding: 20px 4%;
+
+  background: #100817;
+  color: #fff4ff;
+}
+
+/* ============================================
+   01. GALAXY BACKGROUND
+   ============================================ */
+
+.galaxy-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+
+  background:
+    radial-gradient(
+      ellipse at 23% 48%,
+      #512253 0%,
+      transparent 43%
+    ),
+    radial-gradient(
+      ellipse at 78% 20%,
+      #35143e 0%,
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 75% 90%,
+      #291333 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at center,
+      #1e1028 0%,
+      #100817 75%
+    );
+}
+
+.ambient-glow {
+  position: absolute;
+
+  width: min(65vw, 750px);
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    #d44cce 0%,
+    #a33cae 30%,
+    transparent 70%
+  );
+
+  filter: blur(140px);
+  opacity: 0.15;
+
+  z-index: -2;
+  pointer-events: none;
+
+  animation: ambientPulse 7s ease-in-out infinite alternate;
+}
+
+@keyframes ambientPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.08;
+  }
+
+  100% {
+    transform: scale(1.15);
+    opacity: 0.2;
+  }
+}
+
+/* ============================================
+   02. BACKGROUND STARS
+   ============================================ */
+
+.stars-container {
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  display: block;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 5px #ffffff,
+    0 0 10px #f6aaff,
+    0 0 18px #d36aff;
+
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.15;
+    transform: scale(0.6);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+/* ============================================
+   03. FLOATING PARTICLES
+   ============================================ */
+
+.floating-particles {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+  z-index: 1;
+
+  overflow: hidden;
+}
+
+.floating-particles span {
+  position: absolute;
+
+  color: #ffb5ed;
+  font-size: 23px;
+
+  filter: drop-shadow(0 0 8px #ff70df);
+
+  animation: floatParticle 9s ease-in-out infinite;
+}
+
+.floating-particles span:nth-child(1) {
+  left: 12%;
+  top: 18%;
+}
+
+.floating-particles span:nth-child(2) {
+  left: 42%;
+  top: 15%;
+  animation-delay: 1s;
+}
+
+.floating-particles span:nth-child(3) {
+  left: 24%;
+  top: 75%;
+  animation-delay: 2s;
+}
+
+.floating-particles span:nth-child(4) {
+  left: 80%;
+  top: 20%;
+  animation-delay: 3s;
+}
+
+.floating-particles span:nth-child(5) {
+  left: 92%;
+  top: 60%;
+  animation-delay: 4s;
+}
+
+.floating-particles span:nth-child(6) {
+  left: 55%;
+  top: 85%;
+  animation-delay: 2s;
+}
+
+.floating-particles span:nth-child(7) {
+  left: 5%;
+  top: 52%;
+  animation-delay: 3s;
+}
+
+.floating-particles span:nth-child(8) {
+  left: 72%;
+  top: 75%;
+  animation-delay: 1s;
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translateY(-30px) rotate(25deg);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   04. MAIN LAYOUT
+   ============================================ */
+
+.welcome-layout {
+  width: 100%;
+  max-width: 1400px;
+
+  height: 100%;
+  max-height: 850px;
+
+  display: grid;
+
+  grid-template-columns: 0.95fr 1.05fr;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: clamp(20px, 5vw, 90px);
+
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================
+   05. GIRL SECTION
+   ============================================ */
+
+.girl-section {
+  width: 100%;
+  height: 100%;
+
+  min-height: 0;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: visible;
+}
+
+/* Background glow behind portrait */
+
+.girl-halo {
+  position: absolute;
+
+  width: min(85%, 500px);
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    #e36bd9 0%,
+    #a53caa 25%,
+    transparent 70%
+  );
+
+  filter: blur(75px);
+  opacity: 0.28;
+
+  pointer-events: none;
+}
+
+/* ============================================
+   06. GIRL SVG CONTAINER
+   ============================================ */
+
+.girl-art {
+  position: relative;
+
+  width: min(100%, 500px);
+  height: min(76%, 680px);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: visible;
+
+  will-change: transform;
+}
+
+/* Female portrait SVG */
+
+.girl-outline {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  overflow: visible;
+
+  filter: drop-shadow(0 0 8px #ef8bd7);
+
+  animation: portraitGlow 4s ease-in-out 10s infinite alternate;
+}
+
+/* ============================================
+   07. CONTINUOUS LINE DRAWING
+   ============================================ */
+
+/* All paths begin invisible */
+
+.portrait-drawing .draw-line {
+  fill: none;
+
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+
+  opacity: 0;
+
+  animation:
+    continuousSketch 1.15s cubic-bezier(.45, 0, .25, 1) forwards;
+}
+
+/* Path 01 - Outer hair */
+
+.portrait-drawing .draw-1 {
+  animation-delay: 0s;
+}
+
+/* Path 02 - Top of head */
+
+.portrait-drawing .draw-2 {
+  animation-delay: 0.55s;
+}
+
+/* Path 03 - Face profile */
+
+.portrait-drawing .draw-3 {
+  animation-delay: 1.1s;
+}
+
+/* Path 04 - Chin and neck */
+
+.portrait-drawing .draw-4 {
+  animation-delay: 1.65s;
+}
+
+/* Path 05 - Front shoulder */
+
+.portrait-drawing .draw-5 {
+  animation-delay: 2.2s;
+}
+
+/* Path 06 - Upper body */
+
+.portrait-drawing .draw-6 {
+  animation-delay: 2.75s;
+}
+
+/* Path 07 - Back hair */
+
+.portrait-drawing .draw-7 {
+  animation-delay: 3.3s;
+}
+
+/* Path 08 - Inner hair */
+
+.portrait-drawing .draw-8 {
+  animation-delay: 3.85s;
+}
+
+/* Path 09 - Long hair */
+
+.portrait-drawing .draw-9 {
+  animation-delay: 4.4s;
+}
+
+/* Path 10 - Side hair */
+
+.portrait-drawing .draw-10 {
+  animation-delay: 4.95s;
+}
+
+/* Path 11 - Front hair */
+
+.portrait-drawing .draw-11 {
+  animation-delay: 5.5s;
+}
+
+/* Path 12 - Ear */
+
+.portrait-drawing .draw-12 {
+  animation-delay: 6.05s;
+}
+
+/* Path 13 - Eyebrow */
+
+.portrait-drawing .draw-13 {
+  animation-delay: 6.6s;
+}
+
+/* Path 14 - Eye and eyelashes */
+
+.portrait-drawing .draw-14 {
+  animation-delay: 7.15s;
+}
+
+/* Path 15 - Nose */
+
+.portrait-drawing .draw-15 {
+  animation-delay: 7.7s;
+}
+
+/* Path 16 - Lips */
+
+.portrait-drawing .draw-16 {
+  animation-delay: 8.25s;
+}
+
+/* Path 17 - Final hair */
+
+.portrait-drawing .draw-17 {
+  animation-delay: 8.8s;
+}
+
+/* Drawing animation */
+
+@keyframes continuousSketch {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0.15;
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   08. PORTRAIT GLOW
+   ============================================ */
+
+@keyframes portraitGlow {
+  0% {
+    filter:
+      drop-shadow(0 0 5px #ff9be9);
+  }
+
+  100% {
+    filter:
+      drop-shadow(0 0 12px #ff9be9)
+      drop-shadow(0 0 25px #bd62ff);
+  }
+}
+
+/* ============================================
+   09. PORTRAIT SPARKLES
+   ============================================ */
+
+.portrait-sparkles {
+  fill: #ffd5f6;
+
+  filter: drop-shadow(0 0 8px #ff6bdc);
+
+  opacity: 0;
+
+  animation:
+    sparkleAppear 1s ease 10s forwards;
+}
+
+.portrait-sparkles path {
+  transform-box: fill-box;
+  transform-origin: center;
+
+  animation:
+    sparkleTwinkle 2s ease-in-out infinite alternate;
+}
+
+.portrait-sparkles path:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.portrait-sparkles path:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.portrait-sparkles path:nth-child(4) {
+  animation-delay: 1.2s;
+}
+
+/* Small glowing dots */
+
+.portrait-glow-dots {
+  fill: #ffffff;
+
+  filter: drop-shadow(0 0 8px #ff62dc);
+
+  opacity: 0;
+
+  animation:
+    sparkleAppear 1s ease 10.3s forwards;
+}
+
+@keyframes sparkleAppear {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sparkleTwinkle {
+  from {
+    transform: scale(0.65);
+    opacity: 0.4;
+  }
+
+  to {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   10. GIRL CAPTION
+   ============================================ */
+
+.girl-caption {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 5px;
+
+  color: #e9b8ed;
+
+  font-size: 10px;
+  letter-spacing: 3px;
+
+  text-align: center;
+}
+
+/* ============================================
+   11. WELCOME CONTENT
+   ============================================ */
+
+.welcome-content {
+  width: 100%;
+  max-width: 650px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  justify-self: center;
+
+  position: relative;
+  z-index: 3;
+}
+
+/* Heart */
+
+.welcome-symbol {
+  color: #ff9edc;
+
+  filter: drop-shadow(0 0 15px #ff5fcb);
+
+  margin-bottom: 17px;
+}
+
+/* Small heading */
+
+.welcome-eyebrow {
+  color: #d9a9e6;
+
+  font-size: clamp(9px, 1vw, 12px);
+
+  letter-spacing: 4px;
+
+  font-weight: 400;
+
+  margin-bottom: 15px;
+}
+
+/* ============================================
+   12. LUXURY CURSIVE TITLE
+   ============================================ */
+
+.welcome-title {
+  font-family: "Great Vibes", cursive;
+
+  font-size: clamp(65px, 7.2vw, 105px);
+
+  font-weight: 400;
+
+  line-height: 1.25;
+
+  color: #ffe6fa;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 0 12px #ed77e8,
+    0 0 35px #a23ba8;
+}
+
+.welcome-title span {
+  color: #ff9edc;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 0.45em;
+
+  vertical-align: top;
+
+  margin-left: 5px;
+}
+
+/* Decorative divider */
+
+.welcome-divider {
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ff9cdd,
+    transparent
+  );
+
+  margin: 12px auto 17px;
+}
+
+/* Subtitle */
+
+.welcome-subtitle {
+  color: #e9c6e9;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: clamp(18px, 2vw, 25px);
+
+  font-style: italic;
+
+  letter-spacing: 1px;
+}
+
+/* ============================================
+   13. VENKAT NAME REVEAL
+   ============================================ */
+
+.name-reveal {
+  margin-top: 35px;
+
+  position: relative;
+}
+
+.name-reveal span {
+  display: block;
+
+  color: #c7a8cf;
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+}
+
+.name-reveal h2 {
+  margin-top: 9px;
+
+  font-family: "Great Vibes", cursive;
+
+  font-size: clamp(38px, 4vw, 58px);
+
+  font-weight: 400;
+
+  color: #ffb9e9;
+
+  text-shadow:
+    0 0 12px #ff4dcb,
+    0 0 25px #c84dc4;
+}
+
+.name-heart {
+  color: #ff9edc;
+
+  margin-top: 5px;
+
+  filter: drop-shadow(0 0 8px #ff5fcb);
+}
+
+/* ============================================
+   14. DESCRIPTION
+   ============================================ */
+
+.welcome-description {
+  max-width: 400px;
+
+  margin: 12px auto 22px;
+
+  color: #d4bfd9;
+
+  font-size: 12px;
+
+  line-height: 1.8;
+
+  font-weight: 300;
+}
+
+/* ============================================
+   15. JOURNEY BUTTON
+   ============================================ */
+
+.journey-button {
+  min-height: 51px;
+
+  padding: 0 25px;
+
+  border: 1px solid #f5a2e4;
+
+  border-radius: 50px;
+
+  background: linear-gradient(
+    135deg,
+    #a642a5,
+    #5f287f
+  );
+
+  color: white;
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 20px #d14cbd70,
+    inset 0 0 15px #ffffff15;
+
+  transition:
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.journey-button:hover {
+  background: linear-gradient(
+    135deg,
+    #c65bbd,
+    #77339a
+  );
+
+  box-shadow:
+    0 0 35px #ef7ce7,
+    0 0 70px #a63eae55;
+}
+
+.journey-button:focus-visible {
+  outline: 2px solid #ffb5ed;
+  outline-offset: 5px;
+}
+
+/* ============================================
+   16. FOOTER
+   ============================================ */
+
+.welcome-footer {
+  margin-top: 29px;
+
+  color: #997ca8;
+
+  font-size: 9px;
+
+  letter-spacing: 4px;
+}
+
+/* ============================================
+   17. CORNER DECORATIONS
+   ============================================ */
+
+.corner-decoration {
+  position: absolute;
+
+  color: #f4a4dc;
+
+  font-size: 35px;
+
+  opacity: 0.5;
+
+  text-shadow: 0 0 20px #e36acb;
+
+  pointer-events: none;
+
+  z-index: 4;
+}
+
+.top-left {
+  top: 15px;
+  left: 20px;
+}
+
+.top-right {
+  top: 15px;
+  right: 20px;
+}
+
+.bottom-left {
+  bottom: 15px;
+  left: 20px;
+}
+
+.bottom-right {
+  bottom: 15px;
+  right: 20px;
+}
+
+/* ============================================
+   18. TABLET RESPONSIVENESS
+   ============================================ */
+
+@media (max-width: 1024px) {
+
+  .welcome-screen {
+    padding: 18px 3%;
+  }
+
+  .welcome-layout {
+    gap: 20px;
+
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+
+  .girl-art {
+    width: 100%;
+    height: 72%;
+  }
+
+  .welcome-title {
+    font-size: clamp(55px, 7vw, 78px);
+  }
+
+  .welcome-eyebrow {
+    letter-spacing: 2px;
+  }
+
+  .name-reveal {
+    margin-top: 25px;
+  }
+
+  .welcome-footer {
+    letter-spacing: 2px;
+  }
+}
+
+/* ============================================
+   19. MOBILE RESPONSIVENESS
+   ============================================ */
+
+@media (max-width: 600px) {
+
+  .welcome-screen {
+    padding: 12px 18px;
+  }
+
+  .welcome-layout {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 5px;
+
+    max-height: 100%;
+  }
+
+  /* Girl section */
+
+  .girl-section {
+    width: 100%;
+
+    height: 35%;
+
+    flex: 0 1 35%;
+
+    min-height: 0;
+  }
+
+  .girl-art {
+    width: 100%;
+    height: 100%;
+
+    max-width: 250px;
+  }
+
+  .girl-halo {
+    width: 65%;
+
+    filter: blur(45px);
+  }
+
+  .girl-caption {
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    margin-top: 0;
+
+    gap: 6px;
+  }
+
+  /* Welcome content */
+
+  .welcome-content {
+    flex: 0 1 auto;
+
+    min-height: 0;
+
+    width: 100%;
+  }
+
+  .welcome-symbol {
+    margin-bottom: 7px;
+  }
+
+  .welcome-symbol svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .welcome-eyebrow {
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 5px;
+  }
+
+  .welcome-title {
+    font-size: clamp(48px, 13vw, 65px);
+  }
+
+  .welcome-divider {
+    margin: 5px auto 8px;
+  }
+
+  .welcome-subtitle {
+    font-size: 17px;
+  }
+
+  /* Venkat name */
+
+  .name-reveal {
+    margin-top: 17px;
+  }
+
+  .name-reveal span {
+    font-size: 8px;
+
+    letter-spacing: 2px;
+  }
+
+  .name-reveal h2 {
+    font-size: 39px;
+
+    margin-top: 5px;
+  }
+
+  .name-heart {
+    width: 12px;
+    height: 12px;
+
+    margin-top: 0;
+  }
+
+  /* Description */
+
+  .welcome-description {
+    max-width: 300px;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+
+    margin: 7px auto 13px;
+  }
+
+  /* Button */
+
+  .journey-button {
+    min-height: 44px;
+
+    padding: 0 19px;
+
+    font-size: 11px;
+
+    gap: 9px;
+  }
+
+  .journey-button svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Footer */
+
+  .welcome-footer {
+    margin-top: 14px;
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+  }
+
+  /* Particles */
+
+  .floating-particles span {
+    font-size: 15px;
+  }
+
+  /* Corners */
+
+  .corner-decoration {
+    font-size: 22px;
+  }
+
+  .top-left {
+    top: 8px;
+    left: 10px;
+  }
+
+  .top-right {
+    top: 8px;
+    right: 10px;
+  }
+
+  .bottom-left {
+    bottom: 8px;
+    left: 10px;
+  }
+
+  .bottom-right {
+    bottom: 8px;
+    right: 10px;
+  }
+}
+
+/* ============================================
+   20. SMALL MOBILE
+   ============================================ */
+
+@media (max-width: 380px) {
+
+  .welcome-screen {
+    padding: 8px 14px;
+  }
+
+  .welcome-layout {
+    gap: 2px;
+  }
+
+  .girl-section {
+    height: 31%;
+
+    flex-basis: 31%;
+  }
+
+  .girl-art {
+    max-width: 210px;
+  }
+
+  .girl-caption {
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+  }
+
+  .welcome-title {
+    font-size: 46px;
+  }
+
+  .welcome-subtitle {
+    font-size: 15px;
+  }
+
+  .name-reveal {
+    margin-top: 12px;
+  }
+
+  .name-reveal h2 {
+    font-size: 35px;
+  }
+
+  .welcome-description {
+    margin: 5px auto 9px;
+
+    font-size: 9px;
+  }
+
+  .welcome-footer {
+    margin-top: 10px;
+  }
+}
+
+/* ============================================
+   21. SHORT DESKTOP SCREENS
+   ============================================ */
+
+@media (max-height: 650px) and (min-width: 601px) {
+
+  .welcome-screen {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .welcome-layout {
+    gap: 10px;
+  }
+
+  .girl-art {
+    height: 65%;
+  }
+
+  .welcome-symbol {
+    margin-bottom: 7px;
+  }
+
+  .name-reveal {
+    margin-top: 14px;
+  }
+
+  .welcome-description {
+    margin: 8px auto 12px;
+  }
+
+  .welcome-footer {
+    margin-top: 13px;
+  }
+}
+
+/* ============================================
+   22. SHORT MOBILE SCREENS
+   ============================================ */
+
+@media (max-height: 650px) and (max-width: 600px) {
+
+  .welcome-screen {
+    padding: 6px 12px;
+  }
+
+  .welcome-layout {
+    gap: 0;
+  }
+
+  .girl-section {
+    height: 28%;
+
+    flex-basis: 28%;
+  }
+
+  .girl-art {
+    max-width: 170px;
+  }
+
+  .welcome-title {
+    font-size: 43px;
+  }
+
+  .name-reveal {
+    margin-top: 8px;
+  }
+
+  .welcome-description {
+    margin: 4px auto 7px;
+  }
+
+  .welcome-footer {
+    margin-top: 7px;
+  }
+}
+
+/* ============================================
+   23. LARGE DESKTOP
+   ============================================ */
+
+@media (min-width: 1600px) {
+
+  .welcome-layout {
+    max-width: 1500px;
+
+    gap: 100px;
+  }
+
+  .girl-art {
+    max-width: 550px;
+  }
+
+  .welcome-content {
+    max-width: 700px;
+  }
+}
+
+/* ============================================
+   24. ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .star,
+  .ambient-glow,
+  .floating-particles span {
+    animation: none;
+  }
+
+  .portrait-drawing .draw-line {
+    animation: none;
+
+    stroke-dashoffset: 0;
+
+    opacity: 1;
+  }
+
+  .portrait-sparkles,
+  .portrait-glow-dots {
+    animation: none;
+
+    opacity: 1;
+  }
+
+  .girl-art {
+    animation: none;
+  }
+}
