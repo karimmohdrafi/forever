@@ -6,8 +6,9 @@ const MEMORY_MUSIC = `${import.meta.env.BASE_URL}music/background-music7.mp3`;
 
 function FirstMemory({ onContinue }) {
   const audioRef = useRef(null);
+  const continueTimerRef = useRef(null);
 
-  // Background music: autoplay and loop
+  // BACKGROUND MUSIC
   useEffect(() => {
     const audio = audioRef.current;
 
@@ -16,15 +17,9 @@ function FirstMemory({ onContinue }) {
     audio.loop = true;
     audio.volume = 0.45;
 
-    const playMusic = async () => {
-      try {
-        await audio.play();
-      } catch (error) {
-        console.warn("First Memory music autoplay was blocked:", error);
-      }
-    };
-
-    playMusic();
+    audio.play().catch((error) => {
+      console.warn("First Memory music autoplay was blocked:", error);
+    });
 
     return () => {
       audio.pause();
@@ -32,13 +27,23 @@ function FirstMemory({ onContinue }) {
     };
   }, []);
 
-  // Automatically continue after 10 seconds
+  // AUTOMATICALLY CONTINUE AFTER 10 SECONDS
   useEffect(() => {
-    const timer = setTimeout(() => {
-      onContinue?.();
-    }, 10000);
+    continueTimerRef.current = setTimeout(() => {
+      if (typeof onContinue === "function") {
+        onContinue();
+      } else {
+        console.error(
+          "FirstMemory: onContinue callback is missing. Check App.jsx."
+        );
+      }
+    }, 12000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      if (continueTimerRef.current) {
+        clearTimeout(continueTimerRef.current);
+      }
+    };
   }, [onContinue]);
 
   return (
@@ -98,6 +103,7 @@ function FirstMemory({ onContinue }) {
                 src="/images/first-memory.jpg"
                 alt="Our first memory"
               />
+
               <div className="memory-photo-shine" />
             </div>
 

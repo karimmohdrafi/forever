@@ -11,13 +11,24 @@ import {
 import "./OneMoreSurprise.css";
 
 function OneMoreSurprise({ onContinue }) {
+
+  const handleContinue = () => {
+    if (typeof onContinue === "function") {
+      onContinue();
+    } else {
+      console.error(
+        "OneMoreSurprise: onContinue callback is missing. Check App.jsx."
+      );
+    }
+  };
+
   return (
     <section className="one-more-page">
       <div className="one-more-stars" />
       <div className="one-more-glow glow-left" />
       <div className="one-more-glow glow-right" />
 
-      {/* Floating particles */}
+      {/* FLOATING PARTICLES */}
       <div className="one-more-particles">
         {Array.from({ length: 22 }, (_, i) => (
           <span
@@ -34,7 +45,8 @@ function OneMoreSurprise({ onContinue }) {
       </div>
 
       <div className="one-more-content">
-        {/* Top ornament */}
+
+        {/* TOP ORNAMENT */}
         <motion.div
           className="one-more-ornament"
           initial={{ opacity: 0, scale: 0 }}
@@ -46,7 +58,7 @@ function OneMoreSurprise({ onContinue }) {
           <span />
         </motion.div>
 
-        {/* Small heading */}
+        {/* SMALL HEADING */}
         <motion.p
           className="one-more-eyebrow"
           initial={{ opacity: 0, y: 20 }}
@@ -56,42 +68,59 @@ function OneMoreSurprise({ onContinue }) {
           THE MAGIC ISN'T OVER YET
         </motion.p>
 
-        {/* Main title */}
+        {/* MAIN TITLE */}
         <motion.h1
           className="one-more-title"
-          initial={{ opacity: 0, y: 35, filter: "blur(12px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ delay: 1, duration: 1.5 }}
+          initial={{
+            opacity: 0,
+            y: 35,
+            filter: "blur(12px)",
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+          }}
+          transition={{
+            delay: 1,
+            duration: 1.5,
+          }}
         >
           One More
           <span>Surprise...</span>
         </motion.h1>
 
-        {/* Divider */}
+        {/* DIVIDER */}
         <motion.div
           className="one-more-divider"
           initial={{ width: 0 }}
           animate={{ width: "180px" }}
-          transition={{ delay: 2, duration: 1.2 }}
+          transition={{
+            delay: 2,
+            duration: 1.2,
+          }}
         >
           <span />
           <Heart size={15} fill="currentColor" />
           <span />
         </motion.div>
 
-        {/* Message */}
+        {/* MESSAGE */}
         <motion.p
           className="one-more-description"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.4, duration: 1 }}
+          transition={{
+            delay: 2.4,
+            duration: 1,
+          }}
         >
           Just when you thought the magic was over...
           <br />
           there's still something special waiting for you.
         </motion.p>
 
-        {/* Glowing heart */}
+        {/* GLOWING HEART */}
         <motion.div
           className="one-more-heart"
           initial={{ opacity: 0, scale: 0 }}
@@ -100,7 +129,10 @@ function OneMoreSurprise({ onContinue }) {
             scale: [1, 1.13, 1],
           }}
           transition={{
-            opacity: { delay: 3, duration: 1 },
+            opacity: {
+              delay: 3,
+              duration: 1,
+            },
             scale: {
               delay: 3,
               duration: 2,
@@ -111,28 +143,42 @@ function OneMoreSurprise({ onContinue }) {
         >
           <div className="heart-orbit orbit-one" />
           <div className="heart-orbit orbit-two" />
+
           <Heart size={43} fill="currentColor" />
-          <Sparkles className="heart-sparkle sparkle-one" size={18} />
-          <Sparkles className="heart-sparkle sparkle-two" size={15} />
+
+          <Sparkles
+            className="heart-sparkle sparkle-one"
+            size={18}
+          />
+
+          <Sparkles
+            className="heart-sparkle sparkle-two"
+            size={15}
+          />
         </motion.div>
 
-        {/* Continue button */}
+        {/* CONTINUE BUTTON */}
         <motion.button
           type="button"
           className="one-more-button"
-          onClick={onContinue}
+          onClick={handleContinue}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 3.7, duration: 1 }}
+          transition={{
+            delay: 3.7,
+            duration: 1,
+          }}
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.96 }}
         >
           <Sparkles size={16} />
+
           <span>Reveal The Next Surprise</span>
+
           <ArrowRight size={17} />
         </motion.button>
 
-        {/* Footer */}
+        {/* FOOTER */}
         <motion.p
           className="one-more-footer"
           initial={{ opacity: 0 }}
@@ -143,6 +189,7 @@ function OneMoreSurprise({ onContinue }) {
         </motion.p>
       </div>
 
+      {/* CORNER DECORATIONS */}
       <div className="one-more-corner corner-top-left">✧</div>
       <div className="one-more-corner corner-top-right">✦</div>
       <div className="one-more-corner corner-bottom-left">✦</div>

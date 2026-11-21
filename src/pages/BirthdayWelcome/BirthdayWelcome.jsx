@@ -78,7 +78,7 @@ function FloatingParticles() {
 // MAIN BIRTHDAY WELCOME
 // =========================================
 
-function BirthdayWelcome({ onContinue }) {
+function BirthdayWelcome({ onNext }) {
   const [visibleLines, setVisibleLines] = useState(0);
   const [giftMessage, setGiftMessage] = useState("");
   const [showNextButton, setShowNextButton] = useState(false);
@@ -143,6 +143,20 @@ function BirthdayWelcome({ onContinue }) {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // =====================================
+  // NEXT PAGE NAVIGATION
+  // =====================================
+
+  const handleNext = () => {
+    if (typeof onNext === "function") {
+      onNext();
+    } else {
+      console.error(
+        "BirthdayWelcome: onNext callback is missing. Check App.jsx."
+      );
+    }
+  };
 
   // =====================================
   // UI
@@ -297,7 +311,7 @@ function BirthdayWelcome({ onContinue }) {
           <motion.button
             type="button"
             className="birthday-next-button"
-            onClick={onContinue}
+            onClick={handleNext}
             initial={{ opacity: 0, y: 25, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.9, ease: "easeOut" }}

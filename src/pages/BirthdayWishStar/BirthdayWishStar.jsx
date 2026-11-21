@@ -1,7 +1,8 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import "./BirthdayWishStar.css";
 
-const MUSIC_PATH = "/music/background-music10.mp3";
+const MUSIC_PATH = `${import.meta.env.BASE_URL}music/background-music10.mp3`;
 
 const defaultWish = `Nuvvu eppudu ilane navvuthu undali....
 Nee dreams anni nijam avvali....
@@ -24,6 +25,7 @@ function BirthdayWishStar({ onNext }) {
 
   const timers = useRef([]);
   const audioRef = useRef(null);
+  const advancedRef = useRef(false);
 
   const addTimer = (callback, delay) => {
     const timer = setTimeout(callback, delay);
@@ -64,7 +66,7 @@ function BirthdayWishStar({ onNext }) {
     return () => clearTimeout(timer);
   }, []);
 
-  // Clear all manually created timers on unmount
+  // Clear manually created timers on unmount
   useEffect(() => {
     return () => {
       timers.current.forEach(clearTimeout);
@@ -81,17 +83,32 @@ function BirthdayWishStar({ onNext }) {
         setPhotoIndex((current) => current + 1);
       } else {
         setPhase("finished");
-
-        addTimer(() => {
-          if (typeof onNext === "function") {
-            onNext();
-          }
-        }, 2200);
       }
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, [phase, photoIndex, onNext]);
+  }, [phase, photoIndex]);
+
+  // Automatically move to FinalLoveNote after finished screen
+  useEffect(() => {
+    if (phase !== "finished") return;
+
+    const timer = setTimeout(() => {
+      if (advancedRef.current) return;
+
+      advancedRef.current = true;
+
+      if (typeof onNext === "function") {
+        onNext();
+      } else {
+        console.error(
+          "BirthdayWishStar: onNext callback missing. Check App.jsx."
+        );
+      }
+    }, 2200);
+
+    return () => clearTimeout(timer);
+  }, [phase, onNext]);
 
   const closeCard = () => {
     if (phase !== "writing") return;
@@ -123,7 +140,6 @@ function BirthdayWishStar({ onNext }) {
         preload="auto"
       />
 
-      {/* Background */}
       <div className="wish-background" />
       <div className="wish-glow glow-left" />
       <div className="wish-glow glow-right" />
@@ -142,7 +158,6 @@ function BirthdayWishStar({ onNext }) {
         ))}
       </div>
 
-      {/* Heading */}
       {phase !== "photos" &&
         phase !== "finished" &&
         phase !== "star" && (
@@ -165,7 +180,6 @@ function BirthdayWishStar({ onNext }) {
           </header>
         )}
 
-      {/* Lantern is removed completely once the star appears */}
       {["intro", "writing", "folding", "ready", "launching"].includes(
         phase
       ) && (
@@ -204,14 +218,12 @@ function BirthdayWishStar({ onNext }) {
         </div>
       )}
 
-      {/* Intro hint */}
       {phase === "intro" && (
         <div className="wish-intro-hint">
           ✧ &nbsp; A little wish is waiting to take flight &nbsp; ✧
         </div>
       )}
 
-      {/* Wish Card */}
       {(phase === "writing" || phase === "folding") && (
         <div
           className={`wish-card ${
@@ -259,7 +271,6 @@ function BirthdayWishStar({ onNext }) {
         </div>
       )}
 
-      {/* Lantern Launch Message */}
       {phase === "launching" && (
         <div className="launch-message">
           <span>✧</span>
@@ -268,7 +279,6 @@ function BirthdayWishStar({ onNext }) {
         </div>
       )}
 
-      {/* Star appears alone - no lantern or balloon behind it */}
       {phase === "star" && (
         <div className="wish-star-screen">
           <div className="wish-star-orbit orbit-one" />
@@ -292,7 +302,6 @@ function BirthdayWishStar({ onNext }) {
         </div>
       )}
 
-      {/* Photos */}
       {phase === "photos" && (
         <div className="memory-photo-screen">
           <div className="memory-photo-heading">
@@ -333,7 +342,6 @@ function BirthdayWishStar({ onNext }) {
         </div>
       )}
 
-      {/* Finished */}
       {phase === "finished" && (
         <div className="photos-finished">
           <span className="finished-heart">♡</span>

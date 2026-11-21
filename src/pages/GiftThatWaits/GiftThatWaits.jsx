@@ -139,6 +139,13 @@ function GiftThatWaits({ onContinue }) {
   // =====================================
 
   const handleContinue = () => {
+    if (typeof onContinue !== "function") {
+      console.error(
+        "GiftThatWaits: onContinue callback is missing. Check App.jsx."
+      );
+      return;
+    }
+
     const audio = audioRef.current;
 
     if (audio) {
@@ -146,9 +153,7 @@ function GiftThatWaits({ onContinue }) {
       audio.currentTime = 0;
     }
 
-    if (typeof onContinue === "function") {
-      onContinue();
-    }
+    onContinue();
   };
 
   // =====================================
@@ -164,10 +169,11 @@ function GiftThatWaits({ onContinue }) {
   }, []);
 
   return (
-    <main className={`gift-experience ${
-      opening ? "gift-opening" : ""
-    } ${opened ? "gift-opened" : ""}`}>
-
+    <main
+      className={`gift-experience ${
+        opening ? "gift-opening" : ""
+      } ${opened ? "gift-opened" : ""}`}
+    >
       {/* BACKGROUND MUSIC */}
 
       <audio
@@ -273,12 +279,11 @@ function GiftThatWaits({ onContinue }) {
       {/* GIFT STAGE */}
 
       <section className="gift-stage">
-
-        {/* LIGHT RAYS */}
-
-        <div className={`gift-light-rays ${
-          opened ? "rays-active" : ""
-        }`}>
+        <div
+          className={`gift-light-rays ${
+            opened ? "rays-active" : ""
+          }`}
+        >
           {Array.from({ length: 12 }, (_, i) => (
             <span
               key={i}
@@ -289,12 +294,12 @@ function GiftThatWaits({ onContinue }) {
 
         {/* MAGICAL GIFT */}
 
-        <div className={`gift-assembly ${
-          opening ? "gift-shaking" : ""
-        } ${opened ? "gift-fully-opened" : ""}`}>
-
+        <div
+          className={`gift-assembly ${
+            opening ? "gift-shaking" : ""
+          } ${opened ? "gift-fully-opened" : ""}`}
+        >
           <div className="gift-aura" />
-
           <div className="gift-inner-light" />
 
           <div className="gift-sparkle-explosion">
@@ -321,19 +326,11 @@ function GiftThatWaits({ onContinue }) {
             onClick={handleGiftClick}
             onKeyDown={handleKeyDown}
           >
-
-            {/* BOX BACK */}
-
             <div className="gift-box-back" />
 
-            {/* BOX BODY */}
-
             <div className="gift-box-body">
-
               <div className="gift-box-front">
-
                 <div className="gift-ribbon-vertical" />
-
                 <div className="gift-ribbon-horizontal" />
 
                 <div className="gift-box-emblem">
@@ -341,19 +338,15 @@ function GiftThatWaits({ onContinue }) {
                 </div>
 
                 <div className="gift-box-front-shine" />
-
               </div>
 
               <div className="gift-box-side" />
-
               <div className="gift-box-bottom" />
-
             </div>
 
             {/* BOX LID */}
 
             <div className="gift-lid">
-
               <div className="gift-lid-top">
                 <div className="gift-lid-ribbon" />
                 <span className="gift-lid-gem">✦</span>
@@ -362,8 +355,6 @@ function GiftThatWaits({ onContinue }) {
               <div className="gift-lid-front" />
               <div className="gift-lid-side" />
 
-              {/* BOW */}
-
               <div className="gift-bow">
                 <div className="bow-loop bow-left" />
                 <div className="bow-loop bow-right" />
@@ -371,18 +362,11 @@ function GiftThatWaits({ onContinue }) {
                 <div className="bow-tail bow-tail-left" />
                 <div className="bow-tail bow-tail-right" />
               </div>
-
             </div>
-
           </div>
 
-          {/* SHADOW */}
-
           <div className="gift-ground-shadow" />
-
         </div>
-
-        {/* FLOOR GLOW */}
 
         <div className="gift-floor-glow" />
 
@@ -395,13 +379,11 @@ function GiftThatWaits({ onContinue }) {
             <span>✧</span>
           </div>
         )}
-
       </section>
 
       {/* BOTTOM CONTENT */}
 
       <section className="gift-bottom-content">
-
         {!opened ? (
           showUnwrap && (
             <button
@@ -420,7 +402,6 @@ function GiftThatWaits({ onContinue }) {
           )
         ) : (
           <div className="gift-reveal-message">
-
             <div className="reveal-decoration">
               ✦ ♡ ✧ ♡ ✦
             </div>
@@ -436,15 +417,14 @@ function GiftThatWaits({ onContinue }) {
               <button
                 className="gift-continue"
                 onClick={handleContinue}
+                type="button"
               >
                 <span>Continue the magic</span>
                 <span className="continue-arrow">→</span>
               </button>
             )}
-
           </div>
         )}
-
       </section>
 
       {/* FOOTER */}
@@ -453,7 +433,6 @@ function GiftThatWaits({ onContinue }) {
         MADE WITH ENDLESS LOVE
         <span>♡</span>
       </footer>
-
     </main>
   );
 }

@@ -1,163 +1,164 @@
 
 import { useState } from "react";
 
-// STEP 1–3
+// =====================================
+// INTRO PAGES — STEP 1 TO 5
+// =====================================
+
+import IntroPage1 from "./pages/IntroPage1/IntroPage1";
+import IntroPage2 from "./pages/IntroPage2/IntroPage2";
+import IntroPage3 from "./pages/IntroPage3/IntroPage3";
+import IntroPage4 from "./pages/IntroPage4/IntroPage4";
+import IntroPage5 from "./pages/IntroPage5/IntroPage5";
+
+// =====================================
+// MAIN PAGES — STEP 6 TO 22
+// =====================================
+
+import BirthdayCountdown from "./pages/BirthdayCountdown/BirthdayCountdown";
 import Welcome from "./pages/Welcome/Welcome";
 import BirthdayPortal from "./pages/BirthdayPortal/BirthdayPortal";
 import BirthdayWelcome from "./pages/BirthdayWelcome/BirthdayWelcome";
-
-// STEP 5–9
 import StarUniverse from "./pages/StarUniverse/StarUniverse";
-import BirthdayCountdown from "./pages/BirthdayCountdown/BirthdayCountdown";
 import GiftThatWaits from "./pages/GiftThatWaits/GiftThatWaits";
-import BeautifulTimeline from "./pages/BeautifulTimeline/BeautifulTimeline";
-import FirstMemory from "./pages/FirstMemory/FirstMemory";
-
-// STEP 10–13
-import MemoryPuzzle from "./pages/MemoryPuzzle/MemoryPuzzle";
-import HeartLetter from "./pages/HeartLetter/HeartLetter";
 import FlowerGarden from "./pages/FlowerGarden/FlowerGarden";
 import LittleThings from "./pages/LittleThings/LittleThings";
-
-// STEP 14
-import OneMoreSurprise from "./pages/OneMoreSurprise/OneMoreSurprise";
-
-// STEP 15
+import MemoryPuzzle from "./pages/MemoryPuzzle/MemoryPuzzle";
+import FirstMemory from "./pages/FirstMemory/FirstMemory";
 import BirthdaySurprise from "./pages/BirthdaySurprise/BirthdaySurprise";
-
-// STEP 16
+import HeartLetter from "./pages/HeartLetter/HeartLetter";
+import OneMoreSurprise from "./pages/OneMoreSurprise/OneMoreSurprise";
+import BeautifulTimeline from "./pages/BeautifulTimeline/BeautifulTimeline";
 import Step16 from "./pages/Step16/Step16";
-
-// STEP 17
 import BirthdayWishStar from "./pages/BirthdayWishStar/BirthdayWishStar";
-
-// STEP 18
 import FinalLoveNote from "./pages/FinalLoveNote/FinalLoveNote";
 
+// =====================================
+// APP
+// =====================================
 
 function App() {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const goToStep = (step) => {
+    setCurrentStep(step);
+  };
 
   return (
-    <div className="app-container">
+    <>
+      {/* STEP 1 */}
+      {currentStep === 0 && (
+        <IntroPage1 onNext={() => goToStep(1)} />
+      )}
 
-      {/* STEP 1 - WELCOME */}
+      {/* STEP 2 */}
       {currentStep === 1 && (
-        <Welcome onBegin={() => setCurrentStep(2)} />
+        <IntroPage2 onNext={() => goToStep(2)} />
       )}
 
-      {/* STEP 2 - BIRTHDAY PORTAL */}
+      {/* STEP 3 */}
       {currentStep === 2 && (
-        <BirthdayPortal
-          onUnlock={() => setCurrentStep(3)}
-          onBack={() => setCurrentStep(1)}
-        />
+        <IntroPage3 onNext={() => goToStep(3)} />
       )}
 
-      {/* STEP 3 - PERSONAL BIRTHDAY WELCOME */}
+      {/* STEP 4 */}
       {currentStep === 3 && (
-        <BirthdayWelcome
-          onContinue={() => setCurrentStep(5)}
-        />
+        <IntroPage4 onNext={() => goToStep(4)} />
       )}
 
-      {/* STEP 5 - STAR UNIVERSE */}
+      {/* STEP 5 */}
+      {currentStep === 4 && (
+        <IntroPage5 onNext={() => goToStep(5)} />
+      )}
+
+      {/* STEP 6 */}
       {currentStep === 5 && (
-        <StarUniverse
-          onContinue={() => setCurrentStep(6)}
-        />
+        <BirthdayCountdown onContinue={() => goToStep(6)} />
       )}
 
-      {/* STEP 6 - BIRTHDAY COUNTDOWN */}
+      {/* STEP 7 */}
       {currentStep === 6 && (
-        <BirthdayCountdown
-          onContinue={() => setCurrentStep(7)}
-        />
+        <Welcome onNext={() => goToStep(7)} />
       )}
 
-      {/* STEP 7 - GIFT THAT WAITS */}
+      {/* STEP 8 */}
       {currentStep === 7 && (
-        <GiftThatWaits
-          onContinue={() => setCurrentStep(8)}
+        <BirthdayPortal
+          onUnlock={() => goToStep(8)}
+          onBack={() => goToStep(6)}
         />
       )}
 
-      {/* STEP 8 - BEAUTIFUL TIMELINE */}
+      {/* STEP 9 */}
       {currentStep === 8 && (
-        <BeautifulTimeline
-          onContinue={() => setCurrentStep(9)}
-        />
+        <BirthdayWelcome onNext={() => goToStep(9)} />
       )}
 
-      {/* STEP 9 - FIRST MEMORY */}
+      {/* STEP 10 */}
       {currentStep === 9 && (
-        <FirstMemory
-          onContinue={() => setCurrentStep(10)}
-        />
+        <StarUniverse onContinue={() => goToStep(10)} />
       )}
 
-      {/* STEP 10 - MEMORY PUZZLE */}
+      {/* STEP 11 */}
       {currentStep === 10 && (
-        <MemoryPuzzle
-          onNext={() => setCurrentStep(11)}
-        />
+        <GiftThatWaits onContinue={() => goToStep(11)} />
       )}
 
-      {/* STEP 11 - HEART LETTER */}
+      {/* STEP 12 */}
       {currentStep === 11 && (
-        <HeartLetter
-          onNext={() => setCurrentStep(12)}
-        />
+        <FlowerGarden onNext={() => goToStep(12)} />
       )}
 
-      {/* STEP 12 - FLOWER GARDEN */}
+      {/* STEP 13 */}
       {currentStep === 12 && (
-        <FlowerGarden
-          onNext={() => setCurrentStep(13)}
-        />
+        <LittleThings onNext={() => goToStep(13)} />
       )}
 
-      {/* STEP 13 - THE LITTLE THINGS */}
+      {/* STEP 14 */}
       {currentStep === 13 && (
-        <LittleThings
-          onNext={() => setCurrentStep(14)}
-        />
+        <MemoryPuzzle onNext={() => goToStep(14)} />
       )}
 
-      {/* STEP 14 - ONE MORE SURPRISE */}
+      {/* STEP 15 */}
       {currentStep === 14 && (
-        <OneMoreSurprise
-          onContinue={() => setCurrentStep(15)}
-        />
+        <FirstMemory onContinue={() => goToStep(15)} />
       )}
 
-      {/* STEP 15 - BIRTHDAY SURPRISE */}
+      {/* STEP 16 */}
       {currentStep === 15 && (
-        <BirthdaySurprise
-          onNext={() => setCurrentStep(16)}
-        />
+        <BirthdaySurprise onNext={() => goToStep(16)} />
       )}
 
-      {/* STEP 16 - ANOTHER BEAUTIFUL SURPRISE */}
+      {/* STEP 17 */}
       {currentStep === 16 && (
-        <Step16
-          onContinue={() => setCurrentStep(17)}
-        />
+        <HeartLetter onNext={() => goToStep(17)} />
       )}
 
-      {/* STEP 17 - MAKE A BIRTHDAY WISH */}
+      {/* STEP 18 */}
       {currentStep === 17 && (
-        <BirthdayWishStar
-          onNext={() => setCurrentStep(18)}
-        />
+        <OneMoreSurprise onContinue={() => goToStep(18)} />
       )}
 
-      {/* STEP 18 - THE FINAL LOVE NOTE */}
+      {/* STEP 19 */}
       {currentStep === 18 && (
+        <BeautifulTimeline onContinue={() => goToStep(19)} />
+      )}
+
+      {/* STEP 20 */}
+      {currentStep === 19 && (
+        <Step16 onContinue={() => goToStep(20)} />
+      )}
+
+      {/* STEP 21 */}
+      {currentStep === 20 && (
+        <BirthdayWishStar onNext={() => goToStep(21)} />
+      )}
+
+      {/* STEP 22 — FINAL PAGE */}
+      {currentStep === 21 && (
         <FinalLoveNote />
       )}
-
-    </div>
+    </>
   );
 }
 

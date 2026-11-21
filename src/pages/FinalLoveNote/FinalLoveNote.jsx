@@ -236,7 +236,7 @@ function FinalLoveNote() {
                     }}
                   >
                     <span className="cre-line">
-                      CRE Oy
+                      Cre Oy
                     </span>
 
                     <span className="always-line">
@@ -278,7 +278,7 @@ function FinalLoveNote() {
 
           <h1>Thank You</h1>
 
-          <p>For being you. ♡</p>
+          <p>For being you ♡</p>
 
           <span className="thank-you-sparkle">✧</span>
         </motion.div>

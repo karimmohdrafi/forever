@@ -3,6 +3,14 @@ import React from "react";
 import "./Step16.css";
 
 function Step16({ onContinue }) {
+  const handleContinue = () => {
+    if (typeof onContinue === "function") {
+      onContinue();
+    } else {
+      console.error("Step16: onContinue callback missing. Check App.jsx.");
+    }
+  };
+
   return (
     <section className="s16-screen">
 
@@ -62,7 +70,7 @@ function Step16({ onContinue }) {
 
         <button
           className="s16-continue-btn"
-          onClick={onContinue}
+          onClick={handleContinue}
         >
           <span>Continue Your Journey</span>
           <span className="s16-arrow">→</span>

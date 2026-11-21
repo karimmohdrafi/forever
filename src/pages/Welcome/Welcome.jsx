@@ -131,7 +131,7 @@ function GirlOutline() {
    WELCOME COMPONENT
 ========================================= */
 
-function Welcome({ onBegin }) {
+function Welcome({ onNext }) {
   const audioRef = useRef(null);
   const [showJourneyButton, setShowJourneyButton] = useState(false);
 
@@ -189,13 +189,13 @@ function Welcome({ onBegin }) {
     return () => clearTimeout(timer);
   }, []);
 
-  // BUTTON ONLY NAVIGATES TO NEXT PAGE
+  // BUTTON NAVIGATES TO BIRTHDAY PORTAL
   const handleBegin = () => {
-    if (typeof onBegin === "function") {
-      onBegin();
+    if (typeof onNext === "function") {
+      onNext();
     } else {
       console.error(
-        "Welcome: onBegin callback is missing. Check App.jsx."
+        "Welcome: onNext callback is missing. Check App.jsx."
       );
     }
   };
