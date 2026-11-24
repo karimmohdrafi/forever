@@ -1,207 +1,126 @@
 
-import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Sparkles } from "lucide-react";
 import "./IntroPage4.css";
 
-const wishes = [
-  {
-    name: "Narendra Modi",
-    image: "/images/modi.jpg",
-    content: (
-      <>
-        మిత్రోం... నా ప్రియమైన మనవరాలు వెంకట నాగ దుర్గ గారికి, నా
-        హృదయపూర్వక జన్మదిన శుభాకాంక్షలు! ఈ రోజు ఎంతో ప్రత్యేకమైన రోజు.
-        వెంకట నాగ దుర్గ గారు తన జీవితంలో ఎన్నో అద్భుతమైన విజయాలు
-        సాధించాలని, ఆయురారోగ్యాలతో, అష్టైశ్వర్యాలతో ఎల్లప్పుడూ
-        సంతోషంగా ఉండాలని ఆ భగవంతుడిని ప్రార్థిస్తున్నాను. మీ కలలన్నీ
-        నిజం కావాలి. మరోసారి... హ్యాపీ బర్త్‌డే వెంకట నాగ దుర్గ జీ!
-        జై హింద్!
-      </>
-    ),
-  },
-  {
-    name: "N. Chandrababu Naidu",
-    image: "/images/babu.jpeg",
-    content: (
-      <>
-        తమ్ముళ్లు... ఈ రోజు మనందరికీ ఎంతో సంతోషకరమైన రోజు. మన
-        మనవరాలు <strong>వెంకట నాగ దుర్గ</strong> పుట్టినరోజు సందర్భంగా
-        నా హృదయపూర్వక జన్మదిన శుభాకాంక్షలు తెలియజేస్తున్నాను.
-        వెంకట నాగ దుర్గ చాలా కష్టపడే తత్వం, విజన్ ఉన్న అమ్మాయి.
-        భవిష్యత్తులో తను ఇంకా ఉన్నత శిఖరాలకు ఎదగాలని, అనుకున్న
-        లక్ష్యాలన్నీ సాధించాలని మనస్ఫూర్తిగా కోరుకుంటున్నాను.
-        ఎక్కడా తగ్గకుండా ముందుకు వెళ్ళు... I wish you all the very best,
-        Happy Birthday!
-      </>
-    ),
-  },
-  {
-    name: "Pawan Kalyan",
-    image: "/images/pawan.jpg",
-    content: (
-      <>
-        నా ప్రియమైన సోదరి <strong>వెంకట నాగ దుర్గ</strong> కి నా
-        హృదయపూర్వక పుట్టినరోజు శుభాకాంక్షలు. నువ్వు ఎంచుకున్న రంగంలో,
-        నువ్వు అనుకున్న పనుల్లో అద్భుతమైన విజయాలు సాధించాలని
-        మనస్ఫూర్తిగా కోరుకుంటున్నాను. జీవితంలో ఎన్ని అడ్డంకులు
-        వచ్చినా... వెనకడుగు వేయకుండా ధైర్యంగా ముందుకు వెళ్ళు.
-        నీ ఆశయాలన్నీ నెరవేరాలి. నువ్వు ఎప్పుడూ ఇలాగే చిరునవ్వుతో,
-        ఆయురారోగ్యాలతో సంతోషంగా ఉండాలని ఆ భగవంతుడిని
-        ప్రార్థిస్తున్నాను. హ్యాపీ బర్త్‌డే సోదరి... జై హింద్!
-      </>
-    ),
-  },
-  {
-    name: "Y. S. Jagan Mohan Reddy",
-    image: "/images/jagan.jpg",
-    content: (
-      <>
-        నా ప్రియమైన చెల్లెలు <strong>వెంకట నాగ దుర్గ</strong> కి
-        హృదయపూర్వక పుట్టినరోజు శుభాకాంక్షలు. ఈ రోజు నా చెల్లెలి
-        పుట్టినరోజు సందర్భంగా... ఆ దేవుడి దయతో, మీ అందరి చల్లని
-        దీవెనలతో తను ఎప్పుడూ సంతోషంగా, ఆయురారోగ్యాలతో ఉండాలని
-        మనస్ఫూర్తిగా కోరుకుంటున్నాను. తన కలలన్నీ నెరవేరాలి,
-        జీవితంలో ఎన్నో ఉన్నత శిఖరాలకు ఎదగాలి. హ్యాపీ బర్త్‌డే
-        చెల్లెలు... గాడ్ బ్లెస్ యూ!
-      </>
-    ),
-  },
-  {
-    name: "Donald Trump",
-    image: "/images/trump.jpg",
-    content: (
-      <>
-        హలో EveryOne! నాకు విజయవాడ కనకదుర్గ అమ్మవారు అంటే చాలా
-        చాలా ఇష్టం... నాకంటే ఎక్కువగా అమ్మవారిని ఎవరూ ప్రేమించలేరు,
-        బిలీవ్ మీ! అందుకే అమ్మవారి పేరు పెట్టుకున్న మన
-        <strong> వెంకట నాగ దుర్గ</strong> కి ట్రెమండస్ హ్యాపీ బర్త్‌డే
-        చెబుతున్నాను. నువ్వు సూపర్, నీ పుట్టినరోజు గ్రాండ్ సక్సెస్
-        అవ్వాలి... గాడ్ బ్లెస్ యూ!
-      </>
-    ),
-  },
-];
-
 function IntroPage4({ onNext }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [showFinally, setShowFinally] = useState(false);
+  const [gateOpen, setGateOpen] = useState(false);
+  const [leaving, setLeaving] = useState(false);
 
-  useEffect(() => {
-    let timer;
+  const enterGarden = () => {
+    if (gateOpen || leaving) return;
 
-    if (showFinally) {
-      timer = setTimeout(() => {
-        setShowFinally(false);
-        setCurrentIndex(4);
-      }, 2500);
-    } else if (currentIndex === 3) {
-      timer = setTimeout(() => {
-        setShowFinally(true);
-      }, 15000);
-    } else if (currentIndex === 4) {
-      timer = setTimeout(() => {
-        onNext?.();
-      }, 15000);
-    } else {
-      timer = setTimeout(() => {
-        setCurrentIndex((prev) => prev + 1);
-      }, 15000);
-    }
+    setGateOpen(true);
 
-    return () => clearTimeout(timer);
-  }, [currentIndex, showFinally, onNext]);
+    setTimeout(() => {
+      setLeaving(true);
+    }, 1200);
+
+    setTimeout(() => {
+      onNext?.();
+    }, 2500);
+  };
 
   return (
-    <main className="intro4-page">
-      <div className="intro4-background-glow" />
+    <section className={`intro4 ${leaving ? "intro4-leaving" : ""}`}>
 
-      <AnimatePresence mode="wait">
-        {showFinally ? (
+      {/* Garden background */}
+      <div className="intro4-garden">
+
+        <div className="garden-moon" />
+        <div className="garden-horizon" />
+        <div className="garden-path" />
+
+        {/* Garden entrance */}
+        <div className={`garden-entrance ${gateOpen ? "gate-opening" : ""}`}>
+          <div className="garden-arch" />
+          <div className="garden-gate gate-left" />
+          <div className="garden-gate gate-right" />
+          <div className="garden-gate-light" />
+        </div>
+
+        {/* Fireflies */}
+        <div className="garden-fireflies">
+          {Array.from({ length: 12 }).map((_, index) => (
+            <span key={index} />
+          ))}
+        </div>
+
+        {/* Garden plants */}
+        <div className="garden-plants garden-plants-left">
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
+
+        <div className="garden-plants garden-plants-right">
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
+      </div>
+
+      {/* Main text */}
+      <AnimatePresence>
+        {!leaving && (
           <motion.div
-            key="finally"
-            className="intro4-finally"
-            initial={{ opacity: 0, scale: 0.7, filter: "blur(15px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, scale: 1.2, filter: "blur(12px)" }}
-            transition={{ duration: 0.9 }}
+            className="intro4-content"
+            initial={{ opacity: 0, y: 35, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 0.94, filter: "blur(8px)" }}
+            transition={{ duration: 1.1 }}
           >
-            <span className="intro4-finally-line" />
-            <h1>FINALLY...</h1>
-            <p>And now, one more special wish ♡</p>
-            <span className="intro4-finally-line" />
+            <div className="intro4-eyebrow">
+              <Sparkles size={13} />
+              <span>A PLACE MADE WITH LOVE</span>
+              <Sparkles size={13} />
+            </div>
+
+            <h1 className="intro4-title">
+              A Little Garden
+              <span>Just For You</span>
+            </h1>
+
+            <div className="intro4-divider">
+              <span />
+            </div>
+
+            <div className="intro4-message">
+              <p>I wanted to create a little place just for you...</p>
+              <p>
+                A place where every flower holds a beautiful thought,
+                where every colour reminds me of your smile,
+                and every little detail carries a piece of my heart.
+              </p>
+              <p>So, I made this little garden...</p>
+              <p className="intro4-highlight">
+                A little garden, made with you in my heart.
+              </p>
+            </div>
+
+            <div className="intro4-signature">
+              With love, just for you.
+            </div>
+
+            <button
+              className="intro4-button"
+              onClick={enterGarden}
+              disabled={gateOpen}
+            >
+              <span>WALK INTO YOUR GARDEN</span>
+              <ArrowRight size={17} />
+            </button>
           </motion.div>
-        ) : (
-          <motion.section
-            key={currentIndex}
-            className="intro4-slide"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <div className="intro4-left">
-              <motion.div
-                className="intro4-message"
-                initial={{ opacity: 0, x: -45 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 0.3 }}
-              >
-                <span className="intro4-eyebrow">
-                  A SPECIAL BIRTHDAY MESSAGE
-                </span>
-
-                <h2>{wishes[currentIndex].name}</h2>
-
-                <span className="intro4-gold-line" />
-
-                <div className="intro4-quote">
-                  {wishes[currentIndex].content}
-                </div>
-
-                <div className="intro4-signature">
-                  With warm wishes ♡
-                </div>
-              </motion.div>
-            </div>
-
-            <div className="intro4-right">
-              <motion.div
-                className="intro4-photo-frame"
-                initial={{ opacity: 0, scale: 0.88, x: 45 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                transition={{ duration: 1.1, delay: 0.2 }}
-              >
-                <img
-                  src={wishes[currentIndex].image}
-                  alt={`${wishes[currentIndex].name} portrait`}
-                  className="intro4-photo"
-                />
-
-                <div className="intro4-photo-shade" />
-                <div className="intro4-photo-caption">
-                  {wishes[currentIndex].name}
-                </div>
-              </motion.div>
-            </div>
-
-            <div className="intro4-progress">
-              <span
-                className="intro4-progress-fill"
-                key={`progress-${currentIndex}`}
-              />
-            </div>
-
-            <div className="intro4-counter">
-              0{currentIndex + 1} <span>/</span> 05
-            </div>
-          </motion.section>
         )}
       </AnimatePresence>
 
-      <div className="intro4-disclaimer">
-        Imaginary Birthday Wishes · Fan-made Tribute
-      </div>
-    </main>
+      {/* Opening transition */}
+      {leaving && <div className="intro4-transition" />}
+
+    </section>
   );
 }
 

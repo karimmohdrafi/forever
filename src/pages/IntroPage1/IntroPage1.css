@@ -1,525 +1,1467 @@
 
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
-.intro1-page {
-  position: fixed;
-  inset: 0;
+.enchanted-intro {
+  --gold: #e8c68c;
+  --gold-light: #fff0ca;
+  --rose: #d89b9a;
+  --ivory: #fff4e4;
+  --emerald: #183c31;
+
+  position: relative;
   width: 100%;
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
   isolation: isolate;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #f8eddf;
-  background: #080713;
-  font-family: "DM Sans", sans-serif;
+  background: #172c2a;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
 }
 
-.intro1-background {
+/* =========================================
+   CINEMATIC SKY
+========================================= */
+
+.garden-sky {
   position: absolute;
   inset: 0;
-  z-index: -5;
+  z-index: -10;
+  overflow: hidden;
   background:
-    radial-gradient(ellipse at 50% 50%, rgba(80, 49, 108, 0.3), transparent 55%),
-    radial-gradient(ellipse at 10% 10%, rgba(79, 73, 135, 0.18), transparent 40%),
-    radial-gradient(ellipse at 90% 90%, rgba(140, 73, 114, 0.15), transparent 40%),
-    linear-gradient(135deg, #080713, #100d20 50%, #080713);
+    radial-gradient(ellipse at 50% 43%, #f5c6a2 0%, transparent 35%),
+    linear-gradient(
+      180deg,
+      #172d3a 0%,
+      #39545a 28%,
+      #947d78 58%,
+      #d6a18f 82%,
+      #e6b49c 100%
+    );
+  animation: skyOpening 3s ease both;
 }
 
-.intro1-glow {
+.sky-sun {
   position: absolute;
-  width: 380px;
-  height: 380px;
+  width: clamp(130px, 19vw, 270px);
+  aspect-ratio: 1;
+  left: 50%;
+  top: 13%;
+  transform: translateX(-50%);
   border-radius: 50%;
-  filter: blur(110px);
-  opacity: 0.16;
-  pointer-events: none;
-  z-index: -3;
+  background: radial-gradient(
+    circle,
+    #fff8df 0%,
+    #ffe8bb 35%,
+    #f4bd96 68%,
+    transparent 72%
+  );
+  filter: blur(2px);
+  box-shadow:
+    0 0 70px 30px #ffd6a655,
+    0 0 180px 70px #f5b98b33;
+  animation: sunBreathing 8s ease-in-out infinite alternate;
 }
 
-.intro1-glow-left {
-  left: -150px;
-  top: 10%;
-  background: #8b72ed;
-}
-
-.intro1-glow-right {
-  right: -150px;
-  bottom: 5%;
-  background: #cb679b;
-}
-
-/* STARS */
-
-.intro1-stars {
+.sky-sunlight {
   position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: -2;
+  inset: -50%;
+  background: repeating-conic-gradient(
+    from 0deg at 50% 32%,
+    #ffe8c10b 0deg 5deg,
+    transparent 5deg 17deg
+  );
+  mask-image: radial-gradient(ellipse at 50% 30%, black, transparent 65%);
+  animation: sunRays 100s linear infinite;
 }
 
-.intro1-stars span {
+.sky-cloud {
   position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  background: #fbe8bf;
-  box-shadow: 0 0 8px rgba(248, 222, 166, 0.7);
-  animation: intro1-twinkle var(--duration) ease-in-out infinite;
-  animation-delay: var(--delay);
+  width: 350px;
+  height: 90px;
+  border-radius: 100%;
+  background: #ffdfca;
+  filter: blur(35px);
+  opacity: .22;
+  animation: cloudMove 35s ease-in-out infinite alternate;
 }
 
-@keyframes intro1-twinkle {
-  0%, 100% {
-    opacity: 0.15;
-    transform: scale(0.7);
-  }
-
-  50% {
-    opacity: 0.9;
-    transform: scale(1.5);
-  }
+.sky-cloud-one {
+  top: 28%;
+  left: -10%;
 }
 
-/* PARTICLES */
+.sky-cloud-two {
+  top: 39%;
+  right: -12%;
+  animation-delay: -15s;
+}
 
-.intro1-particles {
+.sky-dust {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: -1;
-}
-
-.intro1-particles span {
-  position: absolute;
-  bottom: -20px;
-  left: calc(var(--i) * 8.5%);
   width: 3px;
   height: 3px;
-  background: #d7b77f;
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(222, 185, 120, 0.8);
-  animation: intro1-particle-float calc(7s + var(--i) * 0.4) linear infinite;
-  animation-delay: calc(var(--i) * -0.7s);
+  background: #fff1c7;
+  box-shadow: 0 0 12px 3px #ffdc9b77;
+  animation: goldenDust 4s ease-in-out infinite;
 }
 
-@keyframes intro1-particle-float {
-  0% {
-    opacity: 0;
-    transform: translateY(0) translateX(0);
-  }
+/* =========================================
+   DISTANT LANDSCAPE
+========================================= */
 
-  15% {
-    opacity: 0.7;
-  }
-
-  85% {
-    opacity: 0.4;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(-110vh) translateX(35px);
-  }
-}
-
-/* MAIN CONTENT */
-
-.intro1-content {
-  position: relative;
-  width: min(92%, 760px);
-  max-height: 90dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  padding: 30px 20px;
-  z-index: 2;
-}
-
-.intro1-top-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  color: #c9a66d;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 4px;
-}
-
-.intro1-top-label svg {
-  color: #e0c28b;
-  animation: intro1-sparkle 3s ease-in-out infinite;
-}
-
-@keyframes intro1-sparkle {
-  0%, 100% {
-    opacity: 0.5;
-    transform: scale(0.8) rotate(0deg);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.2) rotate(45deg);
-  }
-}
-
-.intro1-divider {
-  position: relative;
-  height: 1px;
-  max-width: 150px;
-  margin: 25px auto;
-  background: linear-gradient(90deg, transparent, #c8a46c, transparent);
-}
-
-.intro1-divider span {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 6px;
-  height: 6px;
-  background: #dfbd80;
-  transform: translate(-50%, -50%) rotate(45deg);
-  box-shadow: 0 0 12px rgba(220, 180, 115, 0.6);
-}
-
-.intro1-content h1 {
-  margin: 0;
-  color: #fff0d9;
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(38px, 6vw, 74px);
-  font-weight: 500;
-  line-height: 1.15;
-  text-shadow: 0 0 35px rgba(221, 181, 120, 0.12);
-}
-
-.intro1-question-mark {
-  color: #cba66e;
-  font-size: 0.7em;
-}
-
-.intro1-message {
-  margin-top: 25px;
-}
-
-.intro1-message p {
-  margin: 8px 0;
-  color: rgba(242, 227, 208, 0.85);
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(18px, 2.3vw, 25px);
-  letter-spacing: 0.3px;
-}
-
-.intro1-emotion {
-  margin-top: 25px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.intro1-emotion p {
-  margin: 0;
-  color: #d9c5a7;
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(17px, 2vw, 22px);
-  letter-spacing: 0.4px;
-}
-
-.intro1-small-line {
-  width: 70px;
-  height: 1px;
-  margin: 5px 0;
-  background: linear-gradient(90deg, transparent, rgba(198, 158, 101, 0.7), transparent);
-}
-
-.intro1-final-text {
-  margin-top: 25px;
-  color: #d8b477;
-  font-family: "Great Vibes", cursive;
-  font-size: clamp(27px, 4vw, 42px);
-  letter-spacing: 1px;
-  text-shadow: 0 0 25px rgba(222, 181, 116, 0.2);
-}
-
-.intro1-final-text span {
-  margin-left: 8px;
-  color: #e6bd83;
-}
-
-/* HINT */
-
-.intro1-hint-container {
-  position: relative;
-  width: 100%;
-  min-height: 45px;
-  margin-top: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.intro1-hint {
-  margin: 0;
-  color: rgba(219, 191, 149, 0.8);
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(13px, 1.8vw, 17px);
-  letter-spacing: 0.5px;
-}
-
-/* BUTTON */
-
-.intro1-button-container {
-  position: relative;
-  min-height: 65px;
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.intro1-next-button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 13px;
-  min-width: 230px;
-  padding: 15px 27px;
-  border: 1px solid rgba(213, 178, 120, 0.65);
-  border-radius: 50px;
-  background: linear-gradient(135deg, #8e6943, #c49a61, #8b6846);
-  color: #fff7e8;
-  font-family: "DM Sans", sans-serif;
-  font-size: 12px;
-  letter-spacing: 1.5px;
-  font-weight: 500;
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow:
-    0 0 20px rgba(202, 160, 99, 0.15),
-    0 0 45px rgba(202, 160, 99, 0.08);
-  transition: box-shadow 0.4s ease;
-}
-
-.intro1-next-button::before {
-  content: "";
+.distant-garden {
   position: absolute;
   inset: 0;
-  width: 45%;
-  background: linear-gradient(
-    110deg,
-    transparent,
-    rgba(255, 255, 255, 0.25),
-    transparent
-  );
-  transform: translateX(-150%);
-  animation: intro1-button-shine 4s ease-in-out infinite;
+  z-index: -8;
 }
 
-@keyframes intro1-button-shine {
-  0%, 55% {
-    transform: translateX(-150%);
-  }
-
-  75%, 100% {
-    transform: translateX(350%);
-  }
-}
-
-.intro1-next-button:hover {
-  box-shadow:
-    0 0 25px rgba(202, 160, 99, 0.35),
-    0 0 55px rgba(202, 160, 99, 0.15);
-}
-
-.intro1-next-button span,
-.intro1-next-button svg {
-  position: relative;
-  z-index: 1;
-}
-
-/* FOOTER */
-
-.intro1-footer {
+.distant-hill {
   position: absolute;
-  bottom: 2.5%;
+  bottom: 24%;
+  width: 65%;
+  height: 33%;
+  border-radius: 50% 50% 0 0;
+  filter: blur(9px);
+}
+
+.hill-left {
+  left: -25%;
+  background: linear-gradient(180deg, #52715c, #244b3b);
+}
+
+.hill-right {
+  right: -25%;
+  background: linear-gradient(180deg, #526c58, #203e34);
+}
+
+.distant-tree {
+  position: absolute;
+  bottom: 25%;
+  width: 17%;
+  height: 36%;
+  border-radius: 50% 50% 15% 15%;
+  background: radial-gradient(ellipse, #3c6449, #183b31 75%);
+  filter: blur(5px);
+}
+
+.tree-left { left: -3%; }
+.tree-right { right: -3%; }
+
+/* =========================================
+   ROYAL PALACE
+========================================= */
+
+.royal-palace {
+  position: absolute;
+  z-index: -4;
+  width: min(78vw, 1150px);
+  height: 59%;
+  left: 50%;
+  bottom: 27%;
+  transform: translateX(-50%) scale(.78);
+  transform-origin: center bottom;
+  opacity: 0;
+  filter: drop-shadow(0 30px 35px #10221eaa);
+  transition:
+    opacity 2.5s ease,
+    transform 4.5s cubic-bezier(.16, 1, .3, 1);
+}
+
+.scene-ready .royal-palace {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.palace-glow {
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(
+    ellipse at 50% 65%,
+    #ffdfb477,
+    #e5b08c22 40%,
+    transparent 72%
+  );
+  filter: blur(35px);
+}
+
+.palace-building {
+  position: absolute;
+  left: 17%;
+  bottom: 0;
+  width: 66%;
+  height: 75%;
+  background:
+    linear-gradient(
+      90deg,
+      #98795f,
+      #e4c9a7 7%,
+      #fff1d9 22%,
+      #f6e5ca 78%,
+      #c6a17e 94%,
+      #86694f
+    );
+  border: 2px solid #e6c18b;
+  box-shadow:
+    inset 0 0 25px #fff6df88,
+    0 8px 0 #735c46,
+    0 14px 30px #162c24aa;
+}
+
+.palace-building::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0 24%,
+    #ae896522 24.2% 24.5%
+  );
+  pointer-events: none;
+}
+
+.palace-building::after {
+  content: '';
+  position: absolute;
+  left: -5%;
+  bottom: -11px;
+  width: 110%;
+  height: 11px;
+  background: linear-gradient(#f8e5c5, #a98663);
+  box-shadow: 0 5px 0 #594b3b;
+}
+
+/* Palace roof */
+
+.roof-main {
+  position: absolute;
+  top: 0;
+  left: 12%;
+  width: 76%;
+  height: 29%;
+}
+
+.roof-top {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, #f0c5a8, #9e6564 48%, #d59b82);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0 10px 9px #38282788);
+}
+
+.roof-decoration {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff1c5;
+  font-size: clamp(23px, 3vw, 40px);
+  text-shadow: 0 0 20px #fff1bd;
+}
+
+/* Upper windows */
+
+.palace-upper {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 24%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.upper-window {
+  position: relative;
+  width: 12%;
+  height: 100%;
+  border: 4px solid #a78360;
+  border-radius: 50% 50% 0 0;
+  background: linear-gradient(
+    180deg,
+    #fff0bc,
+    #e5aa6e 60%,
+    #a76652
+  );
+  box-shadow:
+    0 0 20px #ffe5a4,
+    inset 0 0 12px #fff4c9;
+}
+
+.upper-window::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 48%;
+  width: 3px;
+  background: #a47a59;
+}
+
+.upper-window::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 3px;
+  background: #a47a59;
+}
+
+/* Balcony */
+
+.palace-balcony {
+  position: absolute;
+  left: 4%;
+  top: 35%;
+  width: 92%;
+  height: 8%;
+  background: linear-gradient(#fff1d7, #b28b68);
+  border: 2px solid #a78260;
+  box-shadow: 0 5px 10px #75573b55;
+}
+
+.balcony-rail {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.balcony-rail span {
+  width: 3px;
+  height: 85%;
+  background: linear-gradient(#fff5df, #b08c69);
+  box-shadow: 1px 0 2px #6f523b;
+}
+
+/* Columns */
+
+.palace-columns {
+  position: absolute;
+  left: 4%;
+  top: 43%;
+  width: 92%;
+  height: 57%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.palace-column {
+  position: relative;
+  width: 6%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #a88a6c,
+    #fff1d7 35%,
+    #d6b58e 85%,
+    #967758
+  );
+  box-shadow: 4px 0 7px #76573d55;
+}
+
+.palace-column::before,
+.palace-column::after {
+  content: '';
+  position: absolute;
+  left: -35%;
+  width: 170%;
+  height: 8%;
+  background: linear-gradient(#fff1d8, #b08a65);
+  border: 1px solid #d7b68c;
+}
+
+.palace-column::before { top: 0; }
+.palace-column::after { bottom: 0; }
+
+/* Royal entrance */
+
+.palace-entrance {
+  position: absolute;
+  left: 38%;
+  bottom: 0;
+  width: 24%;
+  height: 58%;
+  overflow: hidden;
+  border: 5px solid #a57d58;
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0;
+  background: #332e2b;
+  box-shadow: 0 0 25px #ffdda0;
+}
+
+.entrance-light {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    #fff4d1,
+    #edbd7b 35%,
+    #7c4b43 85%
+  );
+  animation: entranceGlow 3s ease-in-out infinite alternate;
+}
+
+.entrance-door {
+  position: absolute;
+  inset: 8% 8% 0;
+  display: flex;
+  gap: 3px;
+}
+
+.entrance-door span {
+  flex: 1;
+  background: linear-gradient(90deg, #553c39, #a66d59);
+  border: 2px solid #dfbd88;
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0;
+}
+
+/* Royal staircase */
+
+.palace-steps {
+  position: absolute;
+  bottom: -27%;
+  left: 20%;
+  width: 60%;
+  height: 28%;
+}
+
+.palace-steps span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 22%;
+  background: linear-gradient(180deg, #fff1d8, #b99a79);
+  border: 1px solid #a48260;
+  box-shadow: 0 3px 6px #34271d55;
+}
+
+.palace-steps span:nth-child(1) {
+  width: 100%;
+  bottom: 0;
+}
+
+.palace-steps span:nth-child(2) {
+  width: 80%;
+  bottom: 22%;
+}
+
+.palace-steps span:nth-child(3) {
+  width: 60%;
+  bottom: 44%;
+}
+
+.palace-steps span:nth-child(4) {
+  width: 40%;
+  bottom: 66%;
+}
+
+/* Side towers */
+
+.palace-side-tower {
+  position: absolute;
+  bottom: 0;
+  width: 15%;
+  height: 68%;
+  border: 2px solid #c4a17c;
+  background: linear-gradient(
+    90deg,
+    #b39472,
+    #fff0d7 45%,
+    #c6a27f
+  );
+  box-shadow: 0 8px 20px #172b24aa;
+}
+
+.tower-left { left: 3%; }
+.tower-right { right: 3%; }
+
+.tower-roof {
+  position: absolute;
+  top: -33%;
+  left: -17%;
+  width: 134%;
+  height: 35%;
+  background: linear-gradient(135deg, #f1c5a9, #a46363 70%);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.tower-window {
+  position: absolute;
+  left: 28%;
+  top: 35%;
+  width: 44%;
+  height: 30%;
+  border: 3px solid #a27a57;
+  border-radius: 50% 50% 0 0;
+  background: linear-gradient(#fff1bd, #e2a46b);
+  box-shadow: 0 0 25px #ffe0a1;
+}
+
+.palace-flag {
+  position: absolute;
+  top: -13%;
+  color: #fff1c7;
+  font-size: 34px;
+  text-shadow: 0 0 20px #fff1c7;
+  animation: flagFloat 4s ease-in-out infinite;
+}
+
+.flag-left { left: 8%; }
+.flag-right { right: 8%; }
+
+/* =========================================
+   GRAND GARDEN ARCHES
+========================================= */
+
+.flower-arch {
+  position: absolute;
+  z-index: -2;
+  bottom: 16%;
+  width: 25%;
+  height: 67%;
+  opacity: 0;
+  filter: drop-shadow(0 0 15px #e6c58c55);
+  transition: opacity 2s ease 1s;
+}
+
+.scene-ready .flower-arch {
+  opacity: 1;
+}
+
+.arch-left { left: -7%; }
+.arch-right {
+  right: -7%;
+  transform: scaleX(-1);
+}
+
+.arch-post {
+  position: absolute;
+  left: 19%;
+  bottom: 0;
+  width: 13%;
+  height: 83%;
+  border-radius: 12px;
+  background: linear-gradient(
+    90deg,
+    #1c4432,
+    #81986a,
+    #36573c
+  );
+  box-shadow: 5px 0 12px #14271d99;
+}
+
+.arch-curve {
+  position: absolute;
+  left: 19%;
+  top: 0;
+  width: 100%;
+  height: 85%;
+  border: 12px solid #4c704c;
+  border-bottom: 0;
+  border-radius: 90% 90% 0 0;
+}
+
+.arch-flower {
+  position: absolute;
+  z-index: 2;
+  color: #f9c8d0;
+  font-size: clamp(20px, 3vw, 42px);
+  text-shadow:
+    0 0 8px white,
+    0 0 25px #ffb5c9;
+  animation: flowerShine 4s ease-in-out infinite;
+}
+
+.flower-a { top: 7%; left: 30%; }
+.flower-b { top: 30%; left: 75%; animation-delay: -2s; }
+.flower-c { top: 50%; left: 17%; animation-delay: -1s; }
+
+/* =========================================
+   ROSE BUSHES
+========================================= */
+
+.rose-garden {
+  position: absolute;
+  z-index: 2;
+  bottom: 8%;
+  width: 29%;
+  height: 30%;
+}
+
+.rose-left { left: -5%; }
+.rose-right {
+  right: -5%;
+  transform: scaleX(-1);
+}
+
+.rose-bush {
+  position: absolute;
+  bottom: 0;
+  width: 78%;
+  height: 55%;
+  border-radius: 50% 50% 0 0;
+  background: linear-gradient(
+    135deg,
+    #72906a,
+    #254c37 60%,
+    #183b2e
+  );
+  box-shadow: inset 0 8px 20px #b5c58a33;
+}
+
+.bush-one { left: 0; }
+.bush-two { left: 25%; height: 70%; }
+.bush-three { left: 53%; height: 49%; }
+
+.garden-rose {
+  position: absolute;
+  color: #f5b5c4;
+  font-size: clamp(23px, 3vw, 43px);
+  text-shadow: 0 0 15px #ffcad8;
+  animation: flowerShine 3.5s ease-in-out infinite;
+}
+
+.rose-one { left: 18%; top: 16%; }
+.rose-two { left: 52%; top: 1%; animation-delay: -1s; }
+.rose-three { left: 80%; top: 25%; animation-delay: -2s; }
+
+/* =========================================
+   FOUNTAIN
+========================================= */
+
+.royal-fountain {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 11%;
+  width: clamp(100px, 13vw, 170px);
+  height: clamp(100px, 17vh, 155px);
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 2s ease 1.5s;
+}
+
+.scene-ready .royal-fountain {
+  opacity: 1;
+}
+
+.fountain-base {
+  position: absolute;
+  bottom: 0;
+  left: 3%;
+  width: 94%;
+  height: 23%;
+  border: 3px solid #f3d5a7;
+  border-radius: 50%;
+  background: linear-gradient(#f6e6c9, #9d8469);
+  box-shadow: 0 0 25px #ffe6bd88;
+}
+
+.fountain-bowl {
+  position: absolute;
+  left: 15%;
+  bottom: 21%;
+  width: 70%;
+  height: 34%;
+  border: 3px solid #f7e3c5;
+  border-radius: 0 0 50% 50%;
+  background: linear-gradient(#c9b49b, #887761);
+}
+
+.fountain-top {
+  position: absolute;
+  left: 50%;
+  top: 1%;
+  transform: translateX(-50%);
+  color: #fff2c6;
+  font-size: 34px;
+  text-shadow: 0 0 22px white;
+  animation: fountainStar 2s infinite;
+}
+
+.fountain-water {
+  position: absolute;
+  bottom: 45%;
+  left: 48%;
+  width: 4px;
+  height: 40%;
+  background: linear-gradient(transparent, #e1f5f5, transparent);
+  transform-origin: bottom;
+  animation: waterFlow .8s ease-in-out infinite alternate;
+}
+
+.water-two {
+  animation-delay: -.4s;
+  transform: rotate(15deg);
+}
+
+/* =========================================
+   MARBLE PATHWAY
+========================================= */
+
+.garden-ground {
+  position: absolute;
+  z-index: -1;
+  bottom: -12%;
   left: 0;
   width: 100%;
+  height: 47%;
+  background:
+    radial-gradient(ellipse at 50% 0%, #6f805b, transparent 55%),
+    linear-gradient(180deg, #426449, #172f27);
+}
+
+.garden-path {
+  position: absolute;
+  top: -2%;
+  left: 23%;
+  width: 54%;
+  height: 120%;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    #8e765f,
+    #d4c0a3 12%,
+    #f6e6cd 50%,
+    #d4c0a3 88%,
+    #8e765f
+  );
+  clip-path: polygon(43% 0, 57% 0, 100% 100%, 0 100%);
+  box-shadow: inset 0 0 40px #fff1d9;
+}
+
+.garden-path::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0 12%,
+    #fff2db88 12.2% 12.5%
+  );
+}
+
+.path-center-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #fff3d9aa,
+    transparent 65%
+  );
+  animation: pathGlow 5s ease-in-out infinite alternate;
+}
+
+.path-tile {
+  display: none;
+}
+
+/* =========================================
+   PETALS
+========================================= */
+
+.petal-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.falling-petal {
+  position: absolute;
+  top: -10%;
+  border-radius: 90% 0 90% 0;
+  background: linear-gradient(135deg, #fff2e8, #d98ea8);
+  box-shadow: 0 0 10px #ffd5e2;
+  opacity: .75;
+  animation: petalFall linear infinite;
+}
+
+/* =========================================
+   BUTTERFLIES
+========================================= */
+
+.garden-butterfly {
+  position: absolute;
+  z-index: 7;
+  width: 35px;
+  height: 30px;
+  animation: butterflyPath 9s ease-in-out infinite;
+}
+
+.garden-butterfly span {
+  position: absolute;
+  top: 0;
+  width: 19px;
+  height: 25px;
+  border-radius: 80% 10% 80% 10%;
+  background: linear-gradient(135deg, #fff5d9, #e8a8bc);
+  box-shadow: 0 0 13px #fff;
+  transform-origin: right center;
+  animation: wingFlap .25s ease-in-out infinite alternate;
+}
+
+.garden-butterfly span:first-child {
+  left: 0;
+}
+
+.garden-butterfly span:last-child {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+.butterfly-one {
+  left: 19%;
+  top: 44%;
+}
+
+.butterfly-two {
+  right: 20%;
+  top: 35%;
+  animation-delay: -3s;
+}
+
+.butterfly-three {
+  left: 73%;
+  top: 65%;
+  animation-delay: -5s;
+}
+
+/* =========================================
+   ROYAL WELCOME
+========================================= */
+
+.princess-welcome {
+  position: absolute;
+  z-index: 15;
+  top: 49%;
+  left: 50%;
+  width: min(700px, 92%);
+  transform: translate(-50%, -50%) translateY(45px);
   text-align: center;
-  color: rgba(211, 180, 132, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 2s ease,
+    transform 2s cubic-bezier(.16, 1, .3, 1);
+}
+
+.welcome-ready .princess-welcome {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+.welcome-ornament {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 16px;
+  color: var(--gold-light);
+  font-size: 27px;
+  text-shadow: 0 0 20px #ffe6b0;
+}
+
+.welcome-ornament span {
+  width: 75px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+
+.welcome-ornament span:last-child {
+  transform: rotate(180deg);
+}
+
+.welcome-overline {
+  margin: 0 0 17px;
+  color: #fff0d4;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 6px;
+  text-shadow: 0 2px 8px #1b2e28;
+}
+
+.welcome-heading {
+  margin: 0;
+  color: #fff9ed;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5.4vw, 72px);
+  font-weight: 500;
+  line-height: .98;
+  text-shadow:
+    0 3px 8px #1b2925,
+    0 10px 30px #1b2925;
+}
+
+.welcome-heading span {
+  display: block;
+  margin-top: 12px;
+  color: #f4d59b;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(30px, 4.5vw, 58px);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-shadow:
+    0 2px 3px #563a2c,
+    0 0 22px #f9d79c66;
+}
+
+/* Name plaque */
+
+.welcome-name-frame {
+  position: relative;
+  width: min(490px, 90%);
+  margin: 27px auto 20px;
+  padding: 17px 25px;
+  border-top: 1px solid #f0d39c;
+  border-bottom: 1px solid #f0d39c;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #142d25aa 20%,
+    #142d25bb 80%,
+    transparent
+  );
+  box-shadow: 0 0 30px #162b2488;
+}
+
+.welcome-name-frame::before,
+.welcome-name-frame::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 50px;
+  height: 1px;
+  background: #ffe7b8;
+  transform: translateX(-50%);
+}
+
+.welcome-name-frame::before { top: -5px; }
+.welcome-name-frame::after { bottom: -5px; }
+
+.welcome-name-frame p {
+  margin: 0 0 8px;
+  color: #e9c88f;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 5px;
+}
+
+.welcome-name-frame h2 {
+  margin: 0;
+  color: #fff2da;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3.8vw, 42px);
+  font-weight: 600;
+  font-style: italic;
+  text-shadow: 0 2px 12px #000;
+}
+
+.frame-decoration {
+  position: absolute;
+  top: 50%;
+  color: #f5d59c;
+  font-size: 25px;
+  transform: translateY(-50%);
+}
+
+.frame-decoration:first-child { left: -12px; }
+.frame-decoration:last-child { right: -12px; }
+
+.welcome-description {
+  margin: 0 0 25px;
+  color: #fff2e2;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(17px, 1.8vw, 22px);
+  line-height: 1.35;
+  text-shadow: 0 2px 8px #182b25;
+}
+
+/* =========================================
+   ROYAL BUTTON
+========================================= */
+
+.garden-enter-button {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 19px;
+  min-width: 265px;
+  min-height: 58px;
+  padding: 0 28px;
+  overflow: hidden;
+  border: 1px solid #fff0c9;
+  border-radius: 2px;
+  background: linear-gradient(
+    110deg,
+    #a77b55,
+    #f5dca9 35%,
+    #fff0cf 50%,
+    #d4a66f 100%
+  );
+  color: #463124;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  cursor: pointer;
+  box-shadow:
+    0 5px 0 #725139,
+    0 12px 30px #111e1a99,
+    inset 0 1px 5px white;
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    filter .35s ease;
+}
+
+.garden-enter-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  transform: skewX(-25deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ffffffbb,
+    transparent
+  );
+  transition: left .8s ease;
+}
+
+.garden-enter-button:hover:not(:disabled)::before {
+  left: 140%;
+}
+
+.garden-enter-button:hover:not(:disabled) {
+  transform: translateY(-5px);
+  filter: brightness(1.08);
+  box-shadow:
+    0 10px 0 #725139,
+    0 18px 35px #111e1a99,
+    inset 0 1px 5px white;
+}
+
+.garden-enter-button:active:not(:disabled) {
+  transform: translateY(2px);
+}
+
+.garden-enter-button:disabled {
+  opacity: .45;
+  cursor: wait;
+}
+
+.button-flower,
+.button-arrow {
+  color: #8b5947;
+  font-size: 17px;
+}
+
+.button-arrow {
+  transition: transform .3s ease;
+}
+
+.garden-enter-button:hover .button-arrow {
+  transform: translateX(6px);
+}
+
+.welcome-bottom-text {
+  margin-top: 24px;
+  color: #f9e8cb;
   font-size: 8px;
-  letter-spacing: 3px;
-  z-index: 3;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 8px #142c24;
 }
 
-.intro1-footer span {
-  color: #b8915a;
-  font-size: 12px;
+.welcome-bottom-text span {
+  margin: 0 13px;
+  color: #f1d08f;
 }
 
-/* TABLET */
+/* =========================================
+   CINEMATIC VIGNETTE
+========================================= */
 
-@media (max-width: 768px) {
-  .intro1-content {
+.garden-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, #10241d55, transparent 22%),
+    linear-gradient(0deg, #10241d99, transparent 35%);
+  box-shadow:
+    inset 0 0 130px 20px #10231d88,
+    inset 0 -60px 100px #10241dcc;
+}
+
+/* =========================================
+   FLOWER TRANSITION
+========================================= */
+
+.garden-transition {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    #fff8e7,
+    #e8b4be 45%,
+    #e8c18c
+  );
+  clip-path: circle(0% at 50% 50%);
+}
+
+.transition-flower {
+  color: white;
+  font-size: 20vw;
+  opacity: 0;
+  transform: scale(.5) rotate(-30deg);
+}
+
+.scene-leaving .garden-transition {
+  animation: flowerReveal 1.5s ease forwards;
+}
+
+.scene-leaving .transition-flower {
+  animation: flowerSymbol 1.5s ease forwards;
+}
+
+.scene-leaving .princess-welcome {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.12);
+  transition: .6s ease;
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes skyOpening {
+  from { filter: brightness(.15); }
+  to { filter: brightness(1); }
+}
+
+@keyframes sunBreathing {
+  from { opacity: .7; scale: .95; }
+  to { opacity: 1; scale: 1.08; }
+}
+
+@keyframes sunRays {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cloudMove {
+  from { transform: translateX(-30px); }
+  to { transform: translateX(80px); }
+}
+
+@keyframes goldenDust {
+  0%, 100% { opacity: .1; transform: scale(.5); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+@keyframes entranceGlow {
+  from { opacity: .6; }
+  to { opacity: 1; }
+}
+
+@keyframes flagFloat {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(7deg); }
+}
+
+@keyframes flowerShine {
+  0%, 100% { opacity: .7; scale: .9; }
+  50% { opacity: 1; scale: 1.12; }
+}
+
+@keyframes fountainStar {
+  0%, 100% { opacity: .6; scale: .8; }
+  50% { opacity: 1; scale: 1.3; }
+}
+
+@keyframes waterFlow {
+  to { transform: rotate(-12deg) scaleY(.75); }
+}
+
+@keyframes pathGlow {
+  from { opacity: .25; }
+  to { opacity: .85; }
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  15% { opacity: .8; }
+  100% {
+    transform: translate3d(90px, 110vh, 0) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes butterflyPath {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(40px, -35px); }
+  50% { transform: translate(75px, 5px); }
+  75% { transform: translate(35px, 35px); }
+}
+
+@keyframes wingFlap {
+  from { scale: 1 1; }
+  to { scale: 1 .4; }
+}
+
+@keyframes flowerReveal {
+  from { clip-path: circle(0% at 50% 50%); }
+  to { clip-path: circle(150% at 50% 50%); }
+}
+
+@keyframes flowerSymbol {
+  0% { opacity: 0; transform: scale(.5) rotate(-30deg); }
+  40% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.6) rotate(30deg); }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .royal-palace {
+    width: 100vw;
+    height: 48%;
+    bottom: 30%;
+  }
+
+  .flower-arch {
+    width: 31%;
+  }
+
+  .princess-welcome {
     width: 94%;
-    padding: 25px 16px;
   }
 
-  .intro1-divider {
-    margin: 20px auto;
-  }
-
-  .intro1-message {
-    margin-top: 20px;
-  }
-
-  .intro1-emotion {
-    margin-top: 20px;
-  }
-
-  .intro1-final-text {
-    margin-top: 22px;
+  .welcome-heading {
+    font-size: clamp(36px, 7vw, 60px);
   }
 }
 
-/* MOBILE */
+/* =========================================
+   MOBILE
+========================================= */
 
-@media (max-width: 480px) {
-  .intro1-content {
-    width: 100%;
-    padding: 22px 18px;
+@media (max-width: 600px) {
+  .sky-sun {
+    top: 8%;
+    width: 145px;
   }
 
-  .intro1-top-label {
+  .royal-palace {
+    width: 135vw;
+    height: 34%;
+    bottom: 38%;
+  }
+
+  .flower-arch {
+    width: 40%;
+    height: 43%;
+    bottom: 17%;
+  }
+
+  .arch-curve {
+    border-width: 8px;
+  }
+
+  .rose-garden {
+    width: 37%;
+    height: 21%;
+    bottom: 8%;
+  }
+
+  .royal-fountain {
+    width: 82px;
+    height: 90px;
+    bottom: 13%;
+  }
+
+  .garden-ground {
+    height: 37%;
+  }
+
+  .garden-path {
+    width: 82%;
+    left: 9%;
+  }
+
+  .princess-welcome {
+    top: 48%;
+    width: 94%;
+  }
+
+  .welcome-ornament {
+    margin-bottom: 10px;
+    font-size: 21px;
+  }
+
+  .welcome-ornament span {
+    width: 40px;
+  }
+
+  .welcome-overline {
+    margin-bottom: 13px;
     font-size: 8px;
-    letter-spacing: 2.5px;
-    gap: 8px;
+    letter-spacing: 3px;
   }
 
-  .intro1-top-label svg {
-    width: 12px;
-    height: 12px;
+  .welcome-heading {
+    font-size: clamp(31px, 8vw, 43px);
   }
 
-  .intro1-divider {
-    margin: 18px auto;
+  .welcome-heading span {
+    margin-top: 8px;
+    font-size: clamp(25px, 7vw, 37px);
+    letter-spacing: 1px;
   }
 
-  .intro1-content h1 {
-    font-size: clamp(37px, 10vw, 50px);
+  .welcome-name-frame {
+    width: 90%;
+    margin: 19px auto 14px;
+    padding: 13px 5px;
   }
 
-  .intro1-message {
-    margin-top: 18px;
+  .welcome-name-frame p {
+    font-size: 8px;
+    letter-spacing: 3px;
   }
 
-  .intro1-message p {
-    font-size: 19px;
+  .welcome-name-frame h2 {
+    font-size: clamp(25px, 6.8vw, 34px);
   }
 
-  .intro1-emotion {
-    margin-top: 20px;
-    gap: 7px;
+  .welcome-description {
+    margin-bottom: 18px;
+    font-size: 16px;
   }
 
-  .intro1-emotion p {
-    font-size: 17px;
+  .garden-enter-button {
+    min-width: 230px;
+    min-height: 51px;
+    font-size: 10px;
+    letter-spacing: 2px;
   }
 
-  .intro1-final-text {
-    margin-top: 20px;
-    font-size: 34px;
-  }
-
-  .intro1-hint-container {
-    margin-top: 18px;
-    min-height: 42px;
-  }
-
-  .intro1-hint {
-    max-width: 320px;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  .intro1-button-container {
-    margin-top: 5px;
-    min-height: 60px;
-  }
-
-  .intro1-next-button {
-    min-width: 220px;
-    padding: 14px 22px;
-    font-size: 11px;
-  }
-
-  .intro1-footer {
+  .welcome-bottom-text {
+    margin-top: 17px;
     font-size: 7px;
     letter-spacing: 2px;
   }
-}
 
-/* SMALL HEIGHT DEVICES */
-
-@media (max-height: 750px) and (min-width: 481px) {
-  .intro1-content {
-    padding: 15px;
-    transform: scale(0.88);
+  .welcome-bottom-text span {
+    margin: 0 6px;
   }
 
-  .intro1-divider {
-    margin: 16px auto;
-  }
-
-  .intro1-message {
-    margin-top: 15px;
-  }
-
-  .intro1-emotion {
-    margin-top: 15px;
-  }
-
-  .intro1-final-text {
-    margin-top: 16px;
-  }
-
-  .intro1-hint-container {
-    margin-top: 12px;
+  .butterfly-three {
+    display: none;
   }
 }
 
-/* VERY SHORT SCREEN */
+/* =========================================
+   SMALL HEIGHT DEVICES
+========================================= */
 
-@media (max-height: 600px) {
-  .intro1-content {
-    transform: scale(0.75);
+@media (max-height: 650px) and (min-width: 601px) {
+  .royal-palace {
+    height: 49%;
+    bottom: 27%;
   }
 
-  .intro1-footer {
-    bottom: 1%;
+  .princess-welcome {
+    transform: translate(-50%, -50%) scale(.78) translateY(45px);
+  }
+
+  .welcome-ready .princess-welcome {
+    transform: translate(-50%, -50%) scale(.78);
+  }
+
+  .welcome-name-frame {
+    margin: 14px auto;
+  }
+
+  .welcome-description {
+    margin-bottom: 15px;
+  }
+
+  .welcome-bottom-text {
+    margin-top: 14px;
+  }
+}
+
+@media (max-height: 560px) {
+  .princess-welcome {
+    transform: translate(-50%, -50%) scale(.68) translateY(45px);
+  }
+
+  .welcome-ready .princess-welcome {
+    transform: translate(-50%, -50%) scale(.68);
+  }
+}
+
+/* =========================================
+   EXTRA SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+  .welcome-heading {
+    font-size: 29px;
+  }
+
+  .welcome-heading span {
+    font-size: 25px;
+  }
+
+  .welcome-name-frame h2 {
+    font-size: 23px;
+  }
+
+  .welcome-description {
+    font-size: 14px;
+  }
+
+  .garden-enter-button {
+    min-width: 210px;
   }
 }
 
 /* ACCESSIBILITY */
 
 @media (prefers-reduced-motion: reduce) {
-  .intro1-stars span,
-  .intro1-particles span,
-  .intro1-top-label svg,
-  .intro1-next-button::before {
-    animation: none !important;
+  .enchanted-intro *,
+  .enchanted-intro *::before,
+  .enchanted-intro *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
   }
 }
