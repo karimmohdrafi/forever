@@ -1,10 +1,11 @@
 
 import React, { useEffect, useRef, useState } from "react";
+import { Sparkles, Heart, Star } from "lucide-react";
 import "./LittleThings.css";
 
-const MUSIC_PATH = `${import.meta.env.BASE_URL}music/background-music10.mp3`;
+const MUSIC = `${import.meta.env.BASE_URL}music/background-music10.mp3`;
 
-const memories = [
+const qualities = [
   "Your Cute Anger",
   "The Way You Care",
   'Your Calling Me "OY"',
@@ -14,277 +15,303 @@ const memories = [
   "Your Little Expressions",
 ];
 
-// 100 butterflies with random flight paths
-const butterflies = Array.from({ length: 100 }, (_, index) => ({
+const random = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+const butterflies = Array.from({ length: 85 }, (_, index) => ({
   id: index,
-  startX: `${18 + Math.random() * 24}%`,
-  startY: `${35 + Math.random() * 30}%`,
-  midX: `${(Math.random() - 0.5) * 35}vw`,
-  midY: `${(Math.random() - 0.5) * 45}vh`,
-  flyX: `${(Math.random() - 0.35) * 95}vw`,
-  flyY: `${(Math.random() - 0.5) * 115}vh`,
-  rotate: `${Math.random() * 900 - 450}deg`,
-  duration: `${5.2 + Math.random() * 1.1}s`,
-  delay: `${Math.random() * 0.3}s`,
-  size: `${13 + Math.random() * 17}px`,
+  left: `${random(8, 92)}%`,
+  top: `${random(35, 85)}%`,
+  x1: `${random(-35, 35)}vw`,
+  y1: `${random(-35, -8)}vh`,
+  x2: `${random(-60, 60)}vw`,
+  y2: `${random(-75, -25)}vh`,
+  x3: `${random(-85, 85)}vw`,
+  y3: `${random(-100, -45)}vh`,
+  x4: `${random(-100, 100)}vw`,
+  y4: `${random(-110, -55)}vh`,
+  duration: `${random(5, 9)}s`,
+  delay: `${Math.random() * 1.4}s`,
+  size: `${random(15, 29)}px`,
+  rotation: `${random(-70, 70)}deg`,
+  scale: (Math.random() * 0.65 + 0.65).toFixed(2),
 }));
 
-function LittleThings({ onNext }) {
+function LittleThings({ onNext, onContinue }) {
   const [visibleCount, setVisibleCount] = useState(0);
   const [jarBroken, setJarBroken] = useState(false);
   const [butterfliesFlying, setButterfliesFlying] = useState(false);
-  const [showPrompt, setShowPrompt] = useState(false);
 
   const audioRef = useRef(null);
-  const timerRef = useRef(null);
-  const promptTimerRef = useRef(null);
-  const breakTimerRef = useRef(null);
-  const navigationRef = useRef(null);
-  const startedRef = useRef(false);
+  const revealTimerRef = useRef(null);
+  const nextTimerRef = useRef(null);
+  const butterflyTimerRef = useRef(null);
 
-  // BACKGROUND MUSIC
   useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
+    const audio = new Audio(MUSIC);
     audio.loop = true;
-    audio.volume = 0.45;
+    audio.volume = 0.35;
+    audioRef.current = audio;
 
-    audio.play().catch((error) => {
-      console.log("Music autoplay blocked by browser:", error);
+    audio.play().catch(() => {
+      // Browser autoplay may require user interaction.
     });
 
+    let count = 0;
+
+    revealTimerRef.current = setInterval(() => {
+      count += 1;
+      setVisibleCount(count);
+
+      if (count >= qualities.length) {
+        clearInterval(revealTimerRef.current);
+      }
+    }, 1700);
+
     return () => {
-      audio.pause();
-      audio.currentTime = 0;
+      clearInterval(revealTimerRef.current);
+      clearTimeout(nextTimerRef.current);
+      clearTimeout(butterflyTimerRef.current);
+
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
     };
   }, []);
 
-  // Reveal seven memories one by one
-  useEffect(() => {
-    timerRef.current = setInterval(() => {
-      setVisibleCount((previous) => {
-        if (previous >= memories.length) {
-          clearInterval(timerRef.current);
-          return memories.length;
-        }
-
-        return previous + 1;
-      });
-    }, 1600);
-
-    return () => {
-      clearInterval(timerRef.current);
-      clearTimeout(promptTimerRef.current);
-      clearTimeout(breakTimerRef.current);
-      clearTimeout(navigationRef.current);
-    };
-  }, []);
-
-  // Show jar prompt after all memories appear
-  useEffect(() => {
-    if (visibleCount === memories.length) {
-      promptTimerRef.current = setTimeout(() => {
-        setShowPrompt(true);
-      }, 1000);
-    }
-  }, [visibleCount]);
-
-  // GLASS JAR BLAST
   const handleJarClick = () => {
-    if (
-      visibleCount !== memories.length ||
-      jarBroken ||
-      startedRef.current
-    ) {
-      return;
-    }
+    if (visibleCount !== qualities.length || jarBroken) return;
 
-    startedRef.current = true;
-    setShowPrompt(false);
     setJarBroken(true);
 
-    // Butterflies release shortly after jar blast
-    breakTimerRef.current = setTimeout(() => {
-      setButterfliesFlying(true);
-    }, 350);
+    if (audioRef.current) {
+      audioRef.current.volume = 0.18;
+    }
 
-    // Continue after the magical reveal
-    navigationRef.current = setTimeout(() => {
-      if (typeof onNext === "function") {
-        onNext();
-      }
-    }, 7000);
+    butterflyTimerRef.current = setTimeout(() => {
+      setButterfliesFlying(true);
+    }, 450);
+
+    nextTimerRef.current = setTimeout(() => {
+      (onNext || onContinue)?.();
+    }, 8500);
   };
 
   return (
-    <section
-      className={`little-things-page ${
-        jarBroken ? "magic-mode" : ""
-      }`}
-    >
-      {/* BACKGROUND MUSIC */}
-      <audio
-        ref={audioRef}
-        src={MUSIC_PATH}
-        loop
-        preload="auto"
-      />
+    <main className="little-things-page">
+      <div className="lt-background-glow lt-glow-one" />
+      <div className="lt-background-glow lt-glow-two" />
 
-      {/* BACKGROUND */}
-      <div className="little-things-stars" />
-      <div className="little-things-glow glow-one" />
-      <div className="little-things-glow glow-two" />
+      <div className="lt-stars">
+        {Array.from({ length: 35 }, (_, i) => (
+          <span
+            key={i}
+            style={{
+              left: `${(i * 37 + 11) % 100}%`,
+              top: `${(i * 23 + 7) % 100}%`,
+              animationDelay: `${(i % 7) * 0.6}s`,
+            }}
+          />
+        ))}
+      </div>
 
-      {/* HEADING */}
-      <header className="little-things-heading">
-        <span className="little-eyebrow">
-          A COLLECTION OF LITTLE MEMORIES
+      <header className="lt-heading">
+        <span className="lt-eyebrow">
+          <Sparkles size={14} />
+          A FEW THINGS I ADORE
+          <Sparkles size={14} />
         </span>
 
-        <h1>The Little Things</h1>
+        <h1>
+          The Little <span>Things</span>
+        </h1>
 
-        <p>
-          Every little thing about you makes you special to me...
-        </p>
+        <p>It's the little things about you that mean the most to me.</p>
       </header>
 
-      <main className="little-things-content">
-
-        {/* LEFT SIDE - GLASS JAR */}
-        <div className="jar-side">
-          <div className="jar-aura" />
-
-          <button
-            type="button"
-            className={`memory-jar ${
-              visibleCount === memories.length ? "jar-complete" : ""
-            } ${jarBroken ? "jar-shattered" : ""}`}
-            onClick={handleJarClick}
-            disabled={visibleCount !== memories.length || jarBroken}
-            aria-label="Click the glass jar to see the magic"
-          >
-            <div className="jar-lid" />
-            <div className="jar-neck" />
-
-            <div className="jar-body">
-              <div className="jar-glass-shine" />
-              <div className="jar-glass-reflection" />
-
-              <div className="jar-lights">
-                {memories.map((memory, index) => (
-                  <span
-                    key={index}
-                    className={`jar-light ${
-                      index < visibleCount ? "light-on" : ""
-                    }`}
-                    style={{ "--light-index": index }}
-                  />
-                ))}
-              </div>
-
-              <div className="jar-bottom-shine" />
-            </div>
-
-            <div className="jar-base-shadow" />
-
-            {jarBroken && (
-              <div className="jar-glass-shards">
-                {Array.from({ length: 14 }, (_, index) => (
-                  <span
-                    key={index}
-                    className={`glass-shard shard-${index + 1}`}
-                  />
-                ))}
-              </div>
-            )}
-          </button>
-
-          <div className="jar-caption">
-            <span className="jar-caption-line" />
-            <span>A JAR FULL OF YOU</span>
-            <span className="jar-caption-line" />
+      <section className="lt-main-content">
+        <div className="lt-qualities-panel">
+          <div className="lt-panel-heading">
+            <Heart size={17} />
+            <span>Seven little reasons</span>
           </div>
 
-          {showPrompt && !jarBroken && (
-            <div className="jar-click-prompt">
-              <span className="prompt-sparkle">✧</span>
-              Click the glass jar to see the magic
-              <span className="prompt-sparkle">✧</span>
-            </div>
-          )}
-        </div>
-
-        {/* RIGHT SIDE - SEVEN MEMORIES */}
-        <div className="memories-side">
-          <div className="memories-intro">
-            <span className="memories-small-title">
-              THINGS I ADORE
-            </span>
-
-            <h2>It's the little things...</h2>
-
-            <p>
-              The tiny moments, the little habits, and all the things
-              that make you, YOU.
-            </p>
-          </div>
-
-          <div className="memory-list">
-            {memories.map((memory, index) => (
+          <div className="lt-quality-list">
+            {qualities.map((quality, index) => (
               <div
-                key={index}
-                className={`memory-item ${
-                  index < visibleCount ? "memory-visible" : ""
+                className={`lt-quality ${
+                  index < visibleCount ? "lt-quality-visible" : ""
                 }`}
+                key={quality}
               >
-                <span className="memory-number">
+                <span className="lt-quality-number">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
-                <span className="memory-text">{memory}</span>
+                <span className="lt-quality-name">{quality}</span>
 
-                <span className="memory-heart">♡</span>
+                <span className="lt-quality-heart">
+                  <Heart size={15} fill="currentColor" />
+                </span>
               </div>
             ))}
           </div>
 
-          <div className="memory-progress">
-            <div className="progress-track">
-              <div
-                className="progress-fill"
+          <div className="lt-progress">
+            <div className="lt-progress-track">
+              <span
+                className="lt-progress-fill"
                 style={{
-                  width: `${(visibleCount / memories.length) * 100}%`,
+                  width: `${(visibleCount / qualities.length) * 100}%`,
                 }}
               />
             </div>
 
-            <span>
-              {String(visibleCount).padStart(2, "0")} /{" "}
-              {String(memories.length).padStart(2, "0")} little things
+            <span className="lt-progress-count">
+              {visibleCount} / 7
             </span>
           </div>
         </div>
-      </main>
 
-      {/* BUTTERFLY RELEASE */}
+        <div className="lt-jar-area">
+          <div className="lt-jar-caption">
+            <Star size={14} />
+            <span>A LITTLE JAR FULL OF MAGIC</span>
+            <Star size={14} />
+          </div>
+
+          <div className={`lt-jar-scene ${jarBroken ? "lt-jar-shattered" : ""}`}>
+            <div className="lt-jar-sparkles">
+              {Array.from({ length: 12 }, (_, i) => (
+                <i
+                  key={i}
+                  style={{
+                    "--spark-x": `${random(-115, 115)}px`,
+                    "--spark-y": `${random(-130, 80)}px`,
+                    animationDelay: `${i * 0.13}s`,
+                  }}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="lt-jar-button"
+              onClick={handleJarClick}
+              disabled={visibleCount !== qualities.length || jarBroken}
+              aria-label="Break the glass jar"
+            >
+              <div className="lt-jar-lid">
+                <span />
+              </div>
+
+              <div className="lt-jar-neck" />
+
+              <div className="lt-jar-body">
+                <div className="lt-jar-shine" />
+                <div className="lt-jar-shine-small" />
+
+                <div className="lt-jar-inner-glow" />
+
+                <div className="lt-jar-lights">
+                  {qualities.map((_, index) => (
+                    <span
+                      key={index}
+                      className={
+                        index < visibleCount ? "lt-light-active" : ""
+                      }
+                      style={{
+                        "--light-delay": `${index * 0.12}s`,
+                      }}
+                    />
+                  ))}
+                </div>
+
+                <div className="lt-jar-heart">
+                  <Heart size={34} fill="currentColor" />
+                </div>
+
+                <div className="lt-jar-dust">
+                  {Array.from({ length: 18 }, (_, i) => (
+                    <i
+                      key={i}
+                      style={{
+                        left: `${(i * 29 + 8) % 90}%`,
+                        top: `${(i * 41 + 12) % 85}%`,
+                        animationDelay: `${(i % 6) * 0.5}s`,
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="lt-jar-base" />
+            </button>
+
+            {jarBroken && (
+              <div className="lt-glass-pieces">
+                {Array.from({ length: 13 }, (_, i) => (
+                  <span
+                    key={i}
+                    style={{
+                      "--piece-x": `${random(-180, 180)}px`,
+                      "--piece-y": `${random(-160, 180)}px`,
+                      "--piece-rotate": `${random(-260, 260)}deg`,
+                      animationDelay: `${Math.random() * 0.25}s`,
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="lt-jar-instruction">
+            {visibleCount === qualities.length && !jarBroken ? (
+              <button
+                className="lt-break-prompt"
+                onClick={handleJarClick}
+                type="button"
+              >
+                <Sparkles size={15} />
+                BREAK THE GLASS JAR, CUTIE
+                <Sparkles size={15} />
+              </button>
+            ) : jarBroken ? (
+              <p className="lt-butterfly-message">
+                A little magic, just for you...
+              </p>
+            ) : (
+              <p className="lt-wait-message">
+                Let the little things unfold...
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+
       {butterfliesFlying && (
-        <div className="butterfly-explosion">
+        <div className="lt-butterfly-layer">
           {butterflies.map((butterfly) => (
             <span
+              className="lt-flying-butterfly"
               key={butterfly.id}
-              className="flying-butterfly"
               style={{
-                "--start-x": butterfly.startX,
-                "--start-y": butterfly.startY,
-                "--mid-x": butterfly.midX,
-                "--mid-y": butterfly.midY,
-                "--fly-x": butterfly.flyX,
-                "--fly-y": butterfly.flyY,
-                "--fly-rotate": butterfly.rotate,
+                left: butterfly.left,
+                top: butterfly.top,
+                "--fly-x1": butterfly.x1,
+                "--fly-y1": butterfly.y1,
+                "--fly-x2": butterfly.x2,
+                "--fly-y2": butterfly.y2,
+                "--fly-x3": butterfly.x3,
+                "--fly-y3": butterfly.y3,
+                "--fly-x4": butterfly.x4,
+                "--fly-y4": butterfly.y4,
                 "--fly-duration": butterfly.duration,
                 "--fly-delay": butterfly.delay,
-                "--butterfly-size": butterfly.size,
+                "--fly-size": butterfly.size,
+                "--fly-rotation": butterfly.rotation,
+                "--fly-scale": butterfly.scale,
               }}
             >
               🦋
@@ -293,21 +320,12 @@ function LittleThings({ onNext }) {
         </div>
       )}
 
-      {/* FINAL MAGIC MESSAGE */}
-      {jarBroken && (
-        <div className="magic-message">
-          <span className="magic-message-heart">♡</span>
-
-          <h1>All my little things about you...</h1>
-
-          <span className="magic-message-subtitle">
-            Every little detail makes you unforgettable
-          </span>
-
-          <span className="magic-message-bottom-heart">✧</span>
-        </div>
-      )}
-    </section>
+      <footer className="lt-footer">
+        <span>MADE WITH</span>
+        <Heart size={12} fill="currentColor" />
+        <span>JUST FOR YOU</span>
+      </footer>
+    </main>
   );
 }
 

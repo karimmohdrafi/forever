@@ -34,13 +34,14 @@ function App() {
 
   const goToStep = (step) => {
     setCurrentStep(step);
+
     window.scrollTo({
       top: 0,
       behavior: "instant",
     });
   };
 
-  // Supports components using either onNext or onContinue
+  // Supports both onNext and onContinue callbacks
   const next = (step) => ({
     onNext: () => goToStep(step),
     onContinue: () => goToStep(step),
@@ -105,28 +106,24 @@ function App() {
     case 16:
       return <BeautifulTimeline {...next(17)} />;
 
-    // First IntroPage5
+    // BirthdayWishStar - BeautifulTimeline తర్వాత direct
     case 17:
-      return <IntroPage5 onNext={() => goToStep(18)} />;
+      return <BirthdayWishStar {...next(18)} />;
 
-    // Birthday wish star
+    // IntroPage5 - BirthdayWishStar తర్వాత
     case 18:
-      return <BirthdayWishStar {...next(19)} />;
-
-    // Second IntroPage5
-    case 19:
-      return <IntroPage5 onNext={() => goToStep(20)} />;
+      return <IntroPage5 onNext={() => goToStep(19)} />;
 
     // Akka birthday message
-    case 20:
-      return <IntroPage6 {...next(21)} />;
+    case 19:
+      return <IntroPage6 {...next(20)} />;
 
     // Five special birthday wishes
-    case 21:
-      return <IntroPage7 {...next(22)} />;
+    case 20:
+      return <IntroPage7 {...next(21)} />;
 
     // Final love note
-    case 22:
+    case 21:
       return <FinalLoveNote />;
 
     default:
