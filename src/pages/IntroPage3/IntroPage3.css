@@ -1,395 +1,1289 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&display=swap');
 
-.intro3,
-.intro3 * {
+:root {
+  --i3-gold: #d9b875;
+  --i3-light-gold: #f5dfa9;
+  --i3-muted-gold: #aa8a58;
+  --i3-text: #f4e8d1;
+  --i3-muted: #b4a5b8;
+  --i3-border: rgba(213, 176, 112, 0.25);
+}
+
+* {
   box-sizing: border-box;
 }
 
-.intro3 {
+.intro3-page {
   position: relative;
-  width: 100%;
-  min-height: 100vh;
-  min-height: 100svh;
-  overflow: hidden;
   isolation: isolate;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 45px 24px;
-  color: #fff;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  padding: 12px 2% 14px;
+  overflow: hidden;
+  color: var(--i3-text);
   background:
-    radial-gradient(ellipse at 50% 42%, rgba(91, 55, 147, .32), transparent 48%),
-    radial-gradient(ellipse at 12% 10%, rgba(42, 57, 112, .25), transparent 42%),
-    linear-gradient(145deg, #080b1c, #11112c 52%, #080918);
-  font-family: 'DM Sans', sans-serif;
+    radial-gradient(ellipse at 28% 5%, #302035 0%, transparent 38%),
+    radial-gradient(ellipse at 95% 90%, #1e203b 0%, transparent 38%),
+    linear-gradient(120deg, #100f20, #1b1425 48%, #111225);
+  font-family: 'Montserrat', sans-serif;
 }
 
-.intro3::before {
-  content: "";
+/* BACKGROUND */
+
+.i3-background {
   position: absolute;
   inset: 0;
-  z-index: -2;
-  opacity: .4;
-  background-image:
-    radial-gradient(1px 1px at 10% 20%, #fff 98%, transparent),
-    radial-gradient(1px 1px at 75% 15%, #fff 98%, transparent),
-    radial-gradient(2px 2px at 85% 75%, #fff 98%, transparent),
-    radial-gradient(1px 1px at 25% 85%, #fff 98%, transparent),
-    radial-gradient(1px 1px at 50% 8%, #fff 98%, transparent);
-  background-size: 260px 260px;
-  animation: intro3Stars 45s linear infinite;
-}
-
-.intro3-nebula {
-  position: absolute;
-  inset: -20%;
-  z-index: -2;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 25% 50%, rgba(92, 69, 163, .12), transparent 35%),
-    radial-gradient(ellipse at 78% 60%, rgba(133, 69, 161, .12), transparent 35%);
-  filter: blur(35px);
-  animation: intro3Nebula 12s ease-in-out infinite alternate;
-}
-
-.intro3-particles {
-  position: absolute;
-  inset: 0;
+  z-index: -1;
+  overflow: hidden;
   pointer-events: none;
 }
 
-.intro3-particles span {
+.i3-nebula {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  filter: blur(115px);
+  opacity: .13;
+}
+
+.i3-nebula-one {
+  top: -220px;
+  left: 20%;
+  background: #bd83ff;
+}
+
+.i3-nebula-two {
+  right: -180px;
+  bottom: -200px;
+  background: #8b9cff;
+}
+
+.i3-star {
   position: absolute;
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: #ead8ff;
-  box-shadow: 0 0 12px 3px rgba(192, 148, 255, .55);
-  animation: intro3Float 6s ease-in-out infinite;
+  background: #f6e2b5;
+  box-shadow: 0 0 9px 2px rgba(255, 221, 159, .55);
+  animation: i3-twinkle 3s ease-in-out infinite alternate;
 }
 
-.intro3-particles span:nth-child(1) { left: 8%; top: 22%; }
-.intro3-particles span:nth-child(2) { left: 84%; top: 30%; animation-delay: 1s; }
-.intro3-particles span:nth-child(3) { left: 20%; top: 75%; animation-delay: 2s; }
-.intro3-particles span:nth-child(4) { left: 78%; top: 80%; animation-delay: 3s; }
-.intro3-particles span:nth-child(5) { left: 50%; top: 12%; animation-delay: 1.5s; }
-.intro3-particles span:nth-child(6) { left: 35%; top: 18%; animation-delay: 2.5s; }
-.intro3-particles span:nth-child(7) { left: 92%; top: 55%; animation-delay: .5s; }
-.intro3-particles span:nth-child(8) { left: 12%; top: 58%; animation-delay: 1.8s; }
-.intro3-particles span:nth-child(9) { left: 65%; top: 90%; animation-delay: 2.8s; }
-.intro3-particles span:nth-child(10) { left: 42%; top: 88%; animation-delay: 1.2s; }
-.intro3-particles span:nth-child(11) { left: 72%; top: 12%; animation-delay: 3.2s; }
-.intro3-particles span:nth-child(12) { left: 28%; top: 42%; animation-delay: 2.2s; }
-.intro3-particles span:nth-child(13) { left: 58%; top: 26%; animation-delay: .8s; }
-.intro3-particles span:nth-child(14) { left: 5%; top: 88%; animation-delay: 3.5s; }
-.intro3-particles span:nth-child(15) { left: 96%; top: 18%; animation-delay: 1.4s; }
-.intro3-particles span:nth-child(16) { left: 48%; top: 68%; animation-delay: 2.4s; }
-.intro3-particles span:nth-child(17) { left: 88%; top: 92%; animation-delay: .6s; }
-.intro3-particles span:nth-child(18) { left: 16%; top: 8%; animation-delay: 1.7s; }
-
-.intro3-cosmos {
-  position: absolute;
-  left: 50%;
-  top: 45%;
-  width: min(440px, 85vw);
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: -1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(145, 91, 210, .12), transparent 68%);
+@keyframes i3-twinkle {
+  from {
+    opacity: .15;
+    transform: scale(.65);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.35);
+  }
 }
 
-.intro3-cosmos::before,
-.intro3-cosmos::after {
-  content: "";
-  position: absolute;
-  inset: 8%;
-  border: 1px solid rgba(196, 160, 255, .12);
-  border-radius: 50%;
-  box-shadow: 0 0 50px rgba(126, 79, 192, .12);
-  animation: intro3Orbit 35s linear infinite;
-}
+/* ======================================
+   HEADER + THREE BIRTH DETAIL CARDS
+====================================== */
 
-.intro3-cosmos::after {
-  inset: 18%;
-  border-color: rgba(196, 160, 255, .09);
-  animation-direction: reverse;
-  animation-duration: 45s;
-}
-
-.intro3-heart {
-  position: absolute;
-  left: 50%;
-  top: 43%;
-  width: min(340px, 70vw);
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  opacity: .48;
-  pointer-events: none;
-}
-
-.intro3-heart-svg {
-  width: 100%;
-  overflow: visible;
-  filter: drop-shadow(0 0 15px rgba(190, 137, 255, .55));
-}
-
-.intro3-heart-star {
-  animation: intro3Twinkle 2.5s ease-in-out infinite alternate;
-}
-
-.intro3-heart-star:nth-child(odd) {
-  animation-delay: .8s;
-}
-
-.intro3-content {
+.i3-top-header {
   position: relative;
   z-index: 2;
-  width: min(850px, 100%);
-  text-align: center;
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(450px, 1.55fr);
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  flex: 0 0 auto;
+  min-height: 82px;
+  margin: 0 auto 12px;
 }
 
-.intro3-eyebrow {
+.i3-heading {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 24px;
-  color: #c5a9e9;
+  gap: 14px;
+  min-width: 0;
+}
+
+.i3-heading-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  color: var(--i3-light-gold);
+  border: 1px solid rgba(220, 184, 117, .45);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .035);
+  box-shadow: 0 0 25px rgba(218, 180, 115, .08);
+}
+
+.i3-heading-copy {
+  min-width: 0;
+}
+
+.i3-eyebrow {
+  margin: 0 0 3px;
+  color: var(--i3-muted-gold);
   font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.7px;
+}
+
+.i3-heading h1 {
+  margin: 0;
+  color: #f4e8d1;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(21px, 2vw, 30px);
   font-weight: 500;
-  letter-spacing: 5px;
+  line-height: 1.25;
 }
 
-.intro3-eyebrow svg {
-  color: #d7b9ff;
+.i3-heading h1 span {
+  color: var(--i3-light-gold);
 }
 
-.intro3-title {
-  margin: 0 0 20px;
-  color: #fff;
+.i3-heading-sub {
+  margin: 3px 0 0;
+  color: #a99bae;
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(42px, 7vw, 78px);
-  font-weight: 300;
-  line-height: 1.05;
-  letter-spacing: 1px;
-  text-shadow: 0 5px 35px rgba(184, 143, 255, .2);
-}
-
-.intro3-title span {
-  display: block;
-  color: #d6b8ff;
+  font-size: 15px;
   font-style: italic;
 }
 
-.intro3-divider {
-  width: 90px;
-  height: 1px;
-  margin: 28px auto;
-  background: linear-gradient(90deg, transparent, #c5a1ed, transparent);
+/* Three cards next to title */
+
+.i3-header-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  width: 100%;
 }
 
-.intro3-message {
-  max-width: 620px;
-  margin: 0 auto;
-  color: rgba(240, 232, 255, .82);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(19px, 2.2vw, 25px);
-  line-height: 1.65;
-  letter-spacing: .2px;
+.i3-header-detail-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 62px;
+  padding: 10px 11px;
+  border: 1px solid rgba(215, 178, 114, .23);
+  border-radius: 13px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .065), rgba(255, 255, 255, .025));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .035);
+  backdrop-filter: blur(10px);
+  transition: .3s ease;
 }
 
-.intro3-message p {
-  margin: 5px 0;
+.i3-header-detail-card:hover {
+  border-color: rgba(229, 194, 133, .55);
+  background: rgba(221, 184, 117, .08);
+  transform: translateY(-2px);
 }
 
-.intro3-message .intro3-highlight {
-  margin-top: 13px;
-  color: #e4ccff;
-  font-weight: 500;
+.i3-header-detail-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 31px;
+  width: 31px;
+  height: 31px;
+  border: 1px solid rgba(218, 184, 117, .25);
+  border-radius: 9px;
+  color: #e6c88f;
+  background: rgba(218, 184, 117, .09);
 }
 
-.intro3-signature {
-  margin-top: 24px;
-  color: #e1c9ff;
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(32px, 5vw, 46px);
-  text-shadow: 0 0 25px rgba(187, 140, 255, .4);
+.i3-header-detail-card > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 4px;
 }
 
-.intro3-name {
-  margin-top: 9px;
-  color: rgba(230, 215, 255, .72);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 14px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
+.i3-header-detail-card small {
+  color: #b99b69;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1.1px;
+  white-space: nowrap;
 }
 
-.intro3-button {
+.i3-header-detail-card strong {
+  overflow: hidden;
+  color: #f1e4cf;
+  font-size: 10px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ======================================
+   THREE MAIN PANELS
+====================================== */
+
+.i3-layout {
   position: relative;
-  display: inline-flex;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr .91fr 1fr;
+  gap: 13px;
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+
+.i3-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px solid var(--i3-border);
+  border-radius: 23px;
+  background:
+    linear-gradient(145deg, rgba(43, 34, 51, .94), rgba(25, 23, 39, .94));
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, .2),
+    inset 0 1px 0 rgba(255, 255, 255, .035);
+  backdrop-filter: blur(18px);
+}
+
+.i3-panel::before {
+  position: absolute;
+  top: 0;
+  left: 12%;
+  width: 76%;
+  height: 1px;
+  content: "";
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(235, 202, 143, .45),
+    transparent
+  );
+}
+
+.i3-panel-heading {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+}
+
+.i3-panel-kicker {
+  display: block;
+  color: var(--i3-muted-gold);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+}
+
+.i3-panel-heading h2 {
+  margin: 5px 0 0;
+  color: #f1e5d1;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(18px, 1.5vw, 25px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.i3-panel-icon {
+  color: var(--i3-gold);
+  font-size: 30px;
+}
+
+/* ======================================
+   FIRST PANEL — KUNDALI
+====================================== */
+
+.i3-kundali-panel {
+  padding: 15px;
+}
+
+.i3-chart-wrap {
+  display: grid;
+  place-items: center;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.i3-kundali-chart {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 440px);
+  height: 100%;
+  max-height: 100%;
+  aspect-ratio: 1;
+  isolation: isolate;
+}
+
+.i3-chart-aura {
+  position: absolute;
+  z-index: -1;
+  width: 90%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(219, 178, 108, .14),
+    rgba(219, 178, 108, .025) 55%,
+    transparent 75%
+  );
+  animation: i3-chart-breathe 5s ease-in-out infinite alternate;
+}
+
+@keyframes i3-chart-breathe {
+  from {
+    transform: scale(.93);
+    opacity: .5;
+  }
+  to {
+    transform: scale(1.07);
+    opacity: 1;
+  }
+}
+
+.i3-kundali-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 8px rgba(222, 183, 112, .12));
+}
+
+.i3-chart-om {
+  fill: #f5dfae;
+  font-family: serif;
+  font-size: 32px;
+  filter: drop-shadow(0 0 8px rgba(255, 224, 160, .6));
+}
+
+.i3-chart-center-dot {
+  filter: drop-shadow(0 0 8px #f5dfa9);
+}
+
+.i3-chart-label {
+  position: absolute;
+  color: #c4a574;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(12px, 1.2vw, 17px);
+}
+
+.c1 { top: 10%; left: 49%; }
+.c2 { top: 19%; right: 19%; }
+.c3 { top: 43%; right: 5%; }
+.c4 { top: 49%; right: 2%; }
+.c5 { bottom: 19%; right: 19%; }
+.c6 { bottom: 10%; left: 49%; }
+.c7 { bottom: 10%; left: 49%; transform: translateY(-3px); }
+.c8 { bottom: 19%; left: 19%; }
+.c9 { top: 65%; left: 5%; }
+.c10 { top: 49%; left: 2%; }
+.c11 { top: 43%; left: 5%; }
+.c12 { top: 19%; left: 19%; }
+
+.i3-chart-note {
+  flex: 0 0 auto;
+  margin: 5px 0 9px;
+  color: #b8a6b8;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.i3-continue-btn {
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  min-width: 225px;
-  margin-top: 35px;
-  padding: 16px 27px;
-  border: 1px solid rgba(219, 190, 255, .5);
-  border-radius: 2px;
-  background: rgba(116, 78, 158, .16);
-  color: #f6edff;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 3px;
+  gap: 13px;
+  flex: 0 0 auto;
+  width: 100%;
+  min-height: 45px;
+  border: 0;
+  border-radius: 11px;
+  color: #2a1e20;
+  background: linear-gradient(110deg, #d5ad6d, #f1d49a, #cba064);
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 700;
   cursor: pointer;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  transition: all .4s ease;
+  box-shadow: 0 7px 25px rgba(210, 170, 105, .12);
 }
 
-.intro3-button::before {
-  content: "";
+/* ======================================
+   SECOND PANEL — CELESTIAL
+====================================== */
+
+.i3-celestial-panel {
+  align-items: center;
+  padding: 15px 12px;
+}
+
+.i3-center-heading {
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.i3-center-heading h2 {
+  font-size: clamp(18px, 1.5vw, 24px);
+}
+
+/* Cosmic stage */
+
+.i3-cosmos {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 1 1 auto;
+  width: min(100%, 430px);
+  min-height: 0;
+  aspect-ratio: 1;
+  margin: 3px auto;
+  isolation: isolate;
+}
+
+.i3-cosmos-aura {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(110deg, transparent, rgba(225, 200, 255, .2), transparent);
-  transform: translateX(-120%);
-  transition: transform .6s ease;
+  inset: 15%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(231, 193, 126, .2),
+    rgba(150, 112, 199, .08) 50%,
+    transparent 75%
+  );
+  filter: blur(12px);
+  animation: i3-aura-pulse 4s ease-in-out infinite alternate;
 }
 
-.intro3-button:hover {
-  border-color: #e5caff;
-  background: rgba(147, 100, 200, .28);
-  box-shadow: 0 0 35px rgba(166, 112, 224, .22);
-  transform: translateY(-3px);
+@keyframes i3-aura-pulse {
+  from { transform: scale(.85); opacity: .5; }
+  to { transform: scale(1.16); opacity: 1; }
 }
 
-.intro3-button:hover::before {
-  transform: translateX(120%);
-}
-
-.intro3-button svg {
-  width: 17px;
-  height: 17px;
-  transition: transform .3s ease;
-}
-
-.intro3-button:hover svg {
-  transform: translateX(5px);
-}
-
-.intro3-button:disabled {
-  cursor: default;
-  opacity: .7;
-}
-
-.intro3-transition {
+.i3-orbit {
   position: absolute;
-  inset: 0;
-  z-index: 10;
-  background: #080918;
-  animation: intro3Exit 1.4s ease forwards;
-}
-
-.intro3-leaving .intro3-content {
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
-@keyframes intro3Stars {
-  to { transform: translateY(-260px); }
+.i3-orbit-one {
+  width: 91%;
+  height: 91%;
+  border: 1px solid rgba(221, 187, 130, .23);
+  box-shadow: 0 0 25px rgba(205, 166, 105, .06);
+  animation: i3-orbit-breathe 5s ease-in-out infinite alternate;
 }
 
-@keyframes intro3Nebula {
-  from { transform: scale(1); opacity: .6; }
-  to { transform: scale(1.12); opacity: 1; }
+.i3-orbit-two {
+  width: 76%;
+  height: 76%;
+  border: 1px dashed rgba(222, 186, 120, .48);
+  animation: i3-orbit-rotate 45s linear infinite;
 }
 
-@keyframes intro3Orbit {
+.i3-orbit-three {
+  width: 53%;
+  height: 53%;
+  border: 1px solid rgba(226, 196, 143, .35);
+  box-shadow: inset 0 0 30px rgba(226, 196, 143, .07);
+  animation: i3-orbit-rotate 28s linear infinite reverse;
+}
+
+@keyframes i3-orbit-rotate {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes i3-orbit-breathe {
+  from { opacity: .45; transform: translate(-50%, -50%) scale(.97); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1.03); }
+}
+
+/* Zodiac ring */
+
+.i3-zodiac-ring {
+  position: absolute;
+  inset: 0;
+  animation: i3-zodiac-rotate 70s linear infinite;
+}
+
+@keyframes i3-zodiac-rotate {
   to { transform: rotate(360deg); }
 }
 
-@keyframes intro3Float {
-  0%, 100% { transform: translateY(0); opacity: .3; }
-  50% { transform: translateY(-22px); opacity: 1; }
+.i3-zodiac-sign {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin: -16px;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 9px;
+  color: #fff3d8;
+  background: linear-gradient(145deg, #a77ae8, #7048b7);
+  box-shadow:
+    0 0 12px rgba(164, 111, 240, .6),
+    inset 0 0 8px rgba(255, 255, 255, .3);
+  font-size: 19px;
+  transform:
+    rotate(calc(var(--sign-index) * 30deg))
+    translateY(-43%);
+  animation: i3-zodiac-glow 3s ease-in-out infinite alternate;
 }
 
-@keyframes intro3Twinkle {
-  from { opacity: .35; transform: scale(.8); }
-  to { opacity: 1; transform: scale(1.25); }
+@keyframes i3-zodiac-glow {
+  from {
+    filter: brightness(.8);
+    box-shadow: 0 0 7px rgba(164, 111, 240, .35);
+  }
+  to {
+    filter: brightness(1.35);
+    box-shadow: 0 0 19px rgba(193, 155, 255, .75);
+  }
 }
 
-@keyframes intro3Exit {
-  to { opacity: 0; }
+/* Golden orbit particles */
+
+.i3-orbit-particles {
+  position: absolute;
+  inset: 0;
+  animation: i3-orbit-rotate 34s linear infinite reverse;
 }
 
-@media (max-width: 600px) {
-  .intro3 {
-    padding: 30px 20px;
+.i3-orbit-particles span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f8dfad;
+  box-shadow: 0 0 14px 4px rgba(248, 220, 165, .55);
+  transform:
+    rotate(calc(var(--particle-index) * 30deg))
+    translateY(-45%);
+}
+
+/* Energy beams */
+
+.i3-energy-ring {
+  position: absolute;
+  inset: 13%;
+  border-radius: 50%;
+  animation: i3-orbit-rotate 18s linear infinite;
+}
+
+.i3-energy-ring span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 45%;
+  transform-origin: center bottom;
+  background: linear-gradient(
+    to top,
+    transparent,
+    rgba(245, 220, 170, .1),
+    rgba(245, 220, 170, .85),
+    transparent
+  );
+  filter: drop-shadow(0 0 6px #e5c68a);
+}
+
+.i3-energy-ring span:nth-child(1) {
+  transform: translate(-50%, -100%) rotate(0deg);
+}
+.i3-energy-ring span:nth-child(2) {
+  transform: translate(-50%, -100%) rotate(90deg);
+}
+.i3-energy-ring span:nth-child(3) {
+  transform: translate(-50%, -100%) rotate(180deg);
+}
+.i3-energy-ring span:nth-child(4) {
+  transform: translate(-50%, -100%) rotate(270deg);
+}
+
+/* Sacred Swastik center */
+
+.i3-sacred-center {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 47%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.i3-center-halo {
+  position: absolute;
+  inset: -17%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 225, 161, .25),
+    rgba(255, 218, 145, .07) 55%,
+    transparent 75%
+  );
+  animation: i3-center-halo 3s ease-in-out infinite alternate;
+}
+
+@keyframes i3-center-halo {
+  from { opacity: .45; transform: scale(.85); }
+  to { opacity: 1; transform: scale(1.12); }
+}
+
+.i3-center-outline {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(244, 219, 169, .4);
+  border-radius: 50%;
+  box-shadow:
+    0 0 20px rgba(238, 207, 148, .15),
+    inset 0 0 20px rgba(238, 207, 148, .1);
+}
+
+.i3-swastik {
+  position: relative;
+  z-index: 2;
+  color: #ffe9b4;
+  font-family: serif;
+  font-size: clamp(85px, 9vw, 140px);
+  line-height: 1;
+  text-shadow:
+    0 0 8px rgba(255, 236, 188, .9),
+    0 0 22px rgba(248, 211, 143, .75),
+    0 0 48px rgba(237, 190, 109, .45);
+  animation: i3-swastik-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes i3-swastik-glow {
+  from { filter: brightness(.85); }
+  to { filter: brightness(1.3); }
+}
+
+.i3-center-pulse {
+  position: absolute;
+  inset: -9%;
+  border: 1px solid rgba(255, 236, 188, .35);
+  border-radius: 50%;
+  animation: i3-pulse-expand 3.5s ease-out infinite;
+}
+
+@keyframes i3-pulse-expand {
+  0% { transform: scale(.85); opacity: .8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* Tiny background stars */
+
+.i3-cosmos-stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.i3-cosmos-stars span {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fff1c9;
+  box-shadow: 0 0 9px 2px rgba(255, 225, 170, .6);
+  animation: i3-cosmos-twinkle 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes i3-cosmos-twinkle {
+  from { opacity: .15; transform: scale(.5); }
+  to { opacity: 1; transform: scale(1.7); }
+}
+
+/* Celestial caption */
+
+.i3-celestial-caption {
+  flex: 0 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.i3-celestial-caption p {
+  margin: 0;
+  color: var(--i3-muted-gold);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+}
+
+.i3-celestial-caption h3 {
+  margin: 5px 0 9px;
+  color: #f6e4c0;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(27px, 2.8vw, 40px);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.i3-caption-line {
+  display: block;
+  width: 55%;
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, #9d7949, transparent);
+}
+
+.i3-celestial-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  margin-top: 10px;
+  color: #c3a36f;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-style: italic;
+}
+
+.i3-celestial-footer svg {
+  flex: 0 0 auto;
+}
+
+/* ======================================
+   THIRD PANEL — DETAILS
+====================================== */
+
+.i3-details-panel {
+  padding: 14px;
+}
+
+.i3-details-heading > svg {
+  color: var(--i3-gold);
+}
+
+.i3-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex: 0 0 auto;
+  min-height: 35px;
+  margin: 10px 0 12px;
+  padding: 0 12px;
+  border: 1px solid rgba(214, 176, 112, .2);
+  border-radius: 9px;
+  color: #c7b49a;
+  background: rgba(255, 255, 255, .045);
+  font-size: 11px;
+}
+
+.i3-scroll-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #bca071;
+  box-shadow: 0 0 9px rgba(220, 186, 129, .6);
+}
+
+.i3-details-scroll {
+  min-height: 0;
+  flex: 1 1 auto;
+  padding-right: 4px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #a98b5e rgba(255, 255, 255, .04);
+}
+
+.i3-details-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.i3-details-scroll::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .04);
+}
+
+.i3-details-scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #a98b5e;
+}
+
+.i3-section-title {
+  margin: 0 0 10px;
+  color: #e6d4b6;
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.i3-core-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.i3-core-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 75px;
+  padding: 9px 11px;
+  border: 1px solid rgba(215, 178, 114, .18);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, .045);
+}
+
+.i3-core-card span {
+  margin-bottom: 4px;
+  color: #ad9062;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.i3-core-card strong {
+  color: #f0dfc2;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.i3-core-card small {
+  margin-top: 2px;
+  color: #b5a5b8;
+  font-size: 11px;
+}
+
+.i3-graha-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0 10px;
+}
+
+.i3-graha-title .i3-section-title {
+  margin: 0;
+}
+
+.i3-graha-title > span {
+  color: #a98b5e;
+  font-size: 9px;
+  letter-spacing: 1.2px;
+}
+
+.i3-graha-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.i3-graha-row {
+  display: grid;
+  grid-template-columns: 26px 1fr 1fr auto;
+  align-items: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 7px 9px;
+  border: 1px solid rgba(215, 178, 114, .13);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, .035);
+  transition: .25s ease;
+}
+
+.i3-graha-row:hover {
+  border-color: rgba(215, 178, 114, .45);
+  background: rgba(215, 178, 114, .07);
+  transform: translateX(3px);
+}
+
+.i3-graha-symbol {
+  color: #d8b875;
+  font-family: serif;
+  font-size: 20px;
+  text-align: center;
+}
+
+.i3-graha-name {
+  color: #e7d9c5;
+  font-size: 11px;
+}
+
+.i3-graha-sign {
+  color: #bcaec1;
+  font-size: 10px;
+}
+
+.i3-graha-house {
+  color: #a99aaf;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.i3-rahu-ketu-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-top: 12px;
+  padding: 11px;
+  border: 1px solid rgba(215, 178, 114, .15);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .035);
+}
+
+.i3-rahu-ketu-note > span {
+  color: #d7b675;
+  font-size: 23px;
+}
+
+.i3-rahu-ketu-note strong {
+  color: #e6d6c0;
+  font-size: 12px;
+}
+
+.i3-rahu-ketu-note p {
+  margin: 3px 0 0;
+  color: #a99aaf;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.i3-accuracy-note {
+  margin: 12px 0 5px;
+  padding: 11px;
+  border: 1px solid rgba(215, 178, 114, .16);
+  border-radius: 9px;
+  color: #c8b79a;
+  background: rgba(215, 178, 114, .045);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+/* ======================================
+   SMALLER DESKTOP / LAPTOP
+====================================== */
+
+@media (max-width: 1150px) and (min-width: 701px) {
+  .intro3-page {
+    padding: 10px 12px;
   }
 
-  .intro3-eyebrow {
-    gap: 7px;
+  .i3-top-header {
+    grid-template-columns: 1fr;
+    gap: 9px;
+    margin-bottom: 10px;
+  }
+
+  .i3-header-details {
+    max-width: 100%;
+  }
+
+  .i3-layout {
+    gap: 9px;
+  }
+
+  .i3-panel {
+    padding: 10px;
+  }
+
+  .i3-panel-heading h2 {
+    font-size: 17px;
+  }
+
+  .i3-graha-row {
+    grid-template-columns: 22px 1fr 1fr;
+  }
+
+  .i3-graha-house {
+    grid-column: 2 / -1;
+    padding-bottom: 2px;
+  }
+}
+
+/* ======================================
+   MOBILE
+====================================== */
+
+@media (max-width: 700px) {
+  .intro3-page {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 100dvh;
+    padding: 12px 11px 24px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  .i3-top-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    min-height: 0;
+    margin-bottom: 15px;
+  }
+
+  .i3-heading {
+    gap: 11px;
+  }
+
+  .i3-heading-icon {
+    flex-basis: 39px;
+    width: 39px;
+    height: 39px;
+  }
+
+  .i3-eyebrow {
     font-size: 8px;
-    letter-spacing: 3px;
-    margin-bottom: 20px;
+    letter-spacing: 1.8px;
   }
 
-  .intro3-title {
-    font-size: clamp(40px, 11vw, 58px);
+  .i3-heading h1 {
+    font-size: clamp(19px, 6vw, 26px);
   }
 
-  .intro3-divider {
-    margin: 22px auto;
+  .i3-heading-sub {
+    font-size: 13px;
   }
 
-  .intro3-message {
-    font-size: 19px;
-    line-height: 1.55;
+  .i3-header-details {
+    grid-template-columns: 1fr;
+    gap: 7px;
   }
 
-  .intro3-signature {
-    margin-top: 20px;
+  .i3-header-detail-card {
+    min-height: 52px;
+    padding: 8px 11px;
   }
 
-  .intro3-name {
+  .i3-header-detail-card strong {
     font-size: 11px;
-    letter-spacing: 3px;
   }
 
-  .intro3-button {
-    min-width: 205px;
-    margin-top: 28px;
-    padding: 15px 20px;
+  .i3-header-detail-card small {
+    font-size: 8px;
+  }
+
+  .i3-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    width: 100%;
+    height: auto;
+  }
+
+  .i3-panel {
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    padding: 13px;
+    border-radius: 18px;
+  }
+
+  .i3-panel-heading h2 {
+    font-size: 21px;
+  }
+
+  .i3-panel-kicker {
     font-size: 9px;
   }
 
-  .intro3-heart {
-    width: 85vw;
-    top: 42%;
+  .i3-chart-wrap {
+    flex: none;
+    height: auto;
+    padding: 12px 0;
   }
 
-  .intro3-cosmos {
-    width: 95vw;
+  .i3-kundali-chart {
+    width: min(100%, 400px);
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .i3-chart-note {
+    font-size: 15px;
+  }
+
+  .i3-continue-btn {
+    min-height: 46px;
+  }
+
+  .i3-celestial-panel {
+    min-height: 0;
+  }
+
+  .i3-cosmos {
+    flex: none;
+    width: min(100%, 380px);
+    height: auto;
+    aspect-ratio: 1;
+    margin: 10px auto;
+  }
+
+  .i3-zodiac-sign {
+    width: 29px;
+    height: 29px;
+    margin: -14.5px;
+    font-size: 17px;
+  }
+
+  .i3-swastik {
+    font-size: clamp(85px, 24vw, 125px);
+  }
+
+  .i3-celestial-caption h3 {
+    font-size: 35px;
+  }
+
+  .i3-celestial-footer {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .i3-details-panel {
+    min-height: 0;
+  }
+
+  .i3-details-scroll {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .i3-core-card {
+    min-height: 74px;
+  }
+
+  .i3-graha-row {
+    grid-template-columns: 25px 1fr 1fr;
+    min-height: 45px;
+  }
+
+  .i3-graha-house {
+    grid-column: 2 / -1;
+    padding-bottom: 2px;
   }
 }
 
-@media (max-height: 650px) and (min-width: 601px) {
-  .intro3 { padding: 18px; }
-  .intro3-title { font-size: 48px; }
-  .intro3-message { font-size: 18px; line-height: 1.4; }
-  .intro3-button { margin-top: 18px; }
-  .intro3-signature { margin-top: 12px; }
+/* EXTRA SMALL PHONES */
+
+@media (max-width: 390px) {
+  .intro3-page {
+    padding: 10px 9px 20px;
+  }
+
+  .i3-header-detail-card {
+    min-height: 49px;
+  }
+
+  .i3-panel {
+    padding: 11px;
+  }
+
+  .i3-core-card {
+    padding: 8px;
+  }
+
+  .i3-core-card strong {
+    font-size: 16px;
+  }
+
+  .i3-graha-row {
+    gap: 5px;
+    padding: 7px;
+  }
+
+  .i3-graha-name,
+  .i3-graha-sign {
+    font-size: 10px;
+  }
+
+  .i3-graha-house {
+    font-size: 9px;
+  }
 }
+
+/* SHORT DESKTOP SCREENS */
+
+@media (min-width: 701px) and (max-height: 720px) {
+  .intro3-page {
+    padding-top: 7px;
+    padding-bottom: 8px;
+  }
+
+  .i3-top-header {
+    min-height: 68px;
+    margin-bottom: 8px;
+  }
+
+  .i3-heading-icon {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+  }
+
+  .i3-header-detail-card {
+    min-height: 52px;
+    padding: 7px;
+  }
+
+  .i3-panel {
+    padding: 10px;
+  }
+
+  .i3-chart-note {
+    margin: 3px 0 6px;
+    font-size: 14px;
+  }
+
+  .i3-continue-btn {
+    min-height: 39px;
+  }
+
+  .i3-scroll-hint {
+    min-height: 30px;
+    margin: 7px 0;
+  }
+
+  .i3-celestial-footer {
+    margin-top: 6px;
+  }
+}
+
+/* REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
-  .intro3 *,
-  .intro3 *::before,
-  .intro3 *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
+  .i3-star,
+  .i3-chart-aura,
+  .i3-cosmos-aura,
+  .i3-orbit,
+  .i3-zodiac-ring,
+  .i3-zodiac-sign,
+  .i3-orbit-particles,
+  .i3-energy-ring,
+  .i3-center-halo,
+  .i3-swastik,
+  .i3-center-pulse,
+  .i3-cosmos-stars span {
+    animation: none !important;
   }
 }
