@@ -306,17 +306,17 @@ function HeartLetter({ onNext }) {
 
                   {letterComplete && (
                     <div className="letter-ending">
-                      <div className="final-heart-seal">
+                      {/* <div className="final-heart-seal">
                         <span>♥</span>
-                        <small>SEALED WITH LOVE</small>
-                      </div>
+                        <small>Click cheyi Bey</small>
+                      </div> */}
 
                       <button
                         className="letter-inline-arrow"
                         onClick={handleNext}
                         aria-label="Continue to next step"
                       >
-                        <span>↓</span>
+                        <span>Osey Button click cheyi</span>
                       </button>
                     </div>
                   )}

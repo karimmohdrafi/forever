@@ -498,10 +498,10 @@
 }
 
 .letter-inline-arrow {
-  width: 34px;
-  height: 34px;
+  width: 50%;
+  height: 64px;
   border: 1px solid rgba(169, 117, 107, 0.55);
-  border-radius: 50%;
+  border-radius: 20px;
   color: #80534f;
   background: rgba(194, 139, 127, 0.12);
   cursor: pointer;
@@ -1053,8 +1053,8 @@
   }
 
   .letter-inline-arrow {
-    width: 29px;
-    height: 29px;
+    width: 70%;
+    height: 50px;
   }
 
   .letter-hint {

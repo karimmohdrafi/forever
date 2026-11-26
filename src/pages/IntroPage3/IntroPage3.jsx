@@ -13,15 +13,15 @@ import {
 import "./IntroPage3.css";
 
 const navagraha = [
-  { name: "Surya", symbol: "☀", sign: "Vrischika", house: "5th House" },
-  { name: "Chandra", symbol: "☾", sign: "Mithuna", house: "12th House" },
-  { name: "Kuja", symbol: "♂", sign: "Kanya", house: "3rd House" },
-  { name: "Budha", symbol: "☿", sign: "Vrischika", house: "5th House" },
-  { name: "Guru", symbol: "♃", sign: "Vrishabha", house: "11th House" },
-  { name: "Shukra", symbol: "♀", sign: "Makara", house: "7th House" },
-  { name: "Shani", symbol: "♄", sign: "Vrishabha", house: "11th House" },
-  { name: "Rahu", symbol: "☊", sign: "Mithuna", house: "12th House" },
-  { name: "Ketu", symbol: "☋", sign: "Dhanu", house: "6th House" },
+  { name: "Surya", symbol: "☉", sign: "Vrischika", house: "5th House", degree: "27°02′" },
+  { name: "Chandra", symbol: "☾", sign: "Mithuna", house: "12th House", degree: "14°13′" },
+  { name: "Kuja", symbol: "♂", sign: "Kanya", house: "3rd House", degree: "29°35′" },
+  { name: "Budha", symbol: "☿", sign: "Vrischika", house: "5th House", degree: "19°43′" },
+  { name: "Guru", symbol: "♃", sign: "Vrishabha", house: "11th House", degree: "10°21′" },
+  { name: "Shukra", symbol: "♀", sign: "Makara", house: "7th House", degree: "11°05′" },
+  { name: "Shani", symbol: "♄", sign: "Vrishabha", house: "11th House", degree: "1°50′" },
+  { name: "Rahu", symbol: "☊", sign: "Mithuna", house: "12th House", degree: "22°50′" },
+  { name: "Ketu", symbol: "☋", sign: "Dhanu", house: "6th House", degree: "22°50′" },
 ];
 
 const coreDetails = [
@@ -36,7 +36,22 @@ const zodiacSigns = [
   "♎", "♏", "♐", "♑", "♒", "♓",
 ];
 
-const stars = Array.from({ length: 65 }, (_, i) => ({
+const chartHouses = [
+  { house: "1", sign: "Karka", planets: "Lagna", className: "house-top" },
+  { house: "2", sign: "Simha", planets: "—", className: "house-top-right" },
+  { house: "3", sign: "Kanya", planets: "Kuja", className: "house-right-top" },
+  { house: "4", sign: "Tula", planets: "—", className: "house-right" },
+  { house: "5", sign: "Vrischika", planets: "Surya · Budha", className: "house-right-bottom" },
+  { house: "6", sign: "Dhanu", planets: "Ketu", className: "house-bottom-right" },
+  { house: "7", sign: "Makara", planets: "Shukra", className: "house-bottom" },
+  { house: "8", sign: "Kumbha", planets: "—", className: "house-bottom-left" },
+  { house: "9", sign: "Meena", planets: "—", className: "house-left-bottom" },
+  { house: "10", sign: "Mesha", planets: "—", className: "house-left" },
+  { house: "11", sign: "Vrishabha", planets: "Guru · Shani", className: "house-left-top" },
+  { house: "12", sign: "Mithuna", planets: "Chandra · Rahu", className: "house-top-left" },
+];
+
+const stars = Array.from({ length: 75 }, (_, i) => ({
   id: i,
   left: `${(i * 37 + 11) % 100}%`,
   top: `${(i * 23 + 7) % 100}%`,
@@ -44,14 +59,15 @@ const stars = Array.from({ length: 65 }, (_, i) => ({
   duration: `${2.5 + (i % 5)}s`,
 }));
 
-// ============================================
-// JANMA KUNDALI CHART
-// ============================================
+/* =========================================
+   JANMA KUNDALI
+========================================= */
 
 function KundaliChart() {
   return (
     <div className="i3-kundali-chart">
       <div className="i3-chart-aura" />
+      <div className="i3-chart-outer-glow" />
 
       <svg
         viewBox="0 0 400 400"
@@ -60,95 +76,152 @@ function KundaliChart() {
       >
         <defs>
           <linearGradient id="kundaliGold" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#f5dfa9" />
-            <stop offset="50%" stopColor="#bd9557" />
-            <stop offset="100%" stopColor="#f5dfa9" />
+            <stop offset="0%" stopColor="#fff4d4" />
+            <stop offset="48%" stopColor="#c69b59" />
+            <stop offset="100%" stopColor="#fff0c4" />
           </linearGradient>
+
+          <radialGradient id="kundaliCenter">
+            <stop offset="0%" stopColor="#fff2c9" />
+            <stop offset="55%" stopColor="#d6ad6b" />
+            <stop offset="100%" stopColor="#87633c" />
+          </radialGradient>
+
+          <filter id="chartGlow">
+            <feGaussianBlur stdDeviation="3.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
         </defs>
 
         <rect
-          x="15"
-          y="15"
-          width="370"
-          height="370"
-          rx="3"
+          x="12"
+          y="12"
+          width="376"
+          height="376"
+          rx="5"
+          fill="rgba(12,18,34,.28)"
+          stroke="url(#kundaliGold)"
+          strokeWidth="2.4"
+          className="i3-chart-frame"
+        />
+
+        <rect
+          x="24"
+          y="24"
+          width="352"
+          height="352"
+          fill="none"
+          stroke="#d7b477"
+          strokeOpacity=".5"
+          strokeWidth="1"
+        />
+
+        <path
+          d="M12 12 L388 388 M388 12 L12 388"
+          fill="none"
+          stroke="url(#kundaliGold)"
+          strokeWidth="1.8"
+        />
+
+        <path
+          d="M200 12 L388 200 L200 388 L12 200 Z"
           fill="none"
           stroke="url(#kundaliGold)"
           strokeWidth="2"
         />
 
         <path
-          d="M15 15 L385 385 M385 15 L15 385"
+          d="M200 12 L200 388 M12 200 L388 200"
           fill="none"
           stroke="url(#kundaliGold)"
-          strokeWidth="1.7"
+          strokeWidth="1.5"
         />
 
         <path
-          d="M200 15 L385 200 L200 385 L15 200 Z"
+          d="M12 12 L200 200 L388 12 M12 388 L200 200 L388 388"
           fill="none"
-          stroke="url(#kundaliGold)"
-          strokeWidth="1.7"
-        />
-
-        <path
-          d="M200 15 L200 385 M15 200 L385 200"
-          fill="none"
-          stroke="url(#kundaliGold)"
-          strokeWidth="1.7"
-        />
-
-        <path
-          d="M15 15 L200 200 L385 15"
-          fill="none"
-          stroke="#d7b477"
-          strokeOpacity=".35"
-        />
-
-        <path
-          d="M15 385 L200 200 L385 385"
-          fill="none"
-          stroke="#d7b477"
-          strokeOpacity=".35"
+          stroke="#e6c58e"
+          strokeWidth="1.4"
+          strokeOpacity=".75"
         />
 
         <circle
           cx="200"
           cy="200"
-          r="5"
-          fill="#f5dfa9"
+          r="30"
+          fill="rgba(18,22,38,.92)"
+          stroke="#d9b675"
+          strokeWidth="1.2"
+        />
+
+        <circle
+          cx="200"
+          cy="200"
+          r="23"
+          fill="none"
+          stroke="#e8c783"
+          strokeOpacity=".65"
+          strokeDasharray="3 4"
+          className="i3-chart-center-ring"
+        />
+
+        <circle
+          cx="200"
+          cy="200"
+          r="8"
+          fill="url(#kundaliCenter)"
+          filter="url(#chartGlow)"
           className="i3-chart-center-dot"
         />
 
         <text
           x="200"
-          y="211"
+          y="210"
           textAnchor="middle"
           className="i3-chart-om"
         >
           ॐ
         </text>
+
+        {[12, 388].map((x) =>
+          [12, 388].map((y) => (
+            <circle
+              key={`${x}-${y}`}
+              cx={x}
+              cy={y}
+              r="4"
+              fill="#ffe6b0"
+              filter="url(#chartGlow)"
+            />
+          ))
+        )}
       </svg>
 
-      <span className="i3-chart-label c1">1</span>
-      <span className="i3-chart-label c2">2</span>
-      <span className="i3-chart-label c3">3</span>
-      <span className="i3-chart-label c4">4</span>
-      <span className="i3-chart-label c5">5</span>
-      <span className="i3-chart-label c6">6</span>
-      <span className="i3-chart-label c7">7</span>
-      <span className="i3-chart-label c8">8</span>
-      <span className="i3-chart-label c9">9</span>
-      <span className="i3-chart-label c10">10</span>
-      <span className="i3-chart-label c11">11</span>
-      <span className="i3-chart-label c12">12</span>
+      {chartHouses.map((item) => (
+        <div
+          className={`i3-chart-house ${item.className}`}
+          key={item.house}
+        >
+          <span className="i3-house-number">{item.house}</span>
+          <strong>{item.sign}</strong>
+          <small>{item.planets}</small>
+        </div>
+      ))}
+
+      <div className="i3-chart-center-label">
+        <span>JANMA</span>
+        <strong>RASHI</strong>
+      </div>
     </div>
   );
 }
 
-// ============================================
-// CELESTIAL UNIVERSE
-// ============================================
+/* =========================================
+   CELESTIAL UNIVERSE
+========================================= */
 
 function CelestialUniverse() {
   return (
@@ -159,13 +232,11 @@ function CelestialUniverse() {
       <div className="i3-orbit i3-orbit-two" />
       <div className="i3-orbit i3-orbit-three" />
 
-      <div className="i3-orbit-particles">
-        {Array.from({ length: 12 }, (_, i) => (
-          <span
-            key={i}
-            style={{ "--particle-index": i }}
-          />
-        ))}
+      <div className="i3-mandala">
+        <div className="i3-mandala-ring i3-mandala-ring-one" />
+        <div className="i3-mandala-ring i3-mandala-ring-two" />
+        <div className="i3-mandala-petals" />
+        <div className="i3-mandala-dots" />
       </div>
 
       <div className="i3-zodiac-ring">
@@ -187,15 +258,24 @@ function CelestialUniverse() {
         <span />
       </div>
 
+      <div className="i3-orbit-particles">
+        {Array.from({ length: 12 }, (_, i) => (
+          <span key={i} style={{ "--particle-index": i }} />
+        ))}
+      </div>
+
       <div className="i3-sacred-center">
         <div className="i3-center-halo" />
         <div className="i3-center-outline" />
-        <span className="i3-swastik">卐</span>
+        <div className="i3-center-inner-ring" />
+
+        <span className="i3-swastik">ॐ</span>
+
         <div className="i3-center-pulse" />
       </div>
 
       <div className="i3-cosmos-stars">
-        {Array.from({ length: 30 }, (_, i) => (
+        {Array.from({ length: 35 }, (_, i) => (
           <span
             key={i}
             style={{
@@ -210,9 +290,9 @@ function CelestialUniverse() {
   );
 }
 
-// ============================================
-// MAIN COMPONENT
-// ============================================
+/* =========================================
+   MAIN PAGE
+========================================= */
 
 function IntroPage3({ onNext, onContinue }) {
   const handleContinue = onContinue || onNext;
@@ -237,260 +317,269 @@ function IntroPage3({ onNext, onContinue }) {
         ))}
       </div>
 
-      {/* ===================================
-          HEADER + THREE BIRTH DETAIL CARDS
-      =================================== */}
-
-      <header className="i3-top-header">
-        <div className="i3-heading">
-          <motion.div
-            className="i3-heading-icon"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Sparkles size={21} />
-          </motion.div>
-
-          <div className="i3-heading-copy">
-            <motion.p
-              className="i3-eyebrow"
-              initial={{ opacity: 0, x: -15 }}
-              animate={{ opacity: 1, x: 0 }}
+      <div className="i3-page-content">
+        <header className="i3-top-header">
+          <div className="i3-heading">
+            <motion.div
+              className="i3-heading-icon"
+              initial={{ opacity: 0, scale: 0.4, rotate: -90 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 1, type: "spring" }}
             >
-              A GLIMPSE INTO HER DESTINY
-            </motion.p>
+              <Sparkles size={22} />
+            </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.15 }}
-            >
-              Her <span>Janma Jathakam</span>
-            </motion.h1>
+            <div className="i3-heading-copy">
+              <motion.p
+                className="i3-eyebrow"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+              >
+                A GLIMPSE INTO HER DESTINY
+              </motion.p>
 
-            <motion.p
-              className="i3-heading-sub"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              <motion.h1
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15, duration: 0.8 }}
+              >
+                Her <span>Janma Jathakam</span>
+              </motion.h1>
+
+              <motion.p
+                className="i3-heading-sub"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                Written in the stars, wrapped in a little magic
+              </motion.p>
+            </div>
+          </div>
+
+          <div className="i3-header-details">
+            <motion.div
+              className="i3-header-detail-card"
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              Written in the stars, wrapped in a little magic
-            </motion.p>
-          </div>
-        </div>
-
-        {/* Three cards beside the title */}
-        <div className="i3-header-details">
-          <motion.div
-            className="i3-header-detail-card"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <span className="i3-header-detail-icon">
-              <CalendarDays size={17} />
-            </span>
-            <div>
-              <small>DATE OF BIRTH</small>
-              <strong>12 December 2000</strong>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="i3-header-detail-card"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.32 }}
-          >
-            <span className="i3-header-detail-icon">
-              <MapPin size={17} />
-            </span>
-            <div>
-              <small>PLACE OF BIRTH</small>
-              <strong>Guntur, Andhra Pradesh</strong>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="i3-header-detail-card"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.44 }}
-          >
-            <span className="i3-header-detail-icon">
-              <Clock3 size={17} />
-            </span>
-            <div>
-              <small>BIRTH TIME</small>
-              <strong>9:30 PM (Assumed)</strong>
-            </div>
-          </motion.div>
-        </div>
-      </header>
-
-      {/* ===================================
-          THREE MAIN PANELS
-      =================================== */}
-
-      <section className="i3-layout">
-
-        {/* PANEL 1 — KUNDALI */}
-        <motion.section
-          className="i3-panel i3-kundali-panel"
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="i3-panel-heading">
-            <div>
-              <span className="i3-panel-kicker">THE BIRTH CHART</span>
-              <h2>Janma Kundali</h2>
-            </div>
-            <span className="i3-panel-icon">✧</span>
-          </div>
-
-          {/* Only the chart in this panel */}
-          <div className="i3-chart-wrap">
-            <KundaliChart />
-          </div>
-
-          <p className="i3-chart-note">
-            A beautiful story written among the stars.
-          </p>
-
-          <motion.button
-            className="i3-continue-btn"
-            onClick={handleContinue}
-            whileHover={{ scale: 1.025, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            type="button"
-          >
-            Continue Her Story
-            <ArrowRight size={18} />
-          </motion.button>
-        </motion.section>
-
-        {/* PANEL 2 — CELESTIAL UNIVERSE */}
-        <motion.section
-          className="i3-panel i3-celestial-panel"
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-        >
-          <div className="i3-panel-heading i3-center-heading">
-            <div>
-              <span className="i3-panel-kicker">COSMIC BLESSINGS</span>
-              <h2>The Celestial Universe</h2>
-            </div>
-          </div>
-
-          <CelestialUniverse />
-
-          <div className="i3-celestial-caption">
-            <p>THE UNIVERSE HAS ITS OWN WAY</p>
-            <h3>Of making someone special.</h3>
-            <span className="i3-caption-line" />
-          </div>
-
-          <div className="i3-celestial-footer">
-            <Star size={14} />
-            <span>May the stars always shine upon her</span>
-            <Star size={14} />
-          </div>
-        </motion.section>
-
-        {/* PANEL 3 — GRAHA STHITI */}
-        <motion.section
-          className="i3-panel i3-details-panel"
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <div className="i3-panel-heading i3-details-heading">
-            <div>
-              <span className="i3-panel-kicker">PLANETARY POSITIONS</span>
-              <h2>Graha Sthiti</h2>
-            </div>
-            <ScrollText size={23} />
-          </div>
-
-          <p className="i3-scroll-hint">
-            <span className="i3-scroll-dot" />
-            (Scroll to explore all details)
-          </p>
-
-          <div className="i3-details-scroll">
-            <div className="i3-details-section">
-              <h3 className="i3-section-title">Birth Details</h3>
-
-              <div className="i3-core-grid">
-                {coreDetails.map((item) => (
-                  <div className="i3-core-card" key={item.label}>
-                    <span>{item.label}</span>
-                    <strong>{item.value}</strong>
-                    <small>{item.sub}</small>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="i3-details-section">
-              <div className="i3-graha-title">
-                <h3 className="i3-section-title">Navagraha Sthiti</h3>
-                <span>9 PLANETS</span>
-              </div>
-
-              <div className="i3-graha-list">
-                {navagraha.map((planet, index) => (
-                  <motion.div
-                    className={`i3-graha-row ${
-                      planet.name === "Rahu" || planet.name === "Ketu"
-                        ? "i3-shadow-planet"
-                        : ""
-                    }`}
-                    key={planet.name}
-                    initial={{ opacity: 0, x: 12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 + index * 0.07 }}
-                  >
-                    <span className="i3-graha-symbol">
-                      {planet.symbol}
-                    </span>
-                    <strong className="i3-graha-name">
-                      {planet.name}
-                    </strong>
-                    <span className="i3-graha-sign">
-                      {planet.sign}
-                    </span>
-                    <small className="i3-graha-house">
-                      {planet.house}
-                    </small>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            <div className="i3-rahu-ketu-note">
-              <span>☊</span>
+              <span className="i3-header-detail-icon">
+                <CalendarDays size={17} />
+              </span>
               <div>
-                <strong>Rahu & Ketu</strong>
-                <p>
-                  The lunar nodes are traditionally considered important
-                  points in Vedic astrology.
-                </p>
+                <small>DATE OF BIRTH</small>
+                <strong>12 December 2000</strong>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="i3-header-detail-card"
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45 }}
+            >
+              <span className="i3-header-detail-icon">
+                <MapPin size={17} />
+              </span>
+              <div>
+                <small>PLACE OF BIRTH</small>
+                <strong>Guntur, Andhra Pradesh</strong>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="i3-header-detail-card"
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <span className="i3-header-detail-icon">
+                <Clock3 size={17} />
+              </span>
+              <div>
+                <small>BIRTH TIME</small>
+                <strong>8:20 PM IST</strong>
+              </div>
+            </motion.div>
+          </div>
+        </header>
+
+        <section className="i3-layout">
+          {/* FIRST PANEL */}
+          <motion.section
+            className="i3-panel i3-kundali-panel"
+            initial={{ opacity: 0, y: 35 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+          >
+            <div className="i3-panel-heading">
+              <div>
+                <span className="i3-panel-kicker">THE BIRTH CHART</span>
+                <h2>Janma Kundali</h2>
+              </div>
+              <span className="i3-panel-icon">✧</span>
+            </div>
+
+            <div className="i3-chart-wrap">
+              <KundaliChart />
+            </div>
+
+            <div className="i3-chart-summary">
+              <span className="i3-summary-star">✦</span>
+              <div>
+                <strong>Karka Lagna</strong>
+                <small>Ardra Nakshatram · Pada 3</small>
               </div>
             </div>
 
-            <p className="i3-accuracy-note">
-              Birth time is assumed as 9:30 PM. Planetary positions, Lagna,
-              houses and Nakshatra shown here are illustrative and need
-              verification with an accurate birth time and a verified
-              Panchangam or ephemeris.
+            <p className="i3-chart-note">
+              A celestial map of her birth moment.
             </p>
-          </div>
-        </motion.section>
-      </section>
+
+            <motion.button
+              className="i3-continue-btn"
+              onClick={handleContinue}
+              whileHover={{ scale: 1.035, y: -3 }}
+              whileTap={{ scale: 0.96 }}
+              type="button"
+            >
+              Continue Her Story
+              <ArrowRight size={18} />
+            </motion.button>
+          </motion.section>
+
+          {/* SECOND PANEL */}
+          <motion.section
+            className="i3-panel i3-celestial-panel"
+            initial={{ opacity: 0, y: 35 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.15 }}
+          >
+            <div className="i3-panel-heading i3-center-heading">
+              <div>
+                <span className="i3-panel-kicker">COSMIC BLESSINGS</span>
+                <h2>The Celestial Universe</h2>
+              </div>
+            </div>
+
+            <CelestialUniverse />
+
+            <div className="i3-celestial-caption">
+              <p>THE UNIVERSE HAS ITS OWN WAY</p>
+              <h3>Of making someone special.</h3>
+              <span className="i3-caption-line" />
+            </div>
+
+            <div className="i3-celestial-footer">
+              <Star size={14} />
+              <span>May the stars always shine upon her</span>
+              <Star size={14} />
+            </div>
+          </motion.section>
+
+          {/* THIRD PANEL */}
+          <motion.section
+            className="i3-panel i3-details-panel"
+            initial={{ opacity: 0, y: 35 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.3 }}
+          >
+            <div className="i3-panel-heading i3-details-heading">
+              <div>
+                <span className="i3-panel-kicker">PLANETARY POSITIONS</span>
+                <h2>Graha Sthiti</h2>
+              </div>
+              <ScrollText size={23} />
+            </div>
+
+            <p className="i3-scroll-hint">
+              <span className="i3-scroll-dot" />
+              Planetary placements at birth
+            </p>
+
+            <div className="i3-details-scroll">
+              <div className="i3-details-section">
+                <h3 className="i3-section-title">Birth Details</h3>
+
+                <div className="i3-core-grid">
+                  {coreDetails.map((item) => (
+                    <div className="i3-core-card" key={item.label}>
+                      <span>{item.label}</span>
+                      <strong>{item.value}</strong>
+                      <small>{item.sub}</small>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="i3-details-section">
+                <div className="i3-graha-title">
+                  <h3 className="i3-section-title">Navagraha Sthiti</h3>
+                  <span>9 PLANETS</span>
+                </div>
+
+                <div className="i3-graha-list">
+                  {navagraha.map((planet, index) => (
+                    <motion.div
+                      className={`i3-graha-row ${
+                        planet.name === "Rahu" || planet.name === "Ketu"
+                          ? "i3-shadow-planet"
+                          : ""
+                      }`}
+                      key={planet.name}
+                      initial={{ opacity: 0, x: 15 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      <span className="i3-graha-symbol">
+                        {planet.symbol}
+                      </span>
+
+                      <div className="i3-graha-main">
+                        <strong className="i3-graha-name">
+                          {planet.name}
+                        </strong>
+                        <small>{planet.degree}</small>
+                      </div>
+
+                      <span className="i3-graha-sign">{planet.sign}</span>
+                      <small className="i3-graha-house">{planet.house}</small>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="i3-rahu-ketu-note">
+                <span>☊</span>
+                <div>
+                  <strong>Rahu & Ketu</strong>
+                  <p>
+                    The lunar nodes are opposite points used in traditional
+                    Vedic astrology.
+                  </p>
+                </div>
+              </div>
+
+              <p className="i3-accuracy-note">
+                Calculated for 12 December 2000, 8:20 PM IST, Guntur,
+                using Lahiri sidereal zodiac and whole-sign houses.
+                Mean lunar nodes are used. Please verify the recorded
+                birth time and coordinates with a professional Panchangam
+                or ephemeris before relying on this chart for formal
+                astrological decisions.
+              </p>
+            </div>
+          </motion.section>
+        </section>
+
+        <footer className="i3-footer">
+          <span>✦</span>
+          A little universe, made for someone extraordinary
+          <span>✦</span>
+        </footer>
+      </div>
     </main>
   );
 }

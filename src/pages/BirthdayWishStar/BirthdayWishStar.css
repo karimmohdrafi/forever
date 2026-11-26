@@ -1,44 +1,71 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
 
 .wish-star-page {
   position: relative;
   width: 100%;
   height: 100vh;
-  height: 100svh;
-  min-height: 500px;
+  height: 100dvh;
+  min-height: 0;
   overflow: hidden;
   isolation: isolate;
-  background: #080d25;
-  color: #fff0cf;
-  font-family: 'Montserrat', sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(69, 49, 113, 0.28), transparent 45%),
+    linear-gradient(180deg, #080b20 0%, #11132e 48%, #211b3d 78%, #090c20 100%);
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
 }
+
+/* BACKGROUND SKY */
 
 .wish-night-sky {
   position: absolute;
   inset: 0;
-  z-index: -5;
+  z-index: -2;
   background:
-    radial-gradient(ellipse at 50% 75%, #30284e 0%, transparent 48%),
-    radial-gradient(ellipse at 50% 0%, #1c2850 0%, transparent 60%),
-    linear-gradient(180deg, #080d25, #15172f 65%, #30243d);
+    radial-gradient(ellipse at 15% 20%, rgba(111, 103, 181, 0.16), transparent 30%),
+    radial-gradient(ellipse at 85% 30%, rgba(168, 109, 169, 0.13), transparent 28%),
+    radial-gradient(ellipse at 50% 80%, rgba(226, 161, 123, 0.09), transparent 38%);
 }
+
+/* MOON */
 
 .wish-moon {
   position: absolute;
-  top: 9%;
+  top: 8%;
   right: 13%;
-  width: clamp(55px, 9vw, 95px);
+  width: clamp(48px, 7vw, 88px);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: #fff0ce;
-  box-shadow: 0 0 25px #ffe6b0, 0 0 75px #e9c88c;
-  opacity: .8;
+  background: linear-gradient(135deg, #fff9df, #e8d8b3 65%, #bcae9d);
+  box-shadow:
+    0 0 25px rgba(255, 237, 195, 0.3),
+    0 0 75px rgba(255, 222, 170, 0.14);
+  opacity: 0.88;
 }
+
+.wish-moon::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: -9px;
+  left: 13px;
+  border-radius: 50%;
+  background: #11132e;
+}
+
+/* STARS */
 
 .wish-stars {
   position: absolute;
   inset: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .wish-stars span {
@@ -47,84 +74,136 @@
   height: 2px;
   border-radius: 50%;
   background: #fff5d9;
-  box-shadow: 0 0 8px #ffe7b0;
-  animation: wishTwinkle 2.5s ease-in-out infinite alternate;
+  box-shadow: 0 0 7px rgba(255, 240, 199, 0.9);
+  animation: wishTwinkle 3s ease-in-out infinite alternate;
+}
+
+.wish-stars span:nth-child(3n) {
+  width: 3px;
+  height: 3px;
+  background: #e9d4ff;
+}
+
+.wish-stars span:nth-child(5n) {
+  width: 1px;
+  height: 1px;
 }
 
 @keyframes wishTwinkle {
-  from { opacity: .2; transform: scale(.6); }
-  to { opacity: 1; transform: scale(1.8); }
+  from {
+    opacity: 0.2;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.5);
+  }
 }
+
+/* CLOUDS */
 
 .wish-cloud {
   position: absolute;
-  width: 45vw;
-  height: 90px;
+  width: 35vw;
+  height: 65px;
   border-radius: 50%;
-  background: rgba(153, 139, 180, .08);
-  filter: blur(28px);
+  background: rgba(119, 108, 153, 0.09);
+  filter: blur(25px);
+  pointer-events: none;
 }
 
 .cloud-one {
-  left: -15%;
-  bottom: 12%;
+  top: 34%;
+  left: -12%;
 }
 
 .cloud-two {
-  right: -15%;
-  bottom: 28%;
+  top: 56%;
+  right: -12%;
+  background: rgba(190, 130, 158, 0.08);
+}
+
+/* MOUNTAINS */
+
+.wish-mountain {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  pointer-events: none;
+}
+
+.mountain-back {
+  bottom: 7%;
+  height: 28%;
+  background: linear-gradient(180deg, #252342, #11152b);
+  clip-path: polygon(0 72%, 13% 35%, 23% 63%, 39% 15%, 52% 62%, 68% 24%, 82% 65%, 94% 34%, 100% 63%, 100% 100%, 0 100%);
+  opacity: 0.8;
+}
+
+.mountain-front {
+  bottom: 0;
+  height: 21%;
+  background: linear-gradient(180deg, #211d39, #090d20);
+  clip-path: polygon(0 44%, 15% 68%, 29% 32%, 43% 73%, 59% 37%, 74% 69%, 88% 35%, 100% 58%, 100% 100%, 0 100%);
 }
 
 /* FIRE BALLOON */
 
 .fire-balloon {
   position: absolute;
-  left: 50%;
-  bottom: 12%;
-  width: 120px;
-  height: 210px;
-  transform: translateX(-50%);
-  opacity: 0;
-  z-index: 4;
+  z-index: 3;
+  top: 15%;
+  left: 17%;
+  width: clamp(75px, 10vw, 125px);
+  height: clamp(150px, 22vw, 245px);
+  animation: balloonFloat 6s ease-in-out infinite;
+  transform-origin: center center;
 }
 
-.launch .fire-balloon {
-  opacity: 1;
-  animation: balloonFly 5.3s cubic-bezier(.35,.05,.65,1) forwards;
+@keyframes balloonFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-17px) rotate(3deg);
+  }
 }
 
 .balloon-glow {
   position: absolute;
-  inset: -25px;
+  width: 150%;
+  height: 65%;
+  left: -25%;
+  top: 5%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,159,70,.35), transparent 68%);
-  filter: blur(15px);
-  animation: fireGlow .7s ease-in-out infinite alternate;
+  background: rgba(255, 151, 86, 0.17);
+  filter: blur(25px);
 }
 
 .balloon-body {
   position: absolute;
-  left: 10px;
-  top: 0;
-  width: 100px;
-  height: 130px;
-  border-radius: 50% 50% 43% 43%;
-  background:
-    radial-gradient(ellipse at 35% 25%, #fff3bb 0%, #ffbd68 18%, #ef7540 55%, #9b3450 100%);
-  box-shadow:
-    inset -12px -10px 20px rgba(90,20,40,.4),
-    0 0 30px rgba(255,154,74,.5);
+  top: 16%;
+  left: 10%;
+  width: 80%;
+  height: 54%;
   overflow: hidden;
+  border-radius: 50% 50% 44% 44%;
+  background:
+    radial-gradient(ellipse at 35% 25%, #ffe4a4 0%, #f8a75c 22%, #c85b55 60%, #663d72 100%);
+  box-shadow:
+    inset -10px -12px 20px rgba(40, 19, 52, 0.35),
+    inset 7px 5px 15px rgba(255, 238, 187, 0.45),
+    0 0 25px rgba(255, 156, 99, 0.25);
 }
 
 .balloon-highlight {
   position: absolute;
-  top: 18px;
-  left: 21px;
-  width: 19px;
-  height: 65px;
+  top: 12%;
+  left: 20%;
+  width: 18%;
+  height: 55%;
   border-radius: 50%;
-  background: rgba(255,255,255,.4);
+  background: rgba(255, 255, 220, 0.38);
   filter: blur(5px);
   transform: rotate(18deg);
 }
@@ -132,273 +211,519 @@
 .balloon-pattern {
   position: absolute;
   inset: 0;
-  opacity: .35;
+  opacity: 0.3;
   background: repeating-linear-gradient(
     90deg,
-    transparent 0 20px,
-    rgba(255,240,190,.3) 21px,
-    transparent 23px
+    transparent 0 18%,
+    rgba(255, 239, 198, 0.28) 19% 20%,
+    transparent 21% 39%
   );
 }
 
 .balloon-neck {
   position: absolute;
-  top: 125px;
-  left: 52px;
-  width: 16px;
-  height: 12px;
-  background: #b74d46;
-  clip-path: polygon(0 0, 100% 0, 75% 100%, 25% 100%);
-}
-
-.balloon-rope {
-  position: absolute;
-  top: 135px;
-  left: 36px;
-  width: 48px;
-  height: 28px;
-  border-left: 1px solid #e6c49a;
-  border-right: 1px solid #e6c49a;
+  top: 68%;
+  left: 44%;
+  width: 12%;
+  height: 7%;
+  background: #c97855;
+  clip-path: polygon(0 0, 100% 0, 65% 100%, 35% 100%);
 }
 
 .balloon-basket {
   position: absolute;
-  top: 163px;
-  left: 43px;
-  width: 34px;
-  height: 25px;
-  border-radius: 3px 3px 8px 8px;
-  background: linear-gradient(90deg, #633e38, #bd8053, #603a36);
-  border: 1px solid #e3b67e;
+  top: 84%;
+  left: 36%;
+  width: 28%;
+  height: 12%;
+  border: 2px solid #b77b55;
+  border-radius: 2px 2px 8px 8px;
+  background: linear-gradient(90deg, #5c3c3b, #a36c4e, #4c343d);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
+}
+
+.balloon-rope {
+  position: absolute;
+  top: 72%;
+  left: 28%;
+  width: 44%;
+  height: 14%;
+  border-left: 1px solid #d5a47a;
+  border-right: 1px solid #d5a47a;
 }
 
 .balloon-flame {
   position: absolute;
-  top: 130px;
-  left: 42px;
-  width: 36px;
-  height: 42px;
   z-index: 2;
+  top: 66%;
+  left: 42%;
+  width: 16%;
+  height: 15%;
+  display: flex;
+  justify-content: center;
+  gap: 3px;
 }
 
 .balloon-flame span {
-  position: absolute;
-  left: 8px;
-  bottom: 0;
-  width: 20px;
-  height: 38px;
-  border-radius: 50% 50% 45% 45%;
-  background: linear-gradient(to top, #ff5b25, #ffcf55, #fff8c6);
+  width: 50%;
+  height: 100%;
+  border-radius: 50% 50% 50% 50%;
+  background: linear-gradient(to top, #ff613b, #ffcf76, #fff4bd);
   filter: blur(2px);
-  animation: flameDance .3s ease-in-out infinite alternate;
+  box-shadow: 0 0 12px #ff9a4a;
+  animation: flameGlow 0.8s ease-in-out infinite alternate;
 }
 
-.balloon-flame span:last-child {
-  left: 15px;
-  height: 27px;
-  width: 12px;
-  background: #fff6bd;
+.balloon-flame span:nth-child(2) {
+  animation-delay: 0.3s;
 }
 
-@keyframes flameDance {
-  to { transform: scale(.8) rotate(8deg); }
-}
-
-@keyframes fireGlow {
-  to { opacity: .55; transform: scale(1.2); }
-}
-
-@keyframes balloonFly {
-  0% {
-    transform: translate(-50%, 0) rotate(-3deg) scale(.85);
-    opacity: 0;
+@keyframes flameGlow {
+  from {
+    transform: scaleY(0.8);
+    opacity: 0.7;
   }
-  10% { opacity: 1; }
-  45% { transform: translate(calc(-50% + 18px), -40vh) rotate(4deg) scale(.8); }
-  100% {
-    transform: translate(calc(-50% - 10px), -125vh) rotate(-4deg) scale(.45);
-    opacity: 0;
+  to {
+    transform: scaleY(1.2);
+    opacity: 1;
   }
 }
 
-/* STAR */
+/* MAIN STAR AREA */
 
 .wish-star-reveal {
   position: absolute;
+  z-index: 5;
+  top: 47%;
   left: 50%;
-  top: 48%;
-  width: 100%;
-  transform: translate(-50%, -50%);
+  width: min(90%, 560px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 1.5s ease, visibility 1.5s ease;
-  z-index: 5;
-}
-
-.star .wish-star-reveal {
-  opacity: 1;
-  visibility: visible;
+  text-align: center;
+  transform: translate(-50%, -50%);
 }
 
 .star-aura {
   position: absolute;
-  width: 260px;
+  z-index: -1;
+  top: 0;
+  width: clamp(170px, 26vw, 290px);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,220,137,.3), transparent 70%);
-  filter: blur(15px);
-  animation: auraPulse 3s ease-in-out infinite alternate;
+  background: radial-gradient(
+    circle,
+    rgba(255, 221, 155, 0.22) 0%,
+    rgba(213, 155, 220, 0.1) 38%,
+    transparent 72%
+  );
+  filter: blur(12px);
+  animation: auraPulse 4s ease-in-out infinite;
 }
 
 @keyframes auraPulse {
-  to { transform: scale(1.3); opacity: .55; }
+  0%, 100% {
+    transform: scale(0.88);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
 }
+
+/* ORBITS */
+
+.star-orbit {
+  position: absolute;
+  top: -4px;
+  width: clamp(145px, 21vw, 230px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 224, 171, 0.24);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.orbit-one {
+  transform: rotateX(65deg) rotate(-25deg);
+}
+
+.orbit-two {
+  width: clamp(170px, 25vw, 270px);
+  border-color: rgba(206, 166, 236, 0.18);
+  transform: rotateX(65deg) rotate(45deg);
+}
+
+/* STAR BUTTON */
 
 .magical-wish-star {
   position: relative;
-  width: clamp(110px, 19vw, 175px);
+  z-index: 2;
+  width: clamp(105px, 15vw, 155px);
   aspect-ratio: 1;
+  border: 0;
+  outline: none;
+  cursor: pointer;
   display: grid;
   place-items: center;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  animation: starFloat 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 18px #ffdc86);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 28%, #fffde9 0%, #ffe6a6 18%, #e9b85e 43%, #a56b70 75%, #59446e 100%);
+  box-shadow:
+    0 0 20px rgba(255, 222, 148, 0.65),
+    0 0 55px rgba(255, 194, 115, 0.38),
+    0 0 110px rgba(223, 158, 207, 0.2),
+    inset 0 0 18px rgba(255, 255, 255, 0.65);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  animation: starBreathing 3s ease-in-out infinite;
 }
 
-.magical-wish-star span {
-  font-size: clamp(100px, 17vw, 155px);
-  line-height: 1;
-  color: #ffe9a7;
-  text-shadow:
-    0 0 10px #fff5cb,
-    0 0 28px #ffdb80,
-    0 0 65px #ffb84c;
-  transition: transform .4s ease, filter .4s ease;
+.magical-wish-star::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border: 1px solid rgba(255, 226, 167, 0.55);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(255, 215, 150, 0.25);
 }
 
-.magical-wish-star:hover span {
-  transform: scale(1.18) rotate(12deg);
-  filter: brightness(1.3);
-}
-
-.magical-wish-star:focus-visible {
-  outline: 2px solid #ffe7a7;
-  outline-offset: 10px;
+.magical-wish-star::after {
+  content: "";
+  position: absolute;
+  inset: -23px;
+  border: 1px solid rgba(226, 192, 240, 0.2);
   border-radius: 50%;
 }
 
-@keyframes starFloat {
-  0%, 100% { transform: translateY(0) rotate(-5deg); }
-  50% { transform: translateY(-17px) rotate(5deg); }
+.magical-wish-star span {
+  color: #fff9df;
+  font-size: clamp(55px, 8vw, 85px);
+  line-height: 1;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 20px #ffdc8e,
+    0 0 35px #ffb95e;
 }
 
+.magical-wish-star:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 0 30px rgba(255, 222, 148, 0.85),
+    0 0 75px rgba(255, 194, 115, 0.55),
+    0 0 130px rgba(223, 158, 207, 0.3);
+}
+
+.magical-wish-star:focus-visible {
+  outline: 2px solid #fff2c9;
+  outline-offset: 18px;
+}
+
+@keyframes starBreathing {
+  0%, 100% {
+    filter: brightness(0.95);
+  }
+  50% {
+    filter: brightness(1.18);
+  }
+}
+
+/* TEXT */
+
 .star-message {
-  margin-top: 22px;
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(32px, 6vw, 58px);
-  color: #ffe6b5;
-  text-shadow: 0 0 18px rgba(255,218,147,.55);
-  text-align: center;
+  margin: clamp(38px, 5vw, 55px) 0 0;
+  color: #fff0d7;
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.15;
+  font-weight: 400;
+  text-shadow: 0 0 18px rgba(255, 218, 166, 0.4);
 }
 
 .star-instruction {
-  margin-top: 18px;
-  font-family: 'Cinzel', serif;
-  font-size: clamp(8px, 1.3vw, 11px);
-  letter-spacing: .3em;
-  color: rgba(255,235,194,.8);
-  animation: instructionBlink 2s ease-in-out infinite;
-}
-
-@keyframes instructionBlink {
-  50% { opacity: .4; }
+  margin: 17px 0 0;
+  color: rgba(255, 226, 191, 0.72);
+  font-size: clamp(8px, 1.2vw, 10px);
+  letter-spacing: clamp(2px, 0.5vw, 4px);
+  font-weight: 500;
 }
 
 /* BOTTOM LIGHT */
 
 .wish-bottom-glow {
   position: absolute;
-  width: 100%;
-  height: 20%;
-  bottom: -12%;
-  background: radial-gradient(ellipse, rgba(255,190,128,.18), transparent 70%);
+  z-index: 1;
+  left: 50%;
+  bottom: 5%;
+  width: min(75vw, 700px);
+  height: 90px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(255, 180, 130, 0.17), transparent 70%);
   filter: blur(20px);
-}
-
-/* TRANSITION */
-
-.wish-transition {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  background: #fff0c6;
-  opacity: 0;
   pointer-events: none;
 }
 
-.wish-leaving .wish-transition {
-  animation: starExit 1.2s ease forwards;
+.wish-ground {
+  position: absolute;
+  z-index: 2;
+  bottom: -50px;
+  left: 50%;
+  width: 120%;
+  height: 100px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(5, 9, 24, 0.55);
+  filter: blur(20px);
 }
 
-.wish-leaving .magical-wish-star {
-  animation: starExpand 1.2s ease forwards;
-}
+/* TABLET */
 
-@keyframes starExpand {
-  to { transform: scale(18); opacity: 0; }
-}
+@media (max-width: 900px) {
+  .fire-balloon {
+    left: 10%;
+    top: 17%;
+  }
 
-@keyframes starExit {
-  0% { opacity: 0; }
-  40% { opacity: .9; }
-  100% { opacity: 1; }
+  .wish-moon {
+    right: 10%;
+    top: 8%;
+  }
+
+  .wish-star-reveal {
+    top: 49%;
+  }
 }
 
 /* MOBILE */
 
 @media (max-width: 600px) {
+  .wish-star-page {
+    min-height: 100svh;
+  }
+
   .wish-moon {
     top: 8%;
-    right: 10%;
-    width: 58px;
+    right: 9%;
+    width: 48px;
   }
 
   .fire-balloon {
-    transform: translateX(-50%) scale(.8);
-    transform-origin: bottom center;
+    top: 13%;
+    left: 7%;
+    width: 75px;
+    height: 150px;
   }
 
-  .star-message {
-    padding: 0 15px;
+  .wish-star-reveal {
+    top: 49%;
+    width: 94%;
   }
 
-  .star-instruction {
-    font-size: 8px;
-    letter-spacing: .2em;
+  .magical-wish-star {
+    width: 112px;
+  }
+
+  .star-orbit {
+    width: 155px;
+  }
+
+  .orbit-two {
+    width: 180px;
   }
 
   .star-aura {
-    width: 210px;
+    width: 190px;
+  }
+
+  .star-message {
+    margin-top: 38px;
+    font-size: clamp(29px, 8vw, 38px);
+  }
+
+  .star-instruction {
+    margin-top: 14px;
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+
+  .mountain-back {
+    height: 23%;
+    bottom: 6%;
+  }
+
+  .mountain-front {
+    height: 17%;
+  }
+
+  .wish-cloud {
+    width: 55vw;
+    height: 45px;
   }
 }
 
-@media (max-height: 600px) {
-  .wish-star-reveal {
-    top: 45%;
-    transform: translate(-50%, -50%) scale(.78);
+/* SMALL MOBILE */
+
+@media (max-width: 380px) {
+  .fire-balloon {
+    top: 12%;
+    left: 5%;
+    width: 65px;
+    height: 130px;
+  }
+
+  .wish-moon {
+    width: 40px;
+  }
+
+  .magical-wish-star {
+    width: 98px;
+  }
+
+  .magical-wish-star span {
+    font-size: 55px;
+  }
+
+  .star-orbit {
+    width: 140px;
+  }
+
+  .orbit-two {
+    width: 160px;
+  }
+
+  .star-aura {
+    width: 165px;
+  }
+
+  .star-message {
+    margin-top: 34px;
+    font-size: 29px;
+  }
+
+  .star-instruction {
+    font-size: 7px;
+    letter-spacing: 1.6px;
   }
 }
+
+/* SHORT SCREENS */
+
+@media (max-height: 650px) {
+  .wish-moon {
+    top: 5%;
+    width: 42px;
+  }
+
+  .fire-balloon {
+    top: 9%;
+    width: 65px;
+    height: 130px;
+  }
+
+  .wish-star-reveal {
+    top: 52%;
+  }
+
+  .magical-wish-star {
+    width: 90px;
+  }
+
+  .magical-wish-star span {
+    font-size: 52px;
+  }
+
+  .star-orbit {
+    width: 130px;
+  }
+
+  .orbit-two {
+    width: 150px;
+  }
+
+  .star-aura {
+    width: 155px;
+  }
+
+  .star-message {
+    margin-top: 30px;
+    font-size: 30px;
+  }
+
+  .star-instruction {
+    margin-top: 10px;
+  }
+
+  .mountain-back {
+    height: 20%;
+  }
+
+  .mountain-front {
+    height: 14%;
+  }
+}
+
+/* LANDSCAPE MOBILE */
+
+@media (max-height: 480px) and (orientation: landscape) {
+  .wish-moon {
+    top: 5%;
+    right: 8%;
+    width: 38px;
+  }
+
+  .fire-balloon {
+    top: 8%;
+    left: 10%;
+    width: 55px;
+    height: 110px;
+  }
+
+  .wish-star-reveal {
+    top: 51%;
+  }
+
+  .magical-wish-star {
+    width: 72px;
+  }
+
+  .magical-wish-star span {
+    font-size: 42px;
+  }
+
+  .star-orbit {
+    width: 105px;
+  }
+
+  .orbit-two {
+    width: 125px;
+  }
+
+  .star-aura {
+    width: 130px;
+  }
+
+  .star-message {
+    margin-top: 22px;
+    font-size: 25px;
+  }
+
+  .star-instruction {
+    margin-top: 7px;
+    font-size: 7px;
+  }
+}
+
+/* ACCESSIBILITY */
 
 @media (prefers-reduced-motion: reduce) {
-  .wish-star-page *,
-  .wish-star-page *::before,
-  .wish-star-page *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
+  .wish-stars span,
+  .fire-balloon,
+  .balloon-flame span,
+  .star-aura,
+  .magical-wish-star {
+    animation: none !important;
+  }
+
+  .magical-wish-star {
+    transition: none;
   }
 }

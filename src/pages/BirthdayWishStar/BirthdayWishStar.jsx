@@ -1,42 +1,19 @@
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./BirthdayWishStar.css";
 
 function BirthdayWishStar({ onNext, onContinue }) {
-  const [stage, setStage] = useState("waiting");
-  const [leaving, setLeaving] = useState(false);
-
-  useEffect(() => {
-    const launchTimer = setTimeout(() => {
-      setStage("launch");
-    }, 1200);
-
-    const starTimer = setTimeout(() => {
-      setStage("star");
-    }, 6500);
-
-    return () => {
-      clearTimeout(launchTimer);
-      clearTimeout(starTimer);
-    };
-  }, []);
-
   const handleStarClick = () => {
-    if (leaving) return;
-
-    setLeaving(true);
-
-    setTimeout(() => {
-      (onNext || onContinue)?.();
-    }, 1200);
+    (onNext || onContinue)?.();
   };
 
   return (
-    <main className={`wish-star-page ${stage} ${leaving ? "wish-leaving" : ""}`}>
+    <main className="wish-star-page">
+      {/* BACKGROUND */}
       <div className="wish-night-sky" />
-
       <div className="wish-moon" />
 
+      {/* STARS */}
       <div className="wish-stars">
         {Array.from({ length: 65 }, (_, i) => (
           <span
@@ -50,12 +27,18 @@ function BirthdayWishStar({ onNext, onContinue }) {
         ))}
       </div>
 
+      {/* CLOUDS */}
       <div className="wish-cloud cloud-one" />
       <div className="wish-cloud cloud-two" />
+
+      {/* DISTANT MOUNTAINS */}
+      <div className="wish-mountain mountain-back" />
+      <div className="wish-mountain mountain-front" />
 
       {/* FIRE BALLOON */}
       <div className="fire-balloon">
         <div className="balloon-glow" />
+
         <div className="balloon-flame">
           <span />
           <span />
@@ -71,14 +54,16 @@ function BirthdayWishStar({ onNext, onContinue }) {
         <div className="balloon-rope" />
       </div>
 
-      {/* STAR REVEAL */}
-      <div className="wish-star-reveal">
+      {/* MAIN STAR */}
+      <section className="wish-star-reveal">
         <div className="star-aura" />
+        <div className="star-orbit orbit-one" />
+        <div className="star-orbit orbit-two" />
 
         <button
           className="magical-wish-star"
           onClick={handleStarClick}
-          aria-label="Open the next surprise"
+          aria-label="Touch the star to continue"
         >
           <span>★</span>
         </button>
@@ -90,10 +75,11 @@ function BirthdayWishStar({ onNext, onContinue }) {
         <p className="star-instruction">
           ✧ TOUCH THE STAR TO CONTINUE ✧
         </p>
-      </div>
+      </section>
 
+      {/* BOTTOM LIGHT */}
       <div className="wish-bottom-glow" />
-      <div className="wish-transition" />
+      <div className="wish-ground" />
     </main>
   );
 }

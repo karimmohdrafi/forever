@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // INTRO PAGES
 import IntroPage1 from "./pages/IntroPage1/IntroPage1";
@@ -14,16 +14,14 @@ import IntroPage7 from "./pages/IntroPage7/IntroPage7";
 import Welcome from "./pages/Welcome/Welcome";
 import BirthdayPortal from "./pages/BirthdayPortal/BirthdayPortal";
 import BirthdayWelcome from "./pages/BirthdayWelcome/BirthdayWelcome";
-import StarUniverse from "./pages/StarUniverse/StarUniverse";
 import LittleThings from "./pages/LittleThings/LittleThings";
 import FlowerGarden from "./pages/FlowerGarden/FlowerGarden";
-import GiftThatWaits from "./pages/GiftThatWaits/GiftThatWaits";
 import Step16 from "./pages/Step16/Step16";
-import FirstMemory from "./pages/FirstMemory/FirstMemory";
 import MemoryPuzzle from "./pages/MemoryPuzzle/MemoryPuzzle";
+import FirstMemory from "./pages/FirstMemory/FirstMemory";
 import HeartLetter from "./pages/HeartLetter/HeartLetter";
-import OneMoreSurprise from "./pages/OneMoreSurprise/OneMoreSurprise";
 import BeautifulTimeline from "./pages/BeautifulTimeline/BeautifulTimeline";
+import GiftThatWaits from "./pages/GiftThatWaits/GiftThatWaits";
 
 // SPECIAL AND FINAL PAGES
 import BirthdayWishStar from "./pages/BirthdayWishStar/BirthdayWishStar";
@@ -34,12 +32,16 @@ function App() {
 
   const goToStep = (step) => {
     setCurrentStep(step);
+  };
 
+  // Scroll to top whenever the page changes
+  useEffect(() => {
     window.scrollTo({
       top: 0,
+      left: 0,
       behavior: "instant",
     });
-  };
+  }, [currentStep]);
 
   // Supports both onNext and onContinue callbacks
   const next = (step) => ({
@@ -47,88 +49,134 @@ function App() {
     onContinue: () => goToStep(step),
   });
 
+  let page;
+
   switch (currentStep) {
+    // STEP 1
     case 0:
-      return <IntroPage1 {...next(1)} />;
+      page = <IntroPage1 {...next(1)} />;
+      break;
 
+    // STEP 2
     case 1:
-      return <IntroPage2 {...next(2)} />;
+      page = <IntroPage2 {...next(2)} />;
+      break;
 
+    // STEP 3
     case 2:
-      return <Welcome {...next(3)} />;
+      page = <Welcome {...next(3)} />;
+      break;
 
+    // STEP 4
     case 3:
-      return (
+      page = (
         <BirthdayPortal
           onUnlock={() => goToStep(4)}
           onNext={() => goToStep(4)}
           onBack={() => goToStep(2)}
         />
       );
+      break;
 
+    // STEP 5
     case 4:
-      return <BirthdayWelcome {...next(5)} />;
+      page = <BirthdayWelcome {...next(5)} />;
+      break;
 
+    // STEP 6
     case 5:
-      return <IntroPage3 {...next(6)} />;
+      page = <LittleThings {...next(6)} />;
+      break;
 
+    // STEP 7
     case 6:
-      return <StarUniverse {...next(7)} />;
+      page = <FlowerGarden {...next(7)} />;
+      break;
 
+    // STEP 8
     case 7:
-      return <LittleThings {...next(8)} />;
+      page = <Step16 {...next(8)} />;
+      break;
 
+    // STEP 9
     case 8:
-      return <IntroPage4 {...next(9)} />;
+      page = <MemoryPuzzle onNext={() => goToStep(9)} />;
+      break;
 
+    // STEP 10
     case 9:
-      return <FlowerGarden {...next(10)} />;
+      page = <FirstMemory {...next(10)} />;
+      break;
 
+    // STEP 11
     case 10:
-      return <GiftThatWaits {...next(11)} />;
+      page = <HeartLetter onNext={() => goToStep(11)} />;
+      break;
 
-    // GiftThatWaits తర్వాత BirthdayWelcome removed
+    // STEP 12
     case 11:
-      return <Step16 {...next(12)} />;
+      page = <Step16 {...next(12)} />;
+      break;
 
+    // STEP 13
     case 12:
-      return <FirstMemory {...next(13)} />;
+      page = <BeautifulTimeline {...next(13)} />;
+      break;
 
+    // STEP 14
     case 13:
-      return <MemoryPuzzle onNext={() => goToStep(14)} />;
+      page = <Step16 {...next(14)} />;
+      break;
 
+    // STEP 15
     case 14:
-      return <HeartLetter onNext={() => goToStep(15)} />;
+      page = <IntroPage6 {...next(15)} />;
+      break;
 
+    // STEP 16
     case 15:
-      return <OneMoreSurprise {...next(16)} />;
+      page = <IntroPage7 {...next(16)} />;
+      break;
 
+    // STEP 17
     case 16:
-      return <BeautifulTimeline {...next(17)} />;
+      page = <GiftThatWaits {...next(17)} />;
+      break;
 
-    // BirthdayWishStar - BeautifulTimeline తర్వాత direct
+    // STEP 18
     case 17:
-      return <BirthdayWishStar {...next(18)} />;
+      page = <IntroPage4 {...next(18)} />;
+      break;
 
-    // IntroPage5 - BirthdayWishStar తర్వాత
+    // STEP 19
     case 18:
-      return <IntroPage5 onNext={() => goToStep(19)} />;
+      page = <BirthdayWishStar {...next(19)} />;
+      break;
 
-    // Akka birthday message
+    // STEP 20
     case 19:
-      return <IntroPage6 {...next(20)} />;
+      page = <IntroPage5 onNext={() => goToStep(20)} />;
+      break;
 
-    // Five special birthday wishes
+    // STEP 21
     case 20:
-      return <IntroPage7 {...next(21)} />;
+      page = <IntroPage3 {...next(21)} />;
+      break;
 
-    // Final love note
+    // STEP 22 - FINAL PAGE
     case 21:
-      return <FinalLoveNote />;
+      page = <FinalLoveNote />;
+      break;
 
     default:
-      return <IntroPage1 {...next(1)} />;
+      page = <IntroPage1 {...next(1)} />;
   }
+
+  return (
+    <main className="app-step-wrapper" key={currentStep}>
+      {page}
+    </main>
+  );
 }
 
 export default App;

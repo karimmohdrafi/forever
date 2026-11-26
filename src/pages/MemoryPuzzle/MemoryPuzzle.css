@@ -1,83 +1,101 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
-/* =====================================
-   GLOBAL NO SCROLL
-===================================== */
-
-html,
-body,
-#root {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
+* {
+  box-sizing: border-box;
 }
 
 .memory-puzzle-page {
-  position: fixed;
-  inset: 0;
+  position: relative;
   width: 100%;
   height: 100vh;
   height: 100dvh;
   min-height: 0;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  background:
-    radial-gradient(
-      ellipse at 50% 45%,
-      #34172d 0%,
-      #160d1b 48%,
-      #080710 100%
-    );
-  color: white;
-  font-family: 'Montserrat', sans-serif;
   isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(117, 54, 139, 0.24), transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(163, 76, 130, 0.15), transparent 40%),
+    linear-gradient(135deg, #090711 0%, #130d20 50%, #080711 100%);
+  font-family: 'Montserrat', sans-serif;
 }
 
-/* =====================================
-   BACKGROUND EFFECTS
-===================================== */
+/* BACKGROUND GLOW */
 
 .memory-bg-glow {
   position: absolute;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: #ec5c9d;
-  filter: blur(180px);
-  opacity: 0.13;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
+  z-index: -2;
+  inset: 0;
+  overflow: hidden;
   pointer-events: none;
 }
+
+.memory-bg-glow::before,
+.memory-bg-glow::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.25;
+  animation: memoryGlow 10s ease-in-out infinite alternate;
+}
+
+.memory-bg-glow::before {
+  top: -130px;
+  left: -100px;
+  background: #a64bd1;
+}
+
+.memory-bg-glow::after {
+  right: -120px;
+  bottom: -130px;
+  background: #d45caa;
+  animation-delay: 2s;
+}
+
+@keyframes memoryGlow {
+  from {
+    transform: translate(0, 0) scale(0.9);
+  }
+  to {
+    transform: translate(45px, 35px) scale(1.2);
+  }
+}
+
+/* STARS */
 
 .memory-stars {
   position: absolute;
+  z-index: -1;
   inset: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(1px 1px at 10% 20%, #fff, transparent),
-    radial-gradient(2px 2px at 80% 15%, #ffd4eb, transparent),
-    radial-gradient(1px 1px at 45% 80%, #fff, transparent),
-    radial-gradient(2px 2px at 90% 70%, #fff, transparent),
-    radial-gradient(1px 1px at 20% 75%, #ffc0e0, transparent);
-  background-size: 220px 220px;
-  animation: starTwinkle 4s infinite alternate;
+    radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,.8) 50%, transparent 100%),
+    radial-gradient(2px 2px at 30% 70%, rgba(255,220,255,.7) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 70% 25%, rgba(255,255,255,.8) 50%, transparent 100%),
+    radial-gradient(2px 2px at 85% 65%, rgba(255,210,245,.7) 50%, transparent 100%),
+    radial-gradient(1px 1px at 50% 45%, white 50%, transparent 100%);
+  background-size: 250px 220px;
+  animation: memoryStarMove 30s linear infinite;
 }
 
-@keyframes starTwinkle {
-  from { opacity: 0.3; }
-  to { opacity: 0.9; }
+@keyframes memoryStarMove {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100px);
+  }
 }
 
-/* =====================================
-   FLOATING PARTICLES
-===================================== */
+/* FLOATING PARTICLES */
 
 .floating-hearts {
   position: absolute;
@@ -88,386 +106,563 @@ body,
 
 .floating-hearts span {
   position: absolute;
-  bottom: -30px;
-  color: #ff9bc9;
-  opacity: 0;
-  animation: floatMemory 9s linear infinite;
+  color: rgba(232, 174, 255, 0.4);
+  font-size: 15px;
+  text-shadow: 0 0 12px #c77aff;
+  animation: floatingMemoryStar 8s ease-in-out infinite;
 }
 
-.floating-hearts span:nth-child(1) { left: 8%; animation-delay: 0s; }
-.floating-hearts span:nth-child(2) { left: 18%; animation-delay: 2s; }
-.floating-hearts span:nth-child(3) { left: 28%; animation-delay: 4s; }
-.floating-hearts span:nth-child(4) { left: 38%; animation-delay: 1s; }
-.floating-hearts span:nth-child(5) { left: 48%; animation-delay: 3s; }
-.floating-hearts span:nth-child(6) { left: 58%; animation-delay: 5s; }
-.floating-hearts span:nth-child(7) { left: 68%; animation-delay: 2s; }
-.floating-hearts span:nth-child(8) { left: 78%; animation-delay: 4s; }
-.floating-hearts span:nth-child(9) { left: 88%; animation-delay: 1s; }
-.floating-hearts span:nth-child(10) { left: 95%; animation-delay: 3s; }
+.floating-hearts span:nth-child(1) { left: 8%; top: 20%; }
+.floating-hearts span:nth-child(2) { left: 20%; top: 75%; animation-delay: 1s; }
+.floating-hearts span:nth-child(3) { left: 82%; top: 18%; animation-delay: 2s; }
+.floating-hearts span:nth-child(4) { left: 90%; top: 70%; animation-delay: 3s; }
+.floating-hearts span:nth-child(5) { left: 45%; top: 12%; animation-delay: 1.5s; }
+.floating-hearts span:nth-child(6) { left: 60%; top: 85%; animation-delay: 2.5s; }
+.floating-hearts span:nth-child(7) { left: 4%; top: 55%; animation-delay: 3.5s; }
+.floating-hearts span:nth-child(8) { left: 95%; top: 40%; animation-delay: 1.2s; }
+.floating-hearts span:nth-child(9) { left: 35%; top: 90%; animation-delay: 2.2s; }
+.floating-hearts span:nth-child(10) { left: 72%; top: 8%; animation-delay: 4s; }
+.floating-hearts span:nth-child(11) { left: 15%; top: 42%; animation-delay: 2.8s; }
+.floating-hearts span:nth-child(12) { left: 76%; top: 55%; animation-delay: 3.2s; }
 
-@keyframes floatMemory {
-  0% {
-    transform: translateY(0) rotate(0);
-    opacity: 0;
+@keyframes floatingMemoryStar {
+  0%, 100% {
+    opacity: 0.2;
+    transform: translateY(0) rotate(0deg) scale(0.8);
   }
-
-  15% { opacity: 0.5; }
-
-  85% { opacity: 0.4; }
-
-  100% {
-    transform: translateY(-110vh) rotate(360deg);
-    opacity: 0;
+  50% {
+    opacity: 0.9;
+    transform: translateY(-30px) rotate(90deg) scale(1.2);
   }
 }
 
-/* =====================================
-   MAIN CONTENT
-===================================== */
+/* MAIN PUZZLE CONTENT */
 
 .puzzle-content {
   position: relative;
   z-index: 2;
-  width: 100%;
-  max-width: 650px;
+  width: min(100%, 760px);
   max-height: 100%;
-  padding: 12px 15px;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  overflow: hidden;
-  animation: contentEnter 1.2s ease both;
+  padding: 8px 12px;
+  animation: puzzleEntrance 1s ease both;
 }
 
-@keyframes contentEnter {
+@keyframes puzzleEntrance {
   from {
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+/* SUBTITLE */
+
 .puzzle-subtitle {
-  color: #e7a6c5;
-  font-size: 10px;
-  letter-spacing: 5px;
-  font-weight: 500;
-  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #d7a9ed;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 3.5px;
+  margin-bottom: 7px;
 }
 
+.puzzle-subtitle::before,
+.puzzle-subtitle::after {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #dba6ed);
+}
+
+/* MAIN TITLE */
+
 .puzzle-heading {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(34px, 5vw, 55px);
-  line-height: 1.05;
-  font-weight: 500;
   margin: 0;
+  color: #fff6ff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 4vw, 43px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 25px rgba(210, 143, 255, 0.2);
 }
 
 .puzzle-heading span {
   display: block;
+  color: #e6a9ff;
   font-style: italic;
-  color: #f4a1ca;
 }
+
+/* DESCRIPTION */
 
 .puzzle-description {
-  font-size: 11px;
-  color: #c6b4c5;
-  letter-spacing: 0.7px;
-  line-height: 1.8;
-  margin: 14px auto 20px;
+  max-width: 420px;
+  margin: 9px 0 14px;
+  color: #c9bbd4;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  line-height: 1.35;
+  letter-spacing: 0.3px;
 }
+
+/* COUNTER */
 
 .puzzle-counter {
-  max-width: 390px;
-  margin: 0 auto 12px;
+  width: min(100%, 340px);
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  color: #e6a4c6;
-  font-size: 9px;
-  letter-spacing: 2px;
+  margin-bottom: 11px;
+  padding: 9px 13px;
+  border: 1px solid rgba(220, 171, 255, 0.22);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-/* =====================================
-   PUZZLE GRID
-===================================== */
+.puzzle-counter span {
+  color: #e3c9f3;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+.puzzle-counter span:last-child {
+  color: #ffc1dc;
+}
+
+/* PUZZLE GRID */
 
 .memory-puzzle-grid {
-  width: min(390px, 78vw, 43vh);
-  aspect-ratio: 1 / 1;
-  margin: 0 auto;
+  position: relative;
+  width: min(68vw, 340px, 40vh);
+  aspect-ratio: 1;
+  flex-shrink: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 5px;
   padding: 7px;
-  box-sizing: border-box;
-  border: 1px solid rgba(255, 176, 217, 0.5);
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  border: 1px solid rgba(235, 191, 255, 0.55);
+  border-radius: 17px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.14), rgba(126,72,154,0.15));
   box-shadow:
-    0 0 30px rgba(255, 95, 170, 0.12),
-    inset 0 0 20px rgba(255, 255, 255, 0.03);
+    0 0 0 5px rgba(190, 122, 224, 0.055),
+    0 0 30px rgba(194, 108, 255, 0.2),
+    0 20px 55px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
 }
+
+/* INDIVIDUAL PIECES */
 
 .puzzle-piece {
   position: relative;
+  min-width: 0;
+  min-height: 0;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 5px;
   padding: 0;
-  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 7px;
   background-repeat: no-repeat;
-  background-color: #301b31;
+  background-color: #21162d;
+  cursor: pointer;
+  outline: none;
   transition:
     transform 0.3s ease,
-    border 0.3s ease,
-    filter 0.3s ease;
+    border-color 0.3s ease,
+    filter 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .puzzle-piece:hover {
+  z-index: 2;
+  border-color: rgba(255, 218, 255, 0.9);
+  filter: brightness(1.12);
   transform: scale(0.97);
-  border-color: #ff9dcb;
-  filter: brightness(1.15);
 }
 
-.piece-selected {
-  z-index: 2;
-  border: 3px solid #ff91c7;
+.puzzle-piece:focus-visible {
+  outline: 2px solid #f2b8ff;
+  outline-offset: 2px;
+}
+
+.puzzle-piece.piece-selected {
+  z-index: 3;
+  border: 2px solid #ffb9e4;
+  filter: brightness(1.18);
   transform: scale(0.94);
-  box-shadow: 0 0 20px #ff5da8;
+  box-shadow:
+    0 0 0 3px rgba(245, 153, 219, 0.25),
+    0 0 20px rgba(255, 143, 222, 0.8);
+  animation: selectedPiece 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes selectedPiece {
+  from {
+    box-shadow: 0 0 10px rgba(255, 143, 222, 0.5);
+  }
+  to {
+    box-shadow: 0 0 23px rgba(255, 143, 222, 0.95);
+  }
 }
 
 .piece-glow {
   position: absolute;
   inset: 0;
-  background: rgba(255, 125, 190, 0.2);
   pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.35),
+    transparent 45%,
+    rgba(255,153,218,0.2)
+  );
 }
 
-/* =====================================
-   INSTRUCTIONS & PROGRESS
-===================================== */
+/* INSTRUCTION */
 
 .puzzle-instruction {
-  color: #d9b7ce;
-  font-size: 10px;
-  letter-spacing: 0.5px;
-  margin: 14px 0 8px;
+  margin: 12px 0 8px;
+  color: #d4c0e3;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  letter-spacing: 0.3px;
 }
 
+.puzzle-instruction::first-letter {
+  color: #f7b4db;
+}
+
+/* PROGRESS */
+
 .puzzle-progress {
-  color: #ffacd0;
-  font-size: 15px;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #ffd1e9;
+  font-size: 14px;
+  font-weight: 700;
   letter-spacing: 1px;
 }
 
 .puzzle-progress span {
+  color: #a994b8;
   font-size: 9px;
-  color: #a994aa;
-  font-weight: 400;
+  font-weight: 600;
+  letter-spacing: 1.5px;
 }
 
-/* =====================================
-   SUCCESS SCREEN
-===================================== */
+/* SUCCESS SCREEN */
 
 .puzzle-success {
   position: absolute;
-  inset: 0;
   z-index: 5;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 20px;
-  box-sizing: border-box;
+  justify-content: center;
   overflow: hidden;
+  padding: 12px;
+  text-align: center;
   opacity: 0;
-  visibility: hidden;
-  background: radial-gradient(
-    circle,
-    #45203e,
-    #100b18 75%
-  );
-  transition: opacity 0.8s ease;
+  animation: successAppear 1.2s ease forwards;
 }
 
-.puzzle-success.reveal-active {
-  opacity: 1;
-  visibility: visible;
+@keyframes successAppear {
+  to {
+    opacity: 1;
+  }
 }
 
 .success-sparkles {
-  color: #ffb5d8;
-  letter-spacing: 15px;
+  margin-bottom: 7px;
+  color: #ffd5a0;
   font-size: 22px;
-  animation: sparklePulse 1.5s infinite alternate;
+  letter-spacing: 10px;
+  text-shadow: 0 0 18px #ffbbd8;
+  animation: successSparkle 2s ease-in-out infinite;
 }
 
-@keyframes sparklePulse {
-  to {
-    text-shadow: 0 0 25px #ff8ec4;
+@keyframes successSparkle {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
     transform: scale(1.1);
   }
 }
 
 .puzzle-success h1 {
+  margin: 0;
+  color: #fff4ff;
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(35px, 5vw, 58px);
+  font-size: clamp(29px, 4vw, 43px);
   font-weight: 500;
-  line-height: 1;
-  margin: 15px 0;
+  line-height: 1.05;
+  text-shadow: 0 0 25px rgba(213, 153, 255, 0.3);
 }
 
 .puzzle-success h1 span {
   display: block;
+  color: #e7aaff;
   font-style: italic;
-  color: #ffacd1;
 }
 
-.puzzle-success p {
-  color: #dfc4d7;
-  font-size: 12px;
-  line-height: 1.8;
-  margin-bottom: 25px;
+.puzzle-success > p {
+  margin: 8px 0 13px;
+  color: #d5c1e1;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
 }
+
+/* COMPLETED PHOTO */
 
 .completed-photo {
-  width: min(300px, 65vw, 35vh);
-  aspect-ratio: 1;
+  position: relative;
+  width: min(65vw, 290px, 36vh);
+  aspect-ratio: 4 / 4.4;
+  flex-shrink: 0;
   padding: 7px;
-  box-sizing: border-box;
-  border: 1px solid #ffabd2;
-  border-radius: 12px;
-  box-shadow: 0 0 45px rgba(255, 100, 170, 0.35);
-  animation: photoReveal 1.2s ease both;
+  overflow: hidden;
+  border: 1px solid rgba(255, 222, 255, 0.75);
+  border-radius: 15px;
+  background: linear-gradient(145deg, #f9d8ff, #bd8ad2, #ffe2ec);
+  box-shadow:
+    0 0 0 5px rgba(221, 160, 245, 0.09),
+    0 0 35px rgba(211, 131, 255, 0.32),
+    0 20px 55px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: scale(0.65) rotate(-5deg);
+}
+
+.reveal-active .completed-photo {
+  animation: photoReveal 1.2s cubic-bezier(.2,.8,.2,1) 0.1s forwards;
 }
 
 .completed-photo img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 7px;
+  border-radius: 9px;
 }
 
 @keyframes photoReveal {
-  from {
+  0% {
     opacity: 0;
-    transform: scale(0.5) rotate(-8deg);
+    transform: scale(0.65) rotate(-5deg);
   }
-
-  to {
+  70% {
+    opacity: 1;
+    transform: scale(1.05) rotate(2deg);
+  }
+  100% {
     opacity: 1;
     transform: scale(1) rotate(0);
   }
 }
 
+/* SUCCESS CAPTION */
+
 .success-caption {
-  margin-top: 18px;
-  color: #f1a9cd;
+  margin-top: 12px;
+  color: #e4b9ef;
   font-size: 9px;
-  letter-spacing: 4px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  opacity: 0;
 }
 
-/* =====================================
-   PAPER EXPLOSION
-===================================== */
+.reveal-active .success-caption {
+  animation: captionReveal 1s ease 1s forwards;
+}
+
+@keyframes captionReveal {
+  to {
+    opacity: 1;
+  }
+}
+
+/* PAPER EXPLOSION */
 
 .paper-explosion {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .paper-explosion span {
   position: absolute;
-  left: 50%;
   top: 50%;
-  width: 9px;
-  height: 13px;
-  background: hsl(calc(var(--i) * 35), 85%, 75%);
+  left: 50%;
+  width: 7px;
+  height: 11px;
+  border-radius: 2px;
   opacity: 0;
-  animation: paperBlast 2.5s ease-out forwards;
-  animation-delay: var(--delay);
+  background: hsl(calc(var(--i) * 13deg), 80%, 75%);
+  animation: paperBlast 2.4s ease-out calc(var(--delay)) forwards;
 }
 
 @keyframes paperBlast {
   0% {
-    transform: translate(-50%, -50%) scale(0) rotate(0);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+  }
+  12% {
     opacity: 1;
   }
-
   100% {
-    transform: translate(var(--x), var(--y)) rotate(var(--r));
     opacity: 0;
+    transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(0.5);
   }
 }
 
-/* =====================================
-   TABLET
-===================================== */
+/* CONTINUE BUTTON */
 
-@media (max-width: 900px) {
+.puzzle-next-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-width: 150px;
+  margin-top: 17px;
+  padding: 11px 22px;
+  border: 1px solid rgba(255, 220, 255, 0.7);
+  border-radius: 30px;
+  color: #fff4ff;
+  background: linear-gradient(135deg, #a85cc3, #78469e, #bd6f9f);
+  box-shadow:
+    0 0 20px rgba(207, 119, 230, 0.3),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reveal-active .puzzle-next-button {
+  animation: nextButtonReveal 0.8s ease 1.3s forwards;
+}
+
+.puzzle-next-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 28px rgba(224, 139, 255, 0.55);
+}
+
+.puzzle-next-button span {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.puzzle-next-button:hover span {
+  transform: translateX(5px);
+}
+
+@keyframes nextButtonReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* TABLET */
+
+@media (max-width: 768px) {
   .puzzle-content {
-    max-width: 580px;
+    width: 100%;
+  }
+
+  .puzzle-heading {
+    font-size: 36px;
   }
 
   .memory-puzzle-grid {
-    width: min(360px, 42vh, 78vw);
+    width: min(75vw, 330px, 39vh);
   }
 }
 
-/* =====================================
-   MOBILE
-===================================== */
+/* MOBILE */
 
 @media (max-width: 600px) {
   .memory-puzzle-page {
-    min-height: 0;
-    height: 100dvh;
+    padding: 10px 12px;
   }
 
   .puzzle-content {
-    padding: 8px 12px;
+    width: 100%;
+    padding: 5px 4px;
   }
 
   .puzzle-subtitle {
     font-size: 8px;
-    letter-spacing: 3px;
-    margin-bottom: 8px;
+    letter-spacing: 2px;
+    margin-bottom: 9px;
+  }
+
+  .puzzle-subtitle::before,
+  .puzzle-subtitle::after {
+    width: 18px;
   }
 
   .puzzle-heading {
-    font-size: clamp(27px, 7vw, 37px);
+    font-size: clamp(27px, 8vw, 35px);
+    line-height: 1.05;
   }
 
   .puzzle-description {
-    font-size: 10px;
-    line-height: 1.5;
-    margin: 7px auto 10px;
+    max-width: 320px;
+    margin: 8px 0 12px;
+    font-size: 15px;
   }
 
   .puzzle-counter {
-    max-width: 320px;
-    margin-bottom: 9px;
+    width: min(100%, 310px);
+    margin-bottom: 11px;
+    padding: 8px 11px;
+  }
+
+  .puzzle-counter span {
     font-size: 8px;
+    letter-spacing: 1px;
   }
 
   .memory-puzzle-grid {
-    width: min(78vw, 38vh);
+    width: min(78vw, 340px, 42vh);
     gap: 4px;
-    padding: 5px;
+    padding: 6px;
+    border-radius: 14px;
+  }
+
+  .puzzle-piece {
+    border-radius: 5px;
   }
 
   .puzzle-instruction {
-    font-size: 9px;
-    margin: 8px 0 5px;
+    margin: 11px 0 7px;
+    font-size: 14px;
   }
 
   .puzzle-progress {
@@ -478,170 +673,249 @@ body,
     font-size: 8px;
   }
 
+  /* SUCCESS */
+
   .puzzle-success {
-    padding: 12px;
+    padding: 10px;
+  }
+
+  .success-sparkles {
+    font-size: 18px;
+    margin-bottom: 5px;
   }
 
   .puzzle-success h1 {
-    font-size: 38px;
+    font-size: clamp(27px, 8vw, 36px);
   }
 
-  .puzzle-success p {
-    font-size: 10px;
-    margin-bottom: 15px;
+  .puzzle-success > p {
+    max-width: 300px;
+    font-size: 15px;
+    margin: 7px 0 11px;
+  }
+
+  .completed-photo {
+    width: min(66vw, 270px, 39vh);
   }
 
   .success-caption {
     font-size: 8px;
-    letter-spacing: 2px;
+    letter-spacing: 1.7px;
+    margin-top: 10px;
+  }
+
+  .puzzle-next-button {
+    margin-top: 14px;
+    padding: 10px 20px;
   }
 }
 
-/* =====================================
-   SMALL HEIGHT LAPTOPS
-===================================== */
+/* SMALL MOBILE */
 
-@media (max-height: 700px) and (min-width: 601px) {
-  .puzzle-content {
-    padding: 6px 12px;
+@media (max-width: 380px) {
+  .puzzle-subtitle {
+    font-size: 7px;
+    letter-spacing: 1.5px;
   }
 
-  .puzzle-subtitle {
-    margin-bottom: 6px;
+  .puzzle-heading {
+    font-size: 27px;
   }
 
   .puzzle-description {
-    margin: 7px auto 10px;
+    max-width: 280px;
+    font-size: 13px;
+  }
+
+  .puzzle-counter {
+    width: 95%;
+  }
+
+  .memory-puzzle-grid {
+    width: min(80vw, 310px, 40vh);
+  }
+
+  .puzzle-instruction {
+    font-size: 12px;
+  }
+
+  .puzzle-success h1 {
+    font-size: 27px;
+  }
+
+  .puzzle-success > p {
+    font-size: 13px;
+  }
+
+  .completed-photo {
+    width: min(65vw, 240px, 36vh);
+  }
+}
+
+/* SHORT HEIGHT SCREENS */
+
+@media (max-height: 700px) and (min-width: 601px) {
+  .puzzle-heading {
+    font-size: 31px;
+  }
+
+  .puzzle-description {
+    margin: 5px 0 8px;
+    font-size: 14px;
   }
 
   .puzzle-counter {
     margin-bottom: 7px;
+    padding: 7px 12px;
   }
 
   .memory-puzzle-grid {
-    width: min(330px, 43vh);
+    width: min(38vh, 280px);
   }
 
   .puzzle-instruction {
-    margin: 7px 0 4px;
+    margin: 7px 0 5px;
+    font-size: 13px;
+  }
+
+  .completed-photo {
+    width: min(30vh, 230px);
+  }
+
+  .puzzle-success h1 {
+    font-size: 32px;
   }
 }
 
-/* =====================================
-   SMALL HEIGHT MOBILE
-===================================== */
-
-@media (max-height: 650px) and (max-width: 600px) {
-  .puzzle-content {
-    padding: 4px 10px;
-  }
-
+@media (max-height: 740px) and (max-width: 600px) {
   .puzzle-subtitle {
-    font-size: 7px;
     margin-bottom: 5px;
   }
 
   .puzzle-heading {
-    font-size: 29px;
+    font-size: 26px;
   }
 
   .puzzle-description {
-    font-size: 9px;
-    margin: 5px auto 7px;
+    margin: 5px 0 8px;
+    font-size: 12px;
   }
 
   .puzzle-counter {
-    margin-bottom: 5px;
+    margin-bottom: 7px;
+    padding: 6px 10px;
   }
 
   .memory-puzzle-grid {
-    width: min(34vh, 75vw);
+    width: min(68vw, 260px, 38vh);
   }
 
   .puzzle-instruction {
-    margin: 5px 0 3px;
-    font-size: 8px;
+    margin: 7px 0 5px;
+    font-size: 12px;
+  }
+
+  .puzzle-success h1 {
+    font-size: 26px;
+  }
+
+  .puzzle-success > p {
+    margin: 5px 0 8px;
+    font-size: 13px;
+  }
+
+  .completed-photo {
+    width: min(55vw, 215px, 32vh);
+  }
+
+  .success-caption {
+    margin-top: 7px;
+  }
+
+  .puzzle-next-button {
+    margin-top: 10px;
   }
 }
 
-/* =====================================
-   DISABLE SCROLLBARS
-===================================== */
+/* LANDSCAPE MOBILE */
 
-.memory-puzzle-page,
-.memory-puzzle-page * {
-  scrollbar-width: none;
-}
-
-.memory-puzzle-page::-webkit-scrollbar,
-.memory-puzzle-page *::-webkit-scrollbar {
-  display: none;
-}
-
-/* CONTINUE BUTTON */
-
-.puzzle-next-button {
-  position: fixed;
-  left: 50%;
-  bottom: 32px;
-  transform: translateX(-50%);
-  z-index: 200;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-
-  padding: 14px 36px;
-
-  border: 1px solid rgba(255, 190, 215, 0.75);
-  border-radius: 50px;
-
-  background: linear-gradient(
-    135deg,
-    #a83d68,
-    #54203d
-  );
-
-  color: #fff;
-  font-family: inherit;
-  font-size: 15px;
-  letter-spacing: 1.5px;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 0 20px rgba(220, 90, 145, 0.3),
-    0 0 45px rgba(220, 90, 145, 0.12);
-
-  animation: puzzleButtonAppear 0.8s ease both;
-  transition: all 0.3s ease;
-}
-
-.puzzle-next-button span {
-  font-size: 22px;
-  transition: transform 0.3s ease;
-}
-
-.puzzle-next-button:hover {
-  transform: translateX(-50%) translateY(-4px);
-  box-shadow:
-    0 0 25px rgba(255, 150, 195, 0.5),
-    0 0 55px rgba(220, 90, 145, 0.25);
-}
-
-.puzzle-next-button:hover span {
-  transform: translateX(5px);
-}
-
-@keyframes puzzleButtonAppear {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 20px);
+@media (max-height: 500px) and (orientation: landscape) {
+  .memory-puzzle-page {
+    padding: 5px 15px;
   }
 
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
+  .puzzle-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    column-gap: 18px;
+    justify-items: center;
+    align-content: center;
+  }
+
+  .puzzle-subtitle,
+  .puzzle-heading,
+  .puzzle-description,
+  .puzzle-counter,
+  .puzzle-instruction,
+  .puzzle-progress {
+    grid-column: 1;
+  }
+
+  .puzzle-heading {
+    font-size: 25px;
+  }
+
+  .puzzle-description {
+    margin: 3px 0;
+    font-size: 12px;
+  }
+
+  .puzzle-counter {
+    margin: 3px 0;
+  }
+
+  .memory-puzzle-grid {
+    grid-column: 2;
+    grid-row: 1 / 6;
+    width: min(48vh, 250px);
+  }
+
+  .puzzle-instruction {
+    font-size: 11px;
+    margin: 4px 0;
+  }
+
+  .puzzle-progress {
+    font-size: 11px;
+  }
+
+  .completed-photo {
+    width: min(30vh, 170px);
+  }
+
+  .puzzle-success h1 {
+    font-size: 25px;
+  }
+
+  .puzzle-success > p {
+    margin: 4px 0 7px;
+    font-size: 12px;
+  }
+
+  .puzzle-next-button {
+    margin-top: 8px;
+  }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+  .memory-puzzle-page *,
+  .memory-puzzle-page *::before,
+  .memory-puzzle-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
