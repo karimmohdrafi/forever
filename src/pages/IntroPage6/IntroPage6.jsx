@@ -78,7 +78,7 @@ function IntroPage6({ onNext, onContinue }) {
           <div className="intro6-photo-frame">
             <div className="intro6-frame-inner">
               <img
-                src={`${import.meta.env.BASE_URL}images/akka.jpg`}
+                src={`${import.meta.env.BASE_URL}images/akka.jpeg`}
                 alt="Akka"
                 className="intro6-akka-photo"
               />

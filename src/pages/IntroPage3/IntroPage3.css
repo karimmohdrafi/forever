@@ -2106,3 +2106,82 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* =========================================
+   MOBILE SCROLL FIX - ADD AT THE VERY END
+========================================= */
+
+@media screen and (max-width: 700px) {
+  html,
+  body {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    position: static !important;
+    touch-action: pan-y !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  #root {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    overflow: visible !important;
+    position: relative !important;
+  }
+
+  .app-step-wrapper {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    position: relative !important;
+    inset: auto !important;
+    overflow: visible !important;
+  }
+
+  .intro3-page {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    position: relative !important;
+    overflow: visible !important;
+    touch-action: pan-y !important;
+  }
+
+  .i3-page-content {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding-bottom: 45px !important;
+  }
+
+  .i3-layout {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .i3-panel,
+  .i3-details-panel,
+  .i3-details-scroll {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .i3-footer {
+    margin-bottom: 15px !important;
+  }
+}

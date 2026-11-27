@@ -1,18 +1,9 @@
+
 * {
   box-sizing: border-box;
 }
 
-html {
-  width: 100%;
-  min-height: 100%;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-}
-
+html,
 body {
   width: 100%;
   min-height: 100%;
@@ -22,6 +13,11 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: auto;
+}
+
+body {
+  position: relative;
 }
 
 #root {
@@ -29,6 +25,7 @@ body {
   min-height: 100vh;
   height: auto;
   overflow: visible;
+  position: relative;
 }
 
 .app-step-wrapper {
@@ -36,32 +33,46 @@ body {
   min-height: 100vh;
   height: auto;
   overflow: visible;
+  position: relative;
 }
 
-/* MOBILE PAGE SCROLL */
-
+/* INTRO PAGE 3 - MOBILE SCROLL FIX */
 @media screen and (max-width: 700px) {
   html,
   body {
-    width: 100% !important;
     height: auto !important;
     min-height: 100% !important;
     overflow-x: hidden !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll !important;
+    position: relative !important;
+    touch-action: pan-y !important;
   }
 
-  #root {
-    width: 100% !important;
-    height: auto !important;
-    min-height: 100vh !important;
-    overflow: visible !important;
-  }
-
+  #root,
   .app-step-wrapper {
     width: 100% !important;
     height: auto !important;
     min-height: 100vh !important;
+    max-height: none !important;
+    overflow: visible !important;
+    position: relative !important;
+    inset: auto !important;
+  }
+
+  .intro3-page {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+    overflow: visible !important;
+    position: relative !important;
+  }
+
+  .i3-page-content,
+  .i3-layout {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
     overflow: visible !important;
   }
 }
